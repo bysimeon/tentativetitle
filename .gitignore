@@ -3,3 +3,6 @@ Logs/
 obj/Debug
 *.sln
 *.csproj
+Temp/
+.vs/
+
