@@ -6,3 +6,6 @@ obj/Debug
 Temp/
 .vs/
 
+*.cache
+*.meta
+*.xcf
