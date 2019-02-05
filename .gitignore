@@ -8,3 +8,7 @@ Temp/
 *.cache
 *.meta
 *.xcf
+*.cache
+obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache
+obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+*.cache
