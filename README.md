@@ -1,2 +1,2 @@
-# tentativetitle
-a game about battling grapplers
+# The Grapplers
+A game about battling grapplers.
