@@ -17,11 +17,21 @@ public class HookLauncher : MonoBehaviour
     {
         float Horizontal = Input.GetAxis("Right Horizontal");
         float Vertical = Input.GetAxis("Right Vertical");
-        Debug.Log(Vertical);
-        float angle = Mathf.Atan2(Vertical, Horizontal);
-
-        GameObject Hook = FindObjectOfType<GrapplingHook>().gameObject;
-        var HookBody = Hook.GetComponent<Rigidbody2D>();
-        HookBody.MoveRotation(Mathf.Rad2Deg * angle - 135);
+        if (Mathf.Abs(Horizontal) + Mathf.Abs(Vertical) > 0.3f)
+        {
+            float angle = Mathf.Atan2(Vertical, Horizontal) * Mathf.Rad2Deg;
+            DisplayAimReticle(angle);
+        }
+        else
+        {
+            Color color = gameObject.GetComponent<SpriteRenderer>().color;
+            color.a = 0;
+            gameObject.GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+    void DisplayAimReticle(float angle)
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

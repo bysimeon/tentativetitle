@@ -45,25 +45,25 @@ public class Outer_Movement : MonoBehaviour
             //Moving along lower platform
             if (rotated_up & Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
             {
-                rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), 0);
+                rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
             }
 
             //Moving along right platform
             if (rotated_right & Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical))
             {
-                rb.velocity = speed * new Vector2(0, Input.GetAxis("Vertical"));
+                rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
 
             //Moving along top platform
             if (rotated_down & Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical))
             {
-                rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), 0);
+                rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
             }
 
             //Moving along left platform
             if (rotated_left & Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical))
             {
-                rb.velocity = speed * new Vector2(0, Input.GetAxis("Vertical"));
+                rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
 
             //Switching bottom right corner from bottom to right
@@ -77,7 +77,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + bottom_to_right_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 90);
-                rb.velocity = speed * new Vector2(0, Input.GetAxis("Vertical"));
+                rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
 
             //Switching bottom right corner from right to bottom
@@ -91,7 +91,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + right_to_bottom_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), 0);
+                rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
             }
 
             //Switching top right corner from right to top
@@ -104,7 +104,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + right_to_top_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 180);
-                rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), 0);
+                rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
             }
 
             //Switching top right corner from top to right
@@ -117,7 +117,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + top_to_right_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 90);
-                rb.velocity = speed * new Vector2(0, Input.GetAxis("Vertical"));
+                rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
 
             //Switching top left corner from left to top
@@ -130,7 +130,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + left_to_top_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 180);
-                rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), 0);
+                rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
             }
 
             //Switching top left corner from top to left
@@ -143,7 +143,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + top_to_left_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 270);
-                rb.velocity = speed * new Vector2(0, Input.GetAxis("Vertical"));
+                rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
 
             //Switching bottom left corner from left to bottom
@@ -157,7 +157,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + left_to_bottom_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), 0);
+                rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
             }
 
             //Switching bottom left corner from bottom to left
@@ -171,7 +171,7 @@ public class Outer_Movement : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 rb.transform.position = rb.transform.position + bottom_to_left_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 270);
-                rb.velocity = speed * new Vector2(0, Input.GetAxis("Vertical"));
+                rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
         }
     }
