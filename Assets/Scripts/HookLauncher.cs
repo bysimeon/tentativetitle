@@ -11,15 +11,20 @@ public class HookLauncher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HookPrefab = Resources.Load("GrapplingHook");
+        HookPrefab = Resources.Load("Prefabs/Hook");
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateAim();
+        ProcessShooting();
+    }
+    void UpdateAim()
+    {
         float Horizontal = Input.GetAxis("Right Horizontal");
         float Vertical = Input.GetAxis("Right Vertical");
-        if (GameInput.SignificantStickInput(Vertical,Horizontal))
+        if (GameInput.SignificantStickInput(Vertical, Horizontal))
         {
             float AimAngle = CalculateAimAngle(Vertical, Horizontal);
             DisplayAimReticle(AimAngle);
@@ -27,6 +32,14 @@ public class HookLauncher : MonoBehaviour
         else
         {
             HideAimReticle();
+        }
+    }
+    void ProcessShooting()
+    {
+        bool Shoot = Input.GetButtonDown("Fire Hook");
+        if(Shoot)
+        {
+            AttemptFire();
         }
     }
     private float CalculateAimAngle(float Vertical, float Horizontal)
@@ -44,13 +57,15 @@ public class HookLauncher : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
-    void Fire()
+    void AttemptFire()
     {
         float time = Time.time;
         if (time > lastShotTime + LaunchCooldown)
         {
             lastShotTime = time;
-            spawnHook(transform.position + transform.up * 10f,
+
+            Debug.Log(transform.rotation.z);
+            spawnHook(transform.position + transform.right * 10f,
                 transform.rotation,
                 transform.up * LaunchVelocity);
 
@@ -58,6 +73,9 @@ public class HookLauncher : MonoBehaviour
     }
     void spawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
     {
+        GameObject newHook = (GameObject)Instantiate(HookPrefab,
+                                            position,
+                                            rotation);
 
     }
 }
