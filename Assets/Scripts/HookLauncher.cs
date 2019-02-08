@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HookLauncher : MonoBehaviour
 {
-    public const float LaunchCooldown = 0.5f;
-    public const float LaunchVelocity = 10f;
+    public const float LaunchCooldown = 3f;
+    public const float LaunchVelocity = 40f;
     private static Object HookPrefab;
     float lastShotTime = 0;
     private bool IsAiming = false;
@@ -62,12 +62,12 @@ public class HookLauncher : MonoBehaviour
     void AttemptFire()
     {
         float time = Time.time;
-        if (time > lastShotTime + LaunchCooldown)
+        if (time > lastShotTime + LaunchCooldown && IsAiming)
         {
             lastShotTime = time;
 
             Debug.Log(transform.rotation.z);
-            SpawnHook(transform.position + transform.right * 10f,
+            SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
                 transform.right * LaunchVelocity);
 
@@ -75,9 +75,11 @@ public class HookLauncher : MonoBehaviour
     }
     void SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
     {
+        Transform playerTransform = transform.parent;
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
                                             position,
-                                            rotation);
+                                            rotation,
+                                            playerTransform);
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
 
     }
