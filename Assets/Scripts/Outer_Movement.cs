@@ -73,8 +73,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_up = false;
                 rotated_right = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToVerticalSurface();
                 rb.transform.position = rb.transform.position + bottom_to_right_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 90);
                 rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
@@ -87,8 +86,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_right = false;
                 rotated_up = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToHorizontalSurface();
                 rb.transform.position = rb.transform.position + right_to_bottom_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 0);
                 rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
@@ -100,8 +98,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_right = false;
                 rotated_down = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToHorizontalSurface();
                 rb.transform.position = rb.transform.position + right_to_top_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 180);
                 rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
@@ -113,8 +110,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_down = false;
                 rotated_right = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToVerticalSurface();
                 rb.transform.position = rb.transform.position + top_to_right_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 90);
                 rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
@@ -126,8 +122,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_left = false;
                 rotated_down = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToHorizontalSurface();
                 rb.transform.position = rb.transform.position + left_to_top_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 180);
                 rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
@@ -139,8 +134,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_down = false;
                 rotated_left = true;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToVerticalSurface();
                 rb.transform.position = rb.transform.position + top_to_left_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 270);
                 rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
@@ -153,8 +147,7 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_up = true;
                 rotated_left = false;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToHorizontalSurface();
                 rb.transform.position = rb.transform.position + left_to_bottom_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 0);
                 rb.velocity = speed * new Vector2(Input.GetAxis("Left Horizontal"), 0);
@@ -167,13 +160,24 @@ public class Outer_Movement : MonoBehaviour
             {
                 rotated_left = true;
                 rotated_up = false;
-                rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                ConstrainToVerticalSurface();
                 rb.transform.position = rb.transform.position + bottom_to_left_shift;
                 rb.transform.rotation = Quaternion.Euler(0, 0, 270);
                 rb.velocity = speed * new Vector2(0, Input.GetAxis("Left Vertical"));
             }
         }
+    }
+
+    private void ConstrainToHorizontalSurface()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    private void ConstrainToVerticalSurface()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
