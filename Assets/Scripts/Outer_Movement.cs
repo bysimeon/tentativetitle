@@ -179,7 +179,11 @@ public class Outer_Movement : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
-
+    public void DetachFromPlatform()
+    {
+        rb.constraints = RigidbodyConstraints2D.None;
+        loc = location.in_air;
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Outer Platform")
