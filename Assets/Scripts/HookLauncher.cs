@@ -65,13 +65,13 @@ public class HookLauncher : MonoBehaviour
             lastShotTime = time;
 
             Debug.Log(transform.rotation.z);
-            spawnHook(transform.position + transform.right * 10f,
+            SpawnHook(transform.position + transform.right * 10f,
                 transform.rotation,
                 transform.up * LaunchVelocity);
 
         }
     }
-    void spawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
+    void SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
     {
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
                                             position,
