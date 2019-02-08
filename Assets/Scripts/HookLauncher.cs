@@ -5,7 +5,7 @@ using UnityEngine;
 public class HookLauncher : MonoBehaviour
 {
     public const float LaunchCooldown = 0.5f;
-    public const float LaunchVelocity = 3f;
+    public const float LaunchVelocity = 10f;
     private static Object HookPrefab;
     float lastShotTime = 0;
     private bool IsAiming = false;
@@ -69,7 +69,7 @@ public class HookLauncher : MonoBehaviour
             Debug.Log(transform.rotation.z);
             SpawnHook(transform.position + transform.right * 10f,
                 transform.rotation,
-                transform.up * LaunchVelocity);
+                transform.right * LaunchVelocity);
 
         }
     }
@@ -78,6 +78,7 @@ public class HookLauncher : MonoBehaviour
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
                                             position,
                                             rotation);
+        newHook.GetComponent<Rigidbody2D>().velocity = velocity;
 
     }
 }
