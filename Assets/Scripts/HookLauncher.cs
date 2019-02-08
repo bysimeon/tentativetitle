@@ -8,6 +8,7 @@ public class HookLauncher : MonoBehaviour
     public const float LaunchVelocity = 3f;
     private static Object HookPrefab;
     float lastShotTime = 0;
+    private bool IsAiming = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,8 @@ public class HookLauncher : MonoBehaviour
     {
         float Horizontal = Input.GetAxis("Right Horizontal");
         float Vertical = Input.GetAxis("Right Vertical");
-        if (GameInput.SignificantStickInput(Vertical, Horizontal))
+        IsAiming = GameInput.SignificantStickInput(Vertical, Horizontal);
+        if (IsAiming)
         {
             float AimAngle = CalculateAimAngle(Vertical, Horizontal);
             DisplayAimReticle(AimAngle);
