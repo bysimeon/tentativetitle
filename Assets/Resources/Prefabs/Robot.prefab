@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e326625af5ac84e950e90bcfe54789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 1352279191}
   speed: 40
   ray_distance_vertical: 4
   ray_distance_horizontal: 3
