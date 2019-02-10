@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HookLauncher : MonoBehaviour
 {
-    public const float LaunchCooldown = 3f;
+    public const float LaunchCooldown = 1f;
     public const float LaunchVelocity = 40f;
     private static Object HookPrefab;
     float lastShotTime = 0;

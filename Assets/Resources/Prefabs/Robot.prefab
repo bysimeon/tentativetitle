@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1352279191}
   - component: {fileID: 1352279190}
   - component: {fileID: 1352279189}
+  - component: {fileID: 3992069919793662868}
   m_Layer: 2
   m_Name: Robot
   m_TagString: Untagged
@@ -154,6 +155,30 @@ MonoBehaviour:
   right_to_top_shift: {x: -1, y: -0.5, z: 0}
   top_to_left_shift: {x: 0.5, y: -1, z: 0}
   left_to_top_shift: {x: 1, y: -0.5, z: 0}
+--- !u!114 &3992069919793662868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352279188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e326625af5ac84e950e90bcfe54789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  speed: 40
+  ray_distance_vertical: 4
+  ray_distance_horizontal: 3
+  top_to_right: {x: 5, y: -6, z: 0}
+  right_to_top: {x: -6, y: 4.75, z: 0}
+  top_to_left: {x: -5, y: -6, z: 0}
+  left_to_top: {x: 6, y: 4.75, z: 0}
+  bottom_to_left: {x: -5, y: 6, z: 0}
+  left_to_bottom: {x: 6, y: -5, z: 0}
+  bottom_to_right: {x: 5, y: 6, z: 0}
+  right_to_bottom: {x: -6, y: -5, z: 0}
 --- !u!1 &1103387181364522744
 GameObject:
   m_ObjectHideFlags: 0
