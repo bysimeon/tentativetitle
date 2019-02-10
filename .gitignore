@@ -8,3 +8,4 @@ Temp/
 *.cache
 *.meta
 *.xcf
+.DS_Store
