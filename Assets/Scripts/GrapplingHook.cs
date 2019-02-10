@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
+    private bool planted;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision detected");
@@ -15,6 +16,7 @@ public class GrapplingHook : MonoBehaviour
             ShooterMovement.DetachFromPlatform();
             PlantHook();
             DragPlayerToHook();
+
         }
 
     }
@@ -22,6 +24,7 @@ public class GrapplingHook : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody2D>().constraints =
             RigidbodyConstraints2D.FreezeAll;
+        planted = true;
     }
     // TODO: Clean this up
     void DragPlayerToHook()
@@ -33,5 +36,16 @@ public class GrapplingHook : MonoBehaviour
                                     20f;
         Debug.Log(PlayerVelocity);
         Player.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
+    }
+    void Update()
+    {
+        GameObject Player = transform.parent.gameObject;
+        Vector3 HookPosition = transform.position;
+        Vector3 PlayerPosition = Player.transform.position;
+        if(planted && Vector3.Magnitude(HookPosition-PlayerPosition) < 10f)
+        {
+            Debug.Log(Vector3.Magnitude(HookPosition - PlayerPosition));
+            Destroy(gameObject);
+        }
     }
 }
