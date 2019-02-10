@@ -13,7 +13,10 @@ public class GrapplingHook : MonoBehaviour
         {
             Outer_Movement ShooterMovement = transform.parent.
                 gameObject.GetComponent<Outer_Movement>();
+            Inner_Movement ShooterMovement2 = transform.parent.
+                gameObject.GetComponent<Inner_Movement>();
             ShooterMovement.DetachFromPlatform();
+            ShooterMovement2.DetachFromPlatform();
             PlantHook();
             DragPlayerToHook();
 
