@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class HookLauncher : MonoBehaviour
 {
+    public int playerId;
+    private Player player;
+
     public const float LaunchCooldown = 1f;
     public const float LaunchVelocity = 40f;
     private static Object HookPrefab;
@@ -15,6 +19,11 @@ public class HookLauncher : MonoBehaviour
         HookPrefab = Resources.Load("Prefabs/Hook");
     }
 
+    void Awake()
+    {
+        player = ReInput.players.GetPlayer(playerId);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -23,8 +32,8 @@ public class HookLauncher : MonoBehaviour
     }
     void UpdateAim()
     {
-        float Horizontal = Input.GetAxis("Right Horizontal");
-        float Vertical = Input.GetAxis("Right Vertical");
+        float Horizontal = player.GetAxis("Right Horizontal");
+        float Vertical = player.GetAxis("Right Vertical");
         IsAiming = GameInput.SignificantStickInput(Vertical, Horizontal);
         if (IsAiming)
         {
@@ -38,7 +47,7 @@ public class HookLauncher : MonoBehaviour
     }
     void ProcessShooting()
     {
-        bool Shoot = Input.GetButtonDown("Fire Hook");
+        bool Shoot = player.GetButtonDown("Fire Hook");
         if(Shoot)
         {
             AttemptFire();

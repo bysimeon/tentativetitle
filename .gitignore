@@ -1,0 +1,11 @@
+Library/
+Logs/
+obj/Debug
+*.sln
+*.csproj
+Temp/
+.vs/
+*.cache
+*.xcf
+*.cache
+.DS_Store
