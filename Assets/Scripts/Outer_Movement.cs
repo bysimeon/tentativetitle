@@ -29,8 +29,6 @@ public class Outer_Movement : MonoBehaviour
     private bool rotated_left = false;
     private bool rotated_down = false;
 
-    private bool pressed = false;
-
     void Awake()
     {
         player = ReInput.players.GetPlayer(playerId);
@@ -50,7 +48,14 @@ public class Outer_Movement : MonoBehaviour
     {
         //If on outer platform
         if (loc == location.outer)
-        {          
+        {
+            //DEMO FEATURE
+            if (player.GetAxis("X") > 0)
+            {
+                rb.transform.position = new Vector2(0, 0);
+            }
+            //END OF DEMO FEATURE
+
             //Moving along lower platform
             if (rotated_up & Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
             {
