@@ -418,11 +418,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.0199733
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.3705087
+      value: 30.26
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -634,7 +634,10 @@ MonoBehaviour:
       _name: Player1
       _descriptiveName: Player1
       _startPlaying: 1
-      _defaultJoystickMaps: []
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
       _defaultMouseMaps: []
       _defaultKeyboardMaps: []
       _defaultCustomControllerMaps: []
@@ -721,6 +724,24 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 6
+      _name: Fire 2
+      _type: 1
+      _descriptiveName: demo feature to switch outer inner
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 7
+      _name: Fire 3
+      _type: 1
+      _descriptiveName: reset position (demo1)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Default
@@ -730,7 +751,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 000000000100000002000000030000000500000004000000
+        actionIds: 0000000001000000020000000300000005000000040000000600000007000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -865,7 +886,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 6
         _elementType: 1
         _elementIdentifierId: 7
         _axisRange: 0
@@ -876,7 +897,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 7
         _elementType: 1
         _elementIdentifierId: 8
         _axisRange: 0
@@ -1023,7 +1044,7 @@ MonoBehaviour:
     customControllerMaps: []
     customControllers: []
     playerIdCounter: 5
-    actionIdCounter: 6
+    actionIdCounter: 8
     actionCategoryIdCounter: 1
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 1

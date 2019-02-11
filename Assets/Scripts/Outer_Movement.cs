@@ -50,9 +50,14 @@ public class Outer_Movement : MonoBehaviour
         if (loc == location.outer)
         {
             //DEMO FEATURE
-            if (player.GetAxis("X") > 0)
+            if (player.GetButtonDown("Fire 2"))
             {
-                rb.transform.position = new Vector2(0, 0);
+                rb.transform.position = new Vector2(-.7f, 30);
+                rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+                rotated_up = true;
+                rotated_down = false;
+                rotated_right = false;
+                rotated_left = false;
             }
             //END OF DEMO FEATURE
 
