@@ -21,6 +21,7 @@ public class HookLauncher : MonoBehaviour
 
     void Awake()
     {
+        playerId = GetComponentInParent<Outer_Movement>().playerId;
         player = ReInput.players.GetPlayer(playerId);
     }
 
