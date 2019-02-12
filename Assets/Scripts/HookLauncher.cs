@@ -13,6 +13,7 @@ public class HookLauncher : MonoBehaviour
     private static Object HookPrefab;
     float lastShotTime = 0;
     private bool IsAiming = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +50,7 @@ public class HookLauncher : MonoBehaviour
     void ProcessShooting()
     {
         bool Shoot = player.GetButtonDown("Fire Hook");
-        if(Shoot)
+        if (Shoot)
         {
             AttemptFire();
         }
@@ -66,9 +67,15 @@ public class HookLauncher : MonoBehaviour
     }
     private void DisplayAimReticle(float angle)
     {
+        lastShotTime = Time.time;
+        while (Time.time < lastShotTime + LaunchCooldown) {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
         gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
     void AttemptFire()
     {
         float time = Time.time;
@@ -80,7 +87,6 @@ public class HookLauncher : MonoBehaviour
             SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
                 transform.right * LaunchVelocity);
-
         }
     }
     void SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
