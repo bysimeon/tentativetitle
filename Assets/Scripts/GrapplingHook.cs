@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrapplingHook : MonoBehaviour
 {
     private bool planted;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision detected");
@@ -20,6 +21,21 @@ public class GrapplingHook : MonoBehaviour
             PlantHook();
             DragPlayerToHook();
 
+        }
+
+        if(collision.gameObject.tag == "Player 1" & transform.parent.gameObject != collision.gameObject)
+        {
+            Debug.Log(transform.parent.gameObject);
+            Destroy(gameObject);
+            var damage = GameObject.Find("Damage_Manager");
+            damage.GetComponent<Damage_Player>().IncrementP1();
+        }
+
+        if (collision.gameObject.tag == "Player 2" & transform.parent.gameObject != collision.gameObject)
+        {
+            Destroy(gameObject);
+            var damage = GameObject.Find("Damage_Manager");
+            damage.GetComponent<Damage_Player>().IncrementP2();
         }
 
     }
