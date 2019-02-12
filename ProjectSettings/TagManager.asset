@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Outer Platform
   - Inner Platform
+  - Player 1
+  - Player 2
   layers:
   - Default
   - TransparentFX
@@ -42,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 464288221
     locked: 0
