@@ -15,6 +15,7 @@ public class Outer_Movement : MonoBehaviour
     public float speed;
     public float ray_distance_vertical;
     public float ray_distance_horizontal;
+    public float ray_distance_in_air;
     public Vector3 bottom_to_right_shift;
     public Vector3 right_to_bottom_shift;
     public Vector3 bottom_to_left_shift;
@@ -46,6 +47,52 @@ public class Outer_Movement : MonoBehaviour
     // Update is called once per time interval
     void FixedUpdate()
     {
+        //Attaching to platform when grappling
+        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air))
+        {
+            Debug.Log("hi");
+            rotated_up = true;
+            rotated_right = false;
+            rotated_left = false;
+            rotated_down = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air))
+        {
+            rotated_down = true;
+            rotated_right = false;
+            rotated_left = false;
+            rotated_up = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air))
+        {
+            rotated_right = true;
+            rotated_up = false;
+            rotated_left = false;
+            rotated_down = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air))
+        {
+            rotated_left = true;
+            rotated_right = false;
+            rotated_up = false;
+            rotated_down = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
         //If on outer platform
         if (loc == location.outer)
         {
