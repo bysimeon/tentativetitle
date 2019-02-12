@@ -11,8 +11,9 @@ public class HookLauncher : MonoBehaviour
     public const float LaunchCooldown = 1f;
     public const float LaunchVelocity = 40f;
     private static Object HookPrefab;
-    float lastShotTime = 0;
+    float lastShotTime = -1;
     private bool IsAiming = false;
+    private GameObject prior_hook;
 
     // Start is called before the first frame update
     void Start()
@@ -67,29 +68,37 @@ public class HookLauncher : MonoBehaviour
     }
     private void DisplayAimReticle(float angle)
     {
-        lastShotTime = Time.time;
-        while (Time.time < lastShotTime + LaunchCooldown) {
+        float time = Time.time;
+        if (time < (lastShotTime + LaunchCooldown))
+        {
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
-        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
     }
 
     void AttemptFire()
     {
         float time = Time.time;
-        if (time > lastShotTime + LaunchCooldown && IsAiming)
+        if (prior_hook)
+        {
+            Destroy(prior_hook);
+        }
+        if (time > (lastShotTime + LaunchCooldown) && IsAiming)
         {
             lastShotTime = time;
 
             Debug.Log(transform.rotation.z);
-            SpawnHook(transform.position + transform.right * 5f,
+            prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
                 transform.right * LaunchVelocity);
         }
     }
-    void SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
+    private GameObject SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
     {
         Transform playerTransform = transform.parent;
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
@@ -97,6 +106,7 @@ public class HookLauncher : MonoBehaviour
                                             rotation,
                                             playerTransform);
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
+        return newHook;
 
     }
 }
