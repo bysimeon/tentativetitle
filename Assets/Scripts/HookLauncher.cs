@@ -9,7 +9,7 @@ public class HookLauncher : MonoBehaviour
     private Player player;
 
     public const float LaunchCooldown = 1f;
-    public const float LaunchVelocity = 40f;
+    public const float LaunchVelocity = 80f;
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;
@@ -84,15 +84,14 @@ public class HookLauncher : MonoBehaviour
     void AttemptFire()
     {
         float time = Time.time;
-        if (prior_hook)
-        {
-            Destroy(prior_hook);
-        }
+
         if (time > (lastShotTime + LaunchCooldown) && IsAiming)
         {
+            if (prior_hook)
+            {
+                Destroy(prior_hook);
+            }
             lastShotTime = time;
-
-            Debug.Log(transform.rotation.z);
             prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
                 transform.right * LaunchVelocity);
@@ -103,9 +102,9 @@ public class HookLauncher : MonoBehaviour
         Transform playerTransform = transform.parent;
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
                                             position,
-                                            rotation,
-                                            playerTransform);
+                                            rotation);
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
+        newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
         return newHook;
 
     }

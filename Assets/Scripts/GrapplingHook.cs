@@ -1,21 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
     private bool planted;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    Quaternion rotation;
+    Vector3 position;
+    Transform plantedTransform;
+    public GameObject Player;
+    void LateUpdate()
+    {
+        if(planted)
+        {
+            transform.SetPositionAndRotation(position, rotation);
+        }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision detected");
         if (collision.gameObject.tag == "Outer Platform" ||
-            collision.gameObject.tag == "Inner Platform")
+            collision.gameObject.tag == "Inner Platform" &&
+            planted == false)
         {
-            Outer_Movement ShooterMovement = transform.parent.
-                gameObject.GetComponent<Outer_Movement>();
-            Inner_Movement ShooterMovement2 = transform.parent.
-                gameObject.GetComponent<Inner_Movement>();
+            Outer_Movement ShooterMovement = Player.
+                GetComponent<Outer_Movement>();
+            Inner_Movement ShooterMovement2 = Player.
+                GetComponent<Inner_Movement>();
             ShooterMovement.DetachFromPlatform();
             ShooterMovement2.DetachFromPlatform();
             PlantHook();
@@ -23,15 +32,14 @@ public class GrapplingHook : MonoBehaviour
 
         }
 
-        if(collision.gameObject.tag == "Player 1" & transform.parent.gameObject != collision.gameObject)
+        if(collision.gameObject.tag == "Player 1" & Player != collision.gameObject)
         {
-            Debug.Log(transform.parent.gameObject);
             Destroy(gameObject);
             var damage = GameObject.Find("Damage_Manager");
             damage.GetComponent<Damage_Player>().IncrementP1();
         }
 
-        if (collision.gameObject.tag == "Player 2" & transform.parent.gameObject != collision.gameObject)
+        if (collision.gameObject.tag == "Player 2" & Player != collision.gameObject)
         {
             Destroy(gameObject);
             var damage = GameObject.Find("Damage_Manager");
@@ -44,24 +52,25 @@ public class GrapplingHook : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().constraints =
             RigidbodyConstraints2D.FreezeAll;
         planted = true;
+        rotation = transform.rotation;
+        position = transform.position;
     }
     // TODO: Clean this up
     void DragPlayerToHook()
     {
-        GameObject Player = transform.parent.gameObject;
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
         Vector3 PlayerVelocity = Vector3.Normalize(HookPosition - PlayerPosition) *
-                                    20f;
+                                    50f;
         Debug.Log(PlayerVelocity);
         Player.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
     }
     void Update()
     {
-        GameObject Player = transform.parent.gameObject;
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
-        if(planted && Vector3.Magnitude(HookPosition-PlayerPosition) < 10f)
+
+        if (planted && Vector3.Magnitude(HookPosition-PlayerPosition) < 10f)
         {
             Debug.Log(Vector3.Magnitude(HookPosition - PlayerPosition));
             Destroy(gameObject);
