@@ -670,11 +670,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 347.18005
+      value: 327
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 86.22949
+      value: 86.1
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -720,10 +720,26 @@ PrefabInstance:
       propertyPath: ray_distance_in_air
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: speed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3992069919793662868, guid: 75b09a230e46c9a47a242b937aaf4d7c,
         type: 3}
       propertyPath: playerId
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279192, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.3475881
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279192, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3931486
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279192, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6886792
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
@@ -818,11 +834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 361.11
+      value: 386.8
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 86.02
+      value: 86.1
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -863,6 +879,22 @@ PrefabInstance:
     - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: ray_distance_in_air
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: speed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279192, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279192, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4000089
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279192, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4000089
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
