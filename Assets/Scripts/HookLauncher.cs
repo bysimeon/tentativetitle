@@ -84,12 +84,13 @@ public class HookLauncher : MonoBehaviour
     void AttemptFire()
     {
         float time = Time.time;
-        if (prior_hook)
-        {
-            Destroy(prior_hook);
-        }
+
         if (time > (lastShotTime + LaunchCooldown) && IsAiming)
         {
+            if (prior_hook)
+            {
+                Destroy(prior_hook);
+            }
             lastShotTime = time;
             prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
