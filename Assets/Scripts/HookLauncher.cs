@@ -9,7 +9,7 @@ public class HookLauncher : MonoBehaviour
     private Player player;
 
     public const float LaunchCooldown = 1f;
-    public const float LaunchVelocity = 40f;
+    public const float LaunchVelocity = 80f;
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;
@@ -102,9 +102,9 @@ public class HookLauncher : MonoBehaviour
         Transform playerTransform = transform.parent;
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
                                             position,
-                                            rotation,
-                                            playerTransform);
+                                            rotation);
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
+        newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
         return newHook;
 
     }
