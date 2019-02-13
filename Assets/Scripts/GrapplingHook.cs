@@ -71,7 +71,6 @@ public class GrapplingHook : MonoBehaviour
     // TODO: Clean this up
     void DragPlayerToHook()
     {
-        Debug.Log("Fired");
         GameObject Player = transform.parent.gameObject;
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
