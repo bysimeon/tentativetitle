@@ -91,8 +91,6 @@ public class HookLauncher : MonoBehaviour
         if (time > (lastShotTime + LaunchCooldown) && IsAiming)
         {
             lastShotTime = time;
-
-            Debug.Log(transform.rotation.z);
             prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
                 transform.right * LaunchVelocity);

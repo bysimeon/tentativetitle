@@ -47,8 +47,14 @@ public class Outer_Movement : MonoBehaviour
     // Update is called once per time interval
     void FixedUpdate()
     {
+        RaycastHit2D DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air);
+        RaycastHit2D UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air);
+        RaycastHit2D RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air);
+        RaycastHit2D LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air);
         //Attaching to platform when grappling
-        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air))
+        if (loc == location.in_air &&
+            DownRaycast &&
+            DownRaycast.collider.gameObject.tag == "Outer Platform")
         {
             Debug.Log("hi");
             rotated_up = true;
@@ -60,7 +66,9 @@ public class Outer_Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air))
+        if (loc == location.in_air &&
+            UpRaycast &&
+            UpRaycast.collider.gameObject.tag == "Outer Platform")
         {
             rotated_down = true;
             rotated_right = false;
@@ -71,8 +79,11 @@ public class Outer_Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air))
+        if (loc == location.in_air &&
+            RightRaycast &&
+            RightRaycast.collider.gameObject.tag == "Outer Platform")
         {
+            Debug.Log("Rotated right");
             rotated_right = true;
             rotated_up = false;
             rotated_left = false;
@@ -82,8 +93,11 @@ public class Outer_Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (loc == location.in_air & Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air))
+        if (loc == location.in_air &&
+            LeftRaycast &&
+            LeftRaycast.collider.gameObject.tag == "Outer Platform")
         {
+            Debug.Log("Rotated left");
             rotated_left = true;
             rotated_right = false;
             rotated_up = false;
