@@ -56,7 +56,6 @@ public class Outer_Movement : MonoBehaviour
             DownRaycast &&
             DownRaycast.collider.gameObject.tag == "Outer Platform")
         {
-            Debug.Log("hi");
             rotated_up = true;
             rotated_right = false;
             rotated_left = false;
@@ -83,7 +82,6 @@ public class Outer_Movement : MonoBehaviour
             RightRaycast &&
             RightRaycast.collider.gameObject.tag == "Outer Platform")
         {
-            Debug.Log("Rotated right");
             rotated_right = true;
             rotated_up = false;
             rotated_left = false;
@@ -97,7 +95,6 @@ public class Outer_Movement : MonoBehaviour
             LeftRaycast &&
             LeftRaycast.collider.gameObject.tag == "Outer Platform")
         {
-            Debug.Log("Rotated left");
             rotated_left = true;
             rotated_right = false;
             rotated_up = false;
@@ -110,18 +107,6 @@ public class Outer_Movement : MonoBehaviour
         //If on outer platform
         if (loc == location.outer)
         {
-            //DEMO FEATURE
-            if (player.GetButtonDown("Fire 2"))
-            {
-                rb.transform.position = new Vector2(-.7f, 30);
-                rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                rotated_up = true;
-                rotated_down = false;
-                rotated_right = false;
-                rotated_left = false;
-            }
-            //END OF DEMO FEATURE
-
             //Moving along lower platform
             if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
             {
