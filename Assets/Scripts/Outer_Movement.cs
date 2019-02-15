@@ -30,6 +30,8 @@ public class Outer_Movement : MonoBehaviour
     private bool rotated_left = false;
     private bool rotated_down = false;
 
+    private GameObject collider;
+
     void Awake()
     {
         player = ReInput.players.GetPlayer(playerId);
@@ -111,6 +113,9 @@ public class Outer_Movement : MonoBehaviour
             if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
             {
                 rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                Debug.Log(player.GetAxis("Left Horizontal"));
+                Debug.Log(rb.velocity);
+                Debug.Log("hi");
             }
 
             //Moving along right platform
@@ -134,7 +139,7 @@ public class Outer_Movement : MonoBehaviour
             //Switching bottom right corner from bottom to right
             if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal) &&
                 Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical) &&
-                rotated_up && player.GetAxis("Switch Platforms") > 0)
+                rotated_up)
             {
                 rotated_up = false;
                 rotated_right = true;
@@ -147,7 +152,7 @@ public class Outer_Movement : MonoBehaviour
             //Switching bottom right corner from right to bottom
             else if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical) &&
             Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal) &&
-            rotated_right && player.GetAxis("Switch Platforms") > 0)
+            rotated_right)
             {
                 rotated_right = false;
                 rotated_up = true;
@@ -158,7 +163,7 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top right corner from right to top
-            if (rotated_right && player.GetAxis("Switch Platforms") > 0 && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical) &&
+            if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical) &&
             Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal))
             {
                 rotated_right = false;
@@ -170,7 +175,7 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top right corner from top to right
-            else if (rotated_down && player.GetAxis("Switch Platforms") > 0 && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal) &&
+            else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal) &&
             Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical))
             {
                 rotated_down = false;
@@ -182,7 +187,7 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top left corner from left to top
-            if (rotated_left && player.GetAxis("Switch Platforms") > 0 && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical) &&
+            if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical) &&
             Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal))
             {
                 rotated_left = false;
@@ -194,7 +199,7 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top left corner from top to left
-            else if (rotated_down && player.GetAxis("Switch Platforms") > 0 && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal) &&
+            else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal) &&
             Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical))
             {
                 rotated_down = false;
@@ -208,7 +213,7 @@ public class Outer_Movement : MonoBehaviour
             //Switching bottom left corner from left to bottom
             if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical) &&
             Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal) &&
-            rotated_left && player.GetAxis("Switch Platforms") > 0)
+            rotated_left)
             {
                 rotated_up = true;
                 rotated_left = false;
@@ -221,7 +226,7 @@ public class Outer_Movement : MonoBehaviour
             //Switching bottom left corner from bottom to left
             else if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal) &&
             Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical) &&
-            rotated_up && player.GetAxis("Switch Platforms") > 0)
+            rotated_up)
             {
                 rotated_left = true;
                 rotated_up = false;
@@ -260,5 +265,11 @@ public class Outer_Movement : MonoBehaviour
         {
             loc = location.inner;
         }
+        collider = collision.gameObject;
+    }
+
+    public GameObject getCollider()
+    {
+        return collider;
     }
 }

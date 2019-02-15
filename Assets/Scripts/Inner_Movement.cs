@@ -24,11 +24,14 @@ public class Inner_Movement : MonoBehaviour
     public Vector3 left_to_bottom;
     public Vector3 bottom_to_right;
     public Vector3 right_to_bottom;
+    public float ray_distance_in_air;
 
     private bool rotated_up = false;
     private bool rotated_right = false;
     private bool rotated_left = false;
     private bool rotated_down = false;
+
+    private GameObject collider;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,62 @@ public class Inner_Movement : MonoBehaviour
     // Update is called once per time interval
     void FixedUpdate()
     {
+        RaycastHit2D DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air);
+        RaycastHit2D UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air);
+        RaycastHit2D RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air);
+        RaycastHit2D LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air);
+        //Attaching to platform when grappling
+        if (loc == location.in_air &&
+            DownRaycast &&
+            DownRaycast.collider.gameObject.tag == "Inner Platform")
+        {
+            rotated_up = true;
+            rotated_right = false;
+            rotated_left = false;
+            rotated_down = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (loc == location.in_air &&
+            UpRaycast &&
+            UpRaycast.collider.gameObject.tag == "Inner Platform")
+        {
+            rotated_down = true;
+            rotated_right = false;
+            rotated_left = false;
+            rotated_up = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (loc == location.in_air &&
+            RightRaycast &&
+            RightRaycast.collider.gameObject.tag == "Inner Platform")
+        {
+            rotated_left = true;
+            rotated_up = false;
+            rotated_right = false;
+            rotated_down = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (loc == location.in_air &&
+            LeftRaycast &&
+            LeftRaycast.collider.gameObject.tag == "Inner Platform")
+        {
+            rotated_right = true;
+            rotated_left = false;
+            rotated_up = false;
+            rotated_down = false;
+            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         //If on inner platform
         if (loc == location.inner)
         {
@@ -79,7 +138,7 @@ public class Inner_Movement : MonoBehaviour
             if (rotated_up & !(Physics2D.Raycast(rb.position + new Vector2(2,0), new Vector2(0, -1), ray_distance_vertical))
                 & Physics2D.Raycast(rb.position + new Vector2(0,-5), new Vector2(-1, 0), ray_distance_horizontal))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_up = false;
                     rotated_right = true;
@@ -90,7 +149,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Horizontal") > 0)
                     {
@@ -102,13 +161,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                     }
                 }
+                */
             }
 
             //Switching top right corner from right to top
             else if (rotated_right & !(Physics2D.Raycast(rb.position + new Vector2(0,2), new Vector2(-1, 0), ray_distance_vertical))
                 & Physics2D.Raycast(rb.position + new Vector2(-5, 0), new Vector2(0, -1), ray_distance_vertical))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_right = false;
                     rotated_up = true;
@@ -119,7 +179,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Vertical") > 0)
                     {
@@ -131,13 +191,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                     }
                 }
+                */
             }
 
             //Switching top left corner from top to left
             if (rotated_up & !(Physics2D.Raycast(rb.position + new Vector2(-2,0), new Vector2(0, -1), ray_distance_vertical))
             & Physics2D.Raycast(rb.position + new Vector2(0, -5), new Vector2(1, 0), ray_distance_horizontal))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_up = false;
                     rotated_left = true;
@@ -148,7 +209,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Horizontal") < 0)
                     {
@@ -160,13 +221,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                     }
                 }
+                */
             }
 
             //Switching top left corner from left to top
             else if (rotated_left & !(Physics2D.Raycast(rb.position + new Vector2(0,2), new Vector2(1, 0), ray_distance_vertical))
             & Physics2D.Raycast(rb.position + new Vector2(5, 0), new Vector2(0, -1), ray_distance_vertical))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_left = false;
                     rotated_up = true;
@@ -177,7 +239,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Vertical") > 0)
                     {
@@ -189,13 +251,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                     }
                 }
+                */
             }
 
             //Switching bottom left corner from bottom to left
             if (rotated_down & !(Physics2D.Raycast(rb.position + new Vector2(-2,0), new Vector2(0, 1), ray_distance_vertical))
             & Physics2D.Raycast(rb.position + new Vector2(0, 5), new Vector2(1, 0), ray_distance_horizontal))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_down = false;
                     rotated_left = true;
@@ -206,7 +269,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Horizontal") < 0)
                     {
@@ -218,13 +281,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                     }
                 }
+                */
             }
 
             //Switching bottom left corner from left to bottom
             else if (rotated_left & !(Physics2D.Raycast(rb.position + new Vector2(0,-2), new Vector2(1, 0), ray_distance_vertical))
             & Physics2D.Raycast(rb.position + new Vector2(5, 0), new Vector2(0, 1), ray_distance_vertical))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_left = false;
                     rotated_down = true;
@@ -235,7 +299,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Vertical") < 0)
                     {
@@ -247,13 +311,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                     }
                 }
+                */
             }
 
             //Switching bottom right corner from bottom to right
             if (rotated_down & !(Physics2D.Raycast(rb.position + new Vector2(2,0), new Vector2(0, 1), ray_distance_vertical))
             & Physics2D.Raycast(rb.position + new Vector2(0, 5), new Vector2(-1, 0), ray_distance_horizontal))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_down = false;
                     rotated_right = true;
@@ -264,7 +329,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Horizontal") > 0)
                     {
@@ -276,13 +341,14 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                     }
                 }
+                */
             }
 
             //Switching bottom right corner from right to bottom
             else if (rotated_right & !(Physics2D.Raycast(rb.position + new Vector2(0,-2), new Vector2(-1, 0), ray_distance_vertical))
             & Physics2D.Raycast(rb.position + new Vector2(-5, 0), new Vector2(0, 1), ray_distance_vertical))
             {
-                if (player.GetAxis("Switch Platforms") > 0)
+                //if (player.GetAxis("Switch Platforms") > 0)
                 {
                     rotated_right = false;
                     rotated_down = true;
@@ -293,7 +359,7 @@ public class Inner_Movement : MonoBehaviour
                     rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                 }
 
-                else
+                /*else
                 {
                     if (player.GetAxis("Left Vertical") < 0)
                     {
@@ -305,6 +371,7 @@ public class Inner_Movement : MonoBehaviour
                         rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                     }
                 }
+                */
             }
         }
     }
@@ -324,5 +391,12 @@ public class Inner_Movement : MonoBehaviour
         {
             loc = location.inner;
         }
+
+        collider = collision.gameObject;
+    }
+
+    public GameObject getCollider()
+    {
+        return collider;
     }
 }
