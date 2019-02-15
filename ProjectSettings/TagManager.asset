@@ -6,8 +6,10 @@ TagManager:
   tags:
   - Outer Platform
   - Inner Platform
-  - Player 1
-  - Player 2
+  - Player1Text
+  - Player2Text
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
