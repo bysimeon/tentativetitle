@@ -33,8 +33,8 @@ public class GrapplingHook : MonoBehaviour
             same_surface = false;
         }
 
-        if (collision.gameObject.tag == "Outer Platform" ||
-            collision.gameObject.tag == "Inner Platform" &&
+        if ((collision.gameObject.tag == "Outer Platform" ||
+            collision.gameObject.tag == "Inner Platform") &&
             planted == false)
         {
             Outer_Movement ShooterMovement = Player.
@@ -47,14 +47,14 @@ public class GrapplingHook : MonoBehaviour
             DragPlayerToHook();
         }
 
-        if(collision.gameObject.tag == "Player 1" & Player != collision.gameObject & !planted)
+        if(collision.gameObject.tag == "Player1" & Player != collision.gameObject)
         {
             Destroy(gameObject);
             var damage = GameObject.Find("Damage_Manager");
             damage.GetComponent<Damage_Player>().IncrementP1();
         }
 
-        if (collision.gameObject.tag == "Player 2" & Player != collision.gameObject & !planted)
+        if (collision.gameObject.tag == "Player2" & Player != collision.gameObject)
         {
             Destroy(gameObject);
             var damage = GameObject.Find("Damage_Manager");

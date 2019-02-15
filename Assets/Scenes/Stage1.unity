@@ -738,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_TagString
-      value: Player 1
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -913,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_TagString
-      value: Player 2
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2007,7 +2007,7 @@ GameObject:
   - component: {fileID: 1954788949}
   m_Layer: 5
   m_Name: Player1_Text
-  m_TagString: Untagged
+  m_TagString: Player1Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
