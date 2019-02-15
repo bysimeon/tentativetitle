@@ -5,8 +5,11 @@ public class GrapplingHook : MonoBehaviour
     private bool planted;
     Quaternion rotation;
     Vector3 position;
-    Transform plantedTransform;
+    Transform plantedtransform;
     public GameObject Player;
+    public float ray_distance;
+    public bool same_surface = false;
+
     void LateUpdate()
     {
         if(planted)
@@ -16,7 +19,20 @@ public class GrapplingHook : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision detected");
+        Outer_Movement outer_collision = Player.GetComponent<Outer_Movement>();
+        Inner_Movement inner_collision = Player.GetComponent<Inner_Movement>();
+
+        if (collision.gameObject == outer_collision.getCollider() |
+            collision.gameObject == inner_collision.getCollider())
+        {
+            same_surface = true;
+        }
+
+        else
+        {
+            same_surface = false;
+        }
+
         if (collision.gameObject.tag == "Outer Platform" ||
             collision.gameObject.tag == "Inner Platform" &&
             planted == false)
@@ -29,23 +45,21 @@ public class GrapplingHook : MonoBehaviour
             ShooterMovement2.DetachFromPlatform();
             PlantHook();
             DragPlayerToHook();
-
         }
 
-        if(collision.gameObject.tag == "Player 1" & Player != collision.gameObject)
+        if(collision.gameObject.tag == "Player 1" & Player != collision.gameObject & !planted)
         {
             Destroy(gameObject);
             var damage = GameObject.Find("Damage_Manager");
             damage.GetComponent<Damage_Player>().IncrementP1();
         }
 
-        if (collision.gameObject.tag == "Player 2" & Player != collision.gameObject)
+        if (collision.gameObject.tag == "Player 2" & Player != collision.gameObject & !planted)
         {
             Destroy(gameObject);
             var damage = GameObject.Find("Damage_Manager");
             damage.GetComponent<Damage_Player>().IncrementP2();
         }
-
     }
     void PlantHook()
     {
@@ -61,18 +75,17 @@ public class GrapplingHook : MonoBehaviour
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
         Vector3 PlayerVelocity = Vector3.Normalize(HookPosition - PlayerPosition) *
-                                    50f;
-        Debug.Log(PlayerVelocity);
+                                        50f;
         Player.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
+
     }
     void Update()
     {
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
 
-        if (planted && Vector3.Magnitude(HookPosition-PlayerPosition) < 10f)
+        if (planted && Vector3.Magnitude(HookPosition - PlayerPosition) < 10f)
         {
-            Debug.Log(Vector3.Magnitude(HookPosition - PlayerPosition));
             Destroy(gameObject);
         }
     }
