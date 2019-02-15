@@ -113,9 +113,9 @@ public class Outer_Movement : MonoBehaviour
             if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
             {
                 rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
-                Debug.Log(player.GetAxis("Left Horizontal"));
-                Debug.Log(rb.velocity);
-                Debug.Log("hi");
+                //Debug.Log(player.GetAxis("Left Horizontal"));
+                //Debug.Log(rb.velocity);
+                //Debug.Log("hi");
             }
 
             //Moving along right platform

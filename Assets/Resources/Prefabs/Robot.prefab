@@ -143,10 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34a79a810e5ef48a56a5c26a17162a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 0
   rb: {fileID: 1352279191}
   speed: 50
   ray_distance_vertical: 4
   ray_distance_horizontal: 3
+  ray_distance_in_air: 0
   bottom_to_right_shift: {x: -0.5, y: 2, z: 0}
   right_to_bottom_shift: {x: -2, y: 0.5, z: 0}
   bottom_to_left_shift: {x: 0.5, y: 2, z: 0}
@@ -167,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e326625af5ac84e950e90bcfe54789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 0
   rb: {fileID: 1352279191}
   speed: 40
   ray_distance_vertical: 4
@@ -179,6 +182,7 @@ MonoBehaviour:
   left_to_bottom: {x: 6, y: -5, z: 0}
   bottom_to_right: {x: 5, y: 6, z: 0}
   right_to_bottom: {x: -6, y: -5, z: 0}
+  ray_distance_in_air: 0
 --- !u!1 &1103387181364522744
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 22f88a690fa3aee4cb93f85b77279ef3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77277c9ff89d24a139df46c13299c31f, type: 3}
   m_Color: {r: 0, g: 1, b: 0.12074661, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -271,3 +275,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf8534017c6fe7428d26da93b036668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 0

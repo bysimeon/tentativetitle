@@ -15,6 +15,11 @@ public class HookLauncher : MonoBehaviour
     private bool IsAiming = false;
     private GameObject prior_hook;
 
+    private  LineRenderer lineRenderer;
+    public Color c1 = Color.yellow;
+    public Color c2 = Color.red;
+    public int lengthOfLineRenderer = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,15 @@ public class HookLauncher : MonoBehaviour
     {
         UpdateAim();
         ProcessShooting();
+
+        if (prior_hook)
+        {
+            Debug.Log("update called");
+            Debug.Log(lineRenderer);
+            Debug.Log(lineRenderer.GetPosition(0));
+            lineRenderer.SetPosition(0, gameObject.transform.position);
+            lineRenderer.SetPosition(1, prior_hook.transform.position);
+        }
     }
     void UpdateAim()
     {
@@ -105,6 +119,7 @@ public class HookLauncher : MonoBehaviour
                                             rotation);
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
         newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
+        lineRenderer = newHook.GetComponent<LineRenderer>();
         return newHook;
 
     }
