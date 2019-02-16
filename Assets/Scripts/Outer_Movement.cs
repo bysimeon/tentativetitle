@@ -9,13 +9,17 @@ public class Outer_Movement : MonoBehaviour
     public int playerId;
     private Player player;
 
-    private enum location { outer, inner, in_air };
-    private location loc;
+    public enum location { outer, inner, in_air };
+    public location loc;
     public Rigidbody2D rb;
     public float speed;
     public float ray_distance_vertical;
     public float ray_distance_horizontal;
-    public float ray_distance_in_air;
+    public float ray_distance_in_air_vertical;
+    public float ray_distance_in_air_horizontal;
+    private float ray_distance_in_air_1;
+    private float ray_distance_in_air_2;
+
     public Vector3 bottom_to_right_shift;
     public Vector3 right_to_bottom_shift;
     public Vector3 bottom_to_left_shift;
@@ -31,6 +35,7 @@ public class Outer_Movement : MonoBehaviour
     private bool rotated_down = false;
 
     private GameObject collider = null;
+    private GameObject grapple_collision = null;
 
     void Awake()
     {
@@ -49,16 +54,52 @@ public class Outer_Movement : MonoBehaviour
     // Update is called once per time interval
     void FixedUpdate()
     {
-        RaycastHit2D DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air);
-        RaycastHit2D UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air);
-        RaycastHit2D RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air);
-        RaycastHit2D LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air);
+        RaycastHit2D DownRaycast = new RaycastHit2D();
+        RaycastHit2D UpRaycast = new RaycastHit2D();
+        RaycastHit2D RightRaycast = new RaycastHit2D();
+        RaycastHit2D LeftRaycast = new RaycastHit2D();
+
+        if (rotated_up | rotated_down)
+        {
+            ray_distance_in_air_1 = ray_distance_in_air_vertical;
+            ray_distance_in_air_2 = ray_distance_in_air_horizontal;
+        }
+
+        else
+        {
+            ray_distance_in_air_1 = ray_distance_in_air_horizontal;
+            ray_distance_in_air_2 = ray_distance_in_air_vertical;
+        }
+
+        DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air_1);
+        UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air_1);
+        RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air_2);
+        LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air_2);
+
+        /*
+        if (DownRaycast)
+        {
+            Debug.Log("Down" + DownRaycast.transform.gameObject);
+        }
+        if (UpRaycast)
+        {
+            Debug.Log("Up" + UpRaycast.transform.gameObject);
+        }
+        if (RightRaycast)
+        {
+            Debug.Log("Right" + RightRaycast.transform.gameObject);
+        }
+        if (LeftRaycast)
+        {
+            Debug.Log("Left" + LeftRaycast.transform.gameObject);
+        }
+        */
+
         //Attaching to platform when grappling
         if (loc == location.in_air &&
             DownRaycast && !rotated_up &&
             DownRaycast.collider.gameObject.tag == "Outer Platform")
         {
-            Debug.Log("up");
             rotated_up = true;
             rotated_right = false;
             rotated_left = false;
@@ -68,8 +109,8 @@ public class Outer_Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (loc == location.in_air &&
-            UpRaycast && !rotated_down && 
+        else if (loc == location.in_air &&
+            UpRaycast && !rotated_down &&
             UpRaycast.collider.gameObject.tag == "Outer Platform")
         {
             rotated_down = true;
@@ -81,7 +122,7 @@ public class Outer_Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (loc == location.in_air &&
+        else if (loc == location.in_air &&
             RightRaycast && !rotated_right &&
             RightRaycast.collider.gameObject.tag == "Outer Platform")
         {
@@ -94,7 +135,7 @@ public class Outer_Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (loc == location.in_air &&
+        else if (loc == location.in_air &&
             LeftRaycast && !rotated_left &&
             LeftRaycast.collider.gameObject.tag == "Outer Platform")
         {
@@ -257,20 +298,54 @@ public class Outer_Movement : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Outer Platform")
+        if (collision.gameObject.tag == "Outer Platform")
         {
             loc = location.outer;
         }
 
-        if(collision.gameObject.tag == "Inner Platform")
+        if (collision.gameObject.tag == "Inner Platform")
         {
             loc = location.inner;
         }
+
         collider = collision.gameObject;
     }
 
     public GameObject getCollider()
     {
         return collider;
+    }
+
+    public void sameSurface()
+    {
+        //rb.velocity = Vector2.zero;
+        if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
+        {
+            Debug.Log("hi");
+            rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+            //Debug.Log(player.GetAxis("Left Horizontal"));
+            //Debug.Log(rb.velocity);
+            //Debug.Log("hi");
+        }
+    }
+
+    public void find_grapple_collision(GameObject collision)
+    {
+        grapple_collision = collision;
+    }
+
+    public GameObject get_grapple_collision()
+    {
+        return grapple_collision;
+    }
+
+    public string getLocation()
+    {
+        if(loc == location.in_air)
+        {
+            return "air";
+        }
+
+        return "";
     }
 }

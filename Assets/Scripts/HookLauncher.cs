@@ -9,7 +9,7 @@ public class HookLauncher : MonoBehaviour
     private Player player;
 
     public const float LaunchCooldown = 1f;
-    public const float LaunchVelocity = 75f;
+    public const float LaunchVelocity = 100f;
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;
@@ -24,6 +24,8 @@ public class HookLauncher : MonoBehaviour
     private bool can_fire = true;
     private bool is_fired = false;
 
+    public GameObject hook;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,6 @@ public class HookLauncher : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject);
     }
 
     void Awake()
@@ -61,11 +62,18 @@ public class HookLauncher : MonoBehaviour
         if (IsAiming)
         {
             Outer_Movement outer_collision = GetComponentInParent<Outer_Movement>();
+            GrapplingHook grapple_collision = hook.GetComponent<GrapplingHook>();
             float AimAngle = CalculateAimAngle(Vertical, Horizontal);
             float AimAngle2 = AimAngle * 0.0174533f;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
                 1000);
+
             if (hit.transform.gameObject == outer_collision.getCollider())
+            {
+                can_fire = false;
+            }
+
+            else if (outer_collision.getLocation().Equals("air") && hit.transform.gameObject == outer_collision.get_grapple_collision())
             {
                 can_fire = false;
             }

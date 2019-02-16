@@ -1162,6 +1162,14 @@ PrefabInstance:
       propertyPath: ray_distance_horizontal
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: ray_distance_in_air_vertical
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: ray_distance_in_air_horizontal
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3992069919793662868, guid: 75b09a230e46c9a47a242b937aaf4d7c,
         type: 3}
       propertyPath: playerId
@@ -1180,6 +1188,12 @@ PrefabInstance:
       propertyPath: game_player
       value: 
       objectReference: {fileID: 100000, guid: 0ae86847fcc1d5949b64b85d9ad67fae, type: 3}
+    - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: hook
+      value: 
+      objectReference: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
 --- !u!1 &984439295 stripped
@@ -1461,6 +1475,14 @@ PrefabInstance:
       propertyPath: ray_distance_horizontal
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: ray_distance_in_air_vertical
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279189, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: ray_distance_in_air_horizontal
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3992069919793662868, guid: 75b09a230e46c9a47a242b937aaf4d7c,
         type: 3}
       propertyPath: ray_distance_in_air
@@ -1504,6 +1526,12 @@ PrefabInstance:
       propertyPath: game_player
       value: 
       objectReference: {fileID: 100000, guid: 0ae86847fcc1d5949b64b85d9ad67fae, type: 3}
+    - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: hook
+      value: 
+      objectReference: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8,
+        type: 3}
     - target: {fileID: 1352279190, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -1511,6 +1539,14 @@ PrefabInstance:
     - target: {fileID: 1352279190, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_UsedByComposite
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279190, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Size.y
+      value: 8.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279190, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
