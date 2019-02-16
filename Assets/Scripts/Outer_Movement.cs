@@ -30,7 +30,7 @@ public class Outer_Movement : MonoBehaviour
     private bool rotated_left = false;
     private bool rotated_down = false;
 
-    private GameObject collider;
+    private GameObject collider = null;
 
     void Awake()
     {
@@ -55,9 +55,10 @@ public class Outer_Movement : MonoBehaviour
         RaycastHit2D LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air);
         //Attaching to platform when grappling
         if (loc == location.in_air &&
-            DownRaycast &&
+            DownRaycast && !rotated_up &&
             DownRaycast.collider.gameObject.tag == "Outer Platform")
         {
+            Debug.Log("up");
             rotated_up = true;
             rotated_right = false;
             rotated_left = false;
@@ -68,7 +69,7 @@ public class Outer_Movement : MonoBehaviour
         }
 
         if (loc == location.in_air &&
-            UpRaycast &&
+            UpRaycast && !rotated_down && 
             UpRaycast.collider.gameObject.tag == "Outer Platform")
         {
             rotated_down = true;
@@ -81,7 +82,7 @@ public class Outer_Movement : MonoBehaviour
         }
 
         if (loc == location.in_air &&
-            RightRaycast &&
+            RightRaycast && !rotated_right &&
             RightRaycast.collider.gameObject.tag == "Outer Platform")
         {
             rotated_right = true;
@@ -94,7 +95,7 @@ public class Outer_Movement : MonoBehaviour
         }
 
         if (loc == location.in_air &&
-            LeftRaycast &&
+            LeftRaycast && !rotated_left &&
             LeftRaycast.collider.gameObject.tag == "Outer Platform")
         {
             rotated_left = true;

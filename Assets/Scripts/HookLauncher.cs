@@ -9,7 +9,7 @@ public class HookLauncher : MonoBehaviour
     private Player player;
 
     public const float LaunchCooldown = 1f;
-    public const float LaunchVelocity = 80f;
+    public const float LaunchVelocity = 75f;
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;
@@ -20,10 +20,19 @@ public class HookLauncher : MonoBehaviour
     public Color c2 = Color.red;
     public int lengthOfLineRenderer = 2;
 
+    public GameObject game_player;
+    private bool can_fire = true;
+    private bool is_fired = false;
+
     // Start is called before the first frame update
     void Start()
     {
         HookPrefab = Resources.Load("Prefabs/Hook");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject);
     }
 
     void Awake()
@@ -40,9 +49,6 @@ public class HookLauncher : MonoBehaviour
 
         if (prior_hook)
         {
-            Debug.Log("update called");
-            Debug.Log(lineRenderer);
-            Debug.Log(lineRenderer.GetPosition(0));
             lineRenderer.SetPosition(0, gameObject.transform.position);
             lineRenderer.SetPosition(1, prior_hook.transform.position);
         }
@@ -54,7 +60,21 @@ public class HookLauncher : MonoBehaviour
         IsAiming = GameInput.SignificantStickInput(Vertical, Horizontal);
         if (IsAiming)
         {
+            Outer_Movement outer_collision = GetComponentInParent<Outer_Movement>();
             float AimAngle = CalculateAimAngle(Vertical, Horizontal);
+            float AimAngle2 = AimAngle * 0.0174533f;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
+                1000);
+            if (hit.transform.gameObject == outer_collision.getCollider())
+            {
+                can_fire = false;
+            }
+
+            else
+            {
+                can_fire = true;
+            }
+
             DisplayAimReticle(AimAngle);
         }
         else
@@ -83,7 +103,7 @@ public class HookLauncher : MonoBehaviour
     private void DisplayAimReticle(float angle)
     {
         float time = Time.time;
-        if (time < (lastShotTime + LaunchCooldown))
+        if (time < (lastShotTime + LaunchCooldown) | !can_fire)
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -99,8 +119,9 @@ public class HookLauncher : MonoBehaviour
     {
         float time = Time.time;
 
-        if (time > (lastShotTime + LaunchCooldown) && IsAiming)
+        if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
         {
+            is_fired = true;
             if (prior_hook)
             {
                 Destroy(prior_hook);

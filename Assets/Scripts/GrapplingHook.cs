@@ -10,6 +10,10 @@ public class GrapplingHook : MonoBehaviour
     public float ray_distance;
     public bool same_surface = false;
 
+    private void Start()
+    {
+    }
+
     void LateUpdate()
     {
         if(planted)
@@ -17,6 +21,7 @@ public class GrapplingHook : MonoBehaviour
             transform.SetPositionAndRotation(position, rotation);
         }
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         Outer_Movement outer_collision = Player.GetComponent<Outer_Movement>();
@@ -60,6 +65,8 @@ public class GrapplingHook : MonoBehaviour
             var damage = GameObject.Find("Damage_Manager");
             damage.GetComponent<Damage_Player>().IncrementP2();
         }
+
+        //Debug.Log(collision.gameObject);
     }
     void PlantHook()
     {
@@ -75,7 +82,7 @@ public class GrapplingHook : MonoBehaviour
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
         Vector3 PlayerVelocity = Vector3.Normalize(HookPosition - PlayerPosition) *
-                                        50f;
+                                        75f;
         Player.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
 
     }
@@ -83,6 +90,11 @@ public class GrapplingHook : MonoBehaviour
     {
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
+
+        if(planted && Player.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+        {
+            Destroy(gameObject);
+        }
 
         if (planted && Vector3.Magnitude(HookPosition - PlayerPosition) < 10f)
         {
