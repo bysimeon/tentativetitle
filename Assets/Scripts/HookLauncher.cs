@@ -22,13 +22,15 @@ public class HookLauncher : MonoBehaviour
 
     public GameObject game_player;
     private bool can_fire = true;
-    private bool is_fired = false;
+    private int layer_mask;
 
     public GameObject hook;
 
     // Start is called before the first frame update
     void Start()
     {
+        layer_mask = (1 << 8 | 1 << 9);
+        layer_mask = ~layer_mask;
         HookPrefab = Resources.Load("Prefabs/Hook");
     }
 
@@ -66,7 +68,7 @@ public class HookLauncher : MonoBehaviour
             float AimAngle = CalculateAimAngle(Vertical, Horizontal);
             float AimAngle2 = AimAngle * 0.0174533f;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
-                1000);
+                1000, layer_mask);
 
             if (hit.transform.gameObject == outer_collision.getCollider())
             {
@@ -129,7 +131,6 @@ public class HookLauncher : MonoBehaviour
 
         if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
         {
-            is_fired = true;
             if (prior_hook)
             {
                 Destroy(prior_hook);

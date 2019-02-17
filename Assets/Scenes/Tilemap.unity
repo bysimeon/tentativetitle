@@ -942,6 +942,11 @@ PrefabInstance:
       propertyPath: m_MatchWidthOrHeight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8668957375028058340, guid: a8f94029428dec64a91502b611fae0f9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player2Text
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8f94029428dec64a91502b611fae0f9, type: 3}
 --- !u!1 &600857710 stripped
@@ -1088,11 +1093,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_Name
-      value: Player one
+      value: Player 2
       objectReference: {fileID: 0}
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_TagString
-      value: Player1
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,6 +1203,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8,
         type: 3}
+    - target: {fileID: 1103387181364522744, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
 --- !u!1 &984439295 stripped
@@ -1405,11 +1419,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_Name
-      value: Robot
+      value: Player 1
       objectReference: {fileID: 0}
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_TagString
-      value: Player2
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1352279193, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1547,6 +1565,11 @@ PrefabInstance:
     - target: {fileID: 1352279190, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_Offset.y
       value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103387181364522744, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}

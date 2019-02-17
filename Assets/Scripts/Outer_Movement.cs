@@ -36,6 +36,7 @@ public class Outer_Movement : MonoBehaviour
 
     private GameObject collider = null;
     private GameObject grapple_collision = null;
+    private int layer_mask;
 
     void Awake()
     {
@@ -45,6 +46,8 @@ public class Outer_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        layer_mask = (1 << 8 | 1 << 9);
+        layer_mask = ~layer_mask;
         loc = location.in_air;
         rotated_up = true;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -71,10 +74,10 @@ public class Outer_Movement : MonoBehaviour
             ray_distance_in_air_2 = ray_distance_in_air_vertical;
         }
 
-        DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air_1);
-        UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air_1);
-        RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air_2);
-        LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air_2);
+        DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air_1, layer_mask);
+        UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air_1, layer_mask);
+        RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air_2, layer_mask);
+        LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air_2, layer_mask);
 
         /*
         if (DownRaycast)
@@ -152,7 +155,7 @@ public class Outer_Movement : MonoBehaviour
         if (loc == location.outer)
         {
             //Moving along lower platform
-            if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
+            if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask))
             {
                 rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                 //Debug.Log(player.GetAxis("Left Horizontal"));
@@ -161,26 +164,26 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Moving along right platform
-            if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical))
+            if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask))
             {
                 rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
             }
 
             //Moving along top platform
-            if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical))
+            if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
             {
                 rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
             }
 
             //Moving along left platform
-            if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical))
+            if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask))
             {
                 rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
             }
 
             //Switching bottom right corner from bottom to right
-            if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal) &&
-                Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical) &&
+            if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal, layer_mask) &&
+                Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask) &&
                 rotated_up)
             {
                 rotated_up = false;
@@ -192,8 +195,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching bottom right corner from right to bottom
-            else if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal) &&
+            else if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal, layer_mask) &&
             rotated_right)
             {
                 rotated_right = false;
@@ -205,8 +208,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top right corner from right to top
-            if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal))
+            if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal, layer_mask))
             {
                 rotated_right = false;
                 rotated_down = true;
@@ -217,8 +220,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top right corner from top to right
-            else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical))
+            else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
             {
                 rotated_down = false;
                 rotated_right = true;
@@ -229,8 +232,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top left corner from left to top
-            if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal))
+            if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal, layer_mask))
             {
                 rotated_left = false;
                 rotated_down = true;
@@ -241,8 +244,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching top left corner from top to left
-            else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical))
+            else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
             {
                 rotated_down = false;
                 rotated_left = true;
@@ -253,8 +256,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching bottom left corner from left to bottom
-            if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal) &&
+            if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal, layer_mask) &&
             rotated_left)
             {
                 rotated_up = true;
@@ -266,8 +269,8 @@ public class Outer_Movement : MonoBehaviour
             }
 
             //Switching bottom left corner from bottom to left
-            else if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal) &&
-            Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical) &&
+            else if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal, layer_mask) &&
+            Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask) &&
             rotated_up)
             {
                 rotated_left = true;
@@ -319,7 +322,7 @@ public class Outer_Movement : MonoBehaviour
     public void sameSurface()
     {
         //rb.velocity = Vector2.zero;
-        if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical))
+        if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask))
         {
             Debug.Log("hi");
             rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
