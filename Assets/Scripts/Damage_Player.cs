@@ -62,6 +62,7 @@ public class Damage_Player : MonoBehaviour
                     flashColor :
                     textColor;
             }
+
             yield return new WaitForSeconds(.15f);
         }
     }
@@ -70,6 +71,7 @@ public class Damage_Player : MonoBehaviour
     {
         player1_count++;
         StartCoroutine("Flash",GameObject.FindWithTag("Player1"));
+
         if(player1_count == 1)
         {
             Destroy(p1_heart3);
@@ -87,8 +89,8 @@ public class Damage_Player : MonoBehaviour
 
     public void IncrementP2()
     {
-        StartCoroutine("Flash", GameObject.FindWithTag("Player2"));
         player2_count++;
+        StartCoroutine("Flash", GameObject.FindWithTag("Player2"));
         if (player2_count == 1)
         {
             Destroy(p2_heart3);
