@@ -82,7 +82,7 @@ public class GrapplingHook : MonoBehaviour
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Player.transform.position;
         Vector3 PlayerVelocity = Vector3.Normalize(HookPosition - PlayerPosition) *
-                                        100f;
+                                        150f;
         Player.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
 
     }

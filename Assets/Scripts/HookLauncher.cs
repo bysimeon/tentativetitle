@@ -8,8 +8,8 @@ public class HookLauncher : MonoBehaviour
     public int playerId;
     private Player player;
 
-    public const float LaunchCooldown = 1f;
-    public const float LaunchVelocity = 100f;
+    public const float LaunchCooldown = .25f;
+    public const float LaunchVelocity = 150f;
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;

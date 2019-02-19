@@ -1727,6 +1727,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_Name
       value: Player 2
@@ -1820,13 +1828,10 @@ PrefabInstance:
       propertyPath: playerId
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
+    - target: {fileID: 1103387181364522744, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
         type: 3}
@@ -1839,11 +1844,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8,
         type: 3}
-    - target: {fileID: 1103387181364522744, guid: 75b09a230e46c9a47a242b937aaf4d7c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
 --- !u!1 &984439295 stripped
@@ -2053,6 +2053,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1352279188, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -2167,30 +2175,6 @@ PrefabInstance:
       propertyPath: ray_distance_horizontal
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352279191, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
-        type: 3}
-      propertyPath: game_player
-      value: 
-      objectReference: {fileID: 100000, guid: 0ae86847fcc1d5949b64b85d9ad67fae, type: 3}
-    - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
-        type: 3}
-      propertyPath: hook
-      value: 
-      objectReference: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8,
-        type: 3}
-    - target: {fileID: 1103387181364522744, guid: 75b09a230e46c9a47a242b937aaf4d7c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 1352279190, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -2207,6 +2191,22 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1103387181364522744, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: game_player
+      value: 
+      objectReference: {fileID: 100000, guid: 0ae86847fcc1d5949b64b85d9ad67fae, type: 3}
+    - target: {fileID: 7627615638376020923, guid: 75b09a230e46c9a47a242b937aaf4d7c,
+        type: 3}
+      propertyPath: hook
+      value: 
+      objectReference: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75b09a230e46c9a47a242b937aaf4d7c, type: 3}
 --- !u!1 &1156001589
