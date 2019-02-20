@@ -101,6 +101,7 @@ MonoBehaviour:
   hook: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8, type: 3}
   in_start_menu: 0
   canvas: {fileID: 0}
+  scene_manager: {fileID: 0}
 --- !u!1 &159709414
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fc698283fb26549d390c936e6db251a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89356704dbbed492eb27a0e3e63d1fd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -262,6 +263,7 @@ MonoBehaviour:
   right_to_top_shift: {x: -1, y: -0.5, z: 0}
   top_to_left_shift: {x: 0.5, y: -1, z: 0}
   left_to_top_shift: {x: 1, y: -0.5, z: 0}
+  scene_manager: {fileID: 0}
 --- !u!114 &159709420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +300,7 @@ Animator:
   m_GameObject: {fileID: 159709414}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cb615b2f0e3ba4fc99f228042e8ad0ce, type: 2}
+  m_Controller: {fileID: 9100000, guid: bd5d8919647824049839c408a04111dc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
