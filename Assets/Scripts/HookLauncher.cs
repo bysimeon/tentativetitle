@@ -31,6 +31,9 @@ public class HookLauncher : MonoBehaviour
     bool done = false;
     bool done2 = false;
 
+    public GameObject scene_manager;
+    private Scene_Manager scene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -174,28 +177,36 @@ public class HookLauncher : MonoBehaviour
 
     void AttemptFire()
     {
-        float time = Time.time;
-        if (in_start_menu && !done)
+        if (scene_manager != null)
         {
-            transform.parent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            prior_hook = SpawnHook(transform.position + transform.right * 5f,
-            transform.rotation,
-            transform.right * LaunchVelocity);
-            done = true;
+            scene = scene_manager.GetComponent<Scene_Manager>();
         }
 
-        else
+        if (scene == null || scene.can_move)
         {
-            if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
+            float time = Time.time;
+            if (in_start_menu && !done)
             {
-                if (prior_hook)
-                {
-                    Destroy(prior_hook);
-                }
-                lastShotTime = time;
+                transform.parent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 prior_hook = SpawnHook(transform.position + transform.right * 5f,
-                    transform.rotation,
-                    transform.right * LaunchVelocity);
+                transform.rotation,
+                transform.right * LaunchVelocity);
+                done = true;
+            }
+
+            else
+            {
+                if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
+                {
+                    if (prior_hook)
+                    {
+                        Destroy(prior_hook);
+                    }
+                    lastShotTime = time;
+                    prior_hook = SpawnHook(transform.position + transform.right * 5f,
+                        transform.rotation,
+                        transform.right * LaunchVelocity);
+                }
             }
         }
     }
