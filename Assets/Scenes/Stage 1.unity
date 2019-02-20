@@ -1635,6 +1635,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 249550a8458224cec96f838c00c3b989, type: 3}
+--- !u!1 &805549752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4978874081400293854, guid: cdd3f9af659be874897c57dbe55a607b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4978874082489327384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &986846865 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8668957373553162476, guid: a8f94029428dec64a91502b611fae0f9,
@@ -7467,6 +7473,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 984439302, guid: ae56f8d166f524abfae1504641c2ee67, type: 3}
+      propertyPath: scene_manager
+      value: 
+      objectReference: {fileID: 805549752}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae56f8d166f524abfae1504641c2ee67, type: 3}
 --- !u!1001 &1859729256
@@ -7524,6 +7534,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 159709421, guid: 572918f7573154d168d9a69e03092000, type: 3}
+      propertyPath: ray_distance_vertical
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 159709421, guid: 572918f7573154d168d9a69e03092000, type: 3}
+      propertyPath: scene_manager
+      value: 
+      objectReference: {fileID: 805549752}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 572918f7573154d168d9a69e03092000, type: 3}
 --- !u!1 &1922039314
