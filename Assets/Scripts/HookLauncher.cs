@@ -18,6 +18,7 @@ public class HookLauncher : MonoBehaviour
     private  LineRenderer lineRenderer;
     public Color c1 = Color.yellow;
     public Color c2 = Color.red;
+    public float width = .1f;
     public int lengthOfLineRenderer = 2;
 
     public GameObject game_player;
@@ -60,6 +61,10 @@ public class HookLauncher : MonoBehaviour
 
         if (prior_hook)
         {
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            lineRenderer.sortingLayerName = "Lines";
+            lineRenderer.SetWidth(width, width);
+            lineRenderer.SetColors(c1, c2);
             lineRenderer.SetPosition(0, gameObject.transform.position);
             lineRenderer.SetPosition(1, prior_hook.transform.position);
         }

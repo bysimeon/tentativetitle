@@ -10,6 +10,8 @@ TagManager:
   - Player2Text
   - Player1
   - Player2
+  - Player3
+  - Player4
   layers:
   - Default
   - TransparentFX
@@ -44,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Lines
+    uniqueID: 1849101587
+    locked: 0
   - name: Platforms
     uniqueID: 2274287497
     locked: 0
