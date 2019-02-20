@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: bf8b0c40e77cf6d439d8fe10fc4b7b68
   - enabled: 1
-    path: Assets/Scenes/Tilemap.unity
+    path: Assets/Scenes/Stage 1.unity
     guid: 442c20ef5a578492d85c50e806b7fde7
+  - enabled: 1
+    path: Assets/Scenes/Stage Select.unity
+    guid: 4d1bc43c3f9baac4482e12ed9a0a3e5a
   m_configObjects: {}

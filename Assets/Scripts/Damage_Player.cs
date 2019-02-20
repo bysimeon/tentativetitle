@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Damage_Player : MonoBehaviour
 {
@@ -84,6 +85,7 @@ public class Damage_Player : MonoBehaviour
         {
             Destroy(p1_heart1);
             win_text.text = "A Winner is Player 2!";
+            StartCoroutine(wait());
         }
     }
 
@@ -103,6 +105,13 @@ public class Damage_Player : MonoBehaviour
         {
             Destroy(p2_heart1);
             win_text.text = "A Winner is Player 1!";
+            StartCoroutine(wait());
         }
+    }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Stage Select");
     }
 }
