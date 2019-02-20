@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GrapplingHook : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class GrapplingHook : MonoBehaviour
     public float ray_distance;
     public bool same_surface = false;
     private GameObject platform_collider;
+
+    public GameObject start_collider;
+
+    public Button start;
 
     private void Start()
     {

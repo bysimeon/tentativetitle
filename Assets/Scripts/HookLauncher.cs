@@ -26,6 +26,11 @@ public class HookLauncher : MonoBehaviour
 
     public GameObject hook;
 
+    public bool in_start_menu = false;
+    public Canvas canvas;
+    bool done = false;
+    bool done2 = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,46 +63,88 @@ public class HookLauncher : MonoBehaviour
     }
     void UpdateAim()
     {
-        float Horizontal = player.GetAxis("Right Horizontal");
-        float Vertical = player.GetAxis("Right Vertical");
-        IsAiming = GameInput.SignificantStickInput(Vertical, Horizontal);
-        if (IsAiming)
+        if (in_start_menu)
         {
-            Outer_Movement outer_collision = GetComponentInParent<Outer_Movement>();
-            GrapplingHook grapple_collision = hook.GetComponent<GrapplingHook>();
-            float AimAngle = CalculateAimAngle(Vertical, Horizontal);
-            float AimAngle2 = AimAngle * 0.0174533f;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
-                1000, layer_mask);
-
-            if (hit.transform.gameObject == outer_collision.getCollider())
+            Start_Menu start = canvas.GetComponent<Start_Menu>();
+            float AimAngle = 0;
+            if(start.select == Start_Menu.selection.start)
             {
-                can_fire = false;
+                AimAngle = CalculateAimAngle(0.3f, -0.9f);
             }
 
-            else if (outer_collision.getLocation().Equals("air") && hit.transform.gameObject == outer_collision.get_grapple_collision())
+            if (start.select == Start_Menu.selection.tutorial)
             {
-                can_fire = false;
+                AimAngle = CalculateAimAngle(0.5f, 0.9f);
             }
 
-            else
+            if (start.select == Start_Menu.selection.credits)
             {
-                can_fire = true;
+                AimAngle = CalculateAimAngle(-0.5f, -0.9f);
+            }
+
+            if (start.select == Start_Menu.selection.quit)
+            {
+                AimAngle = CalculateAimAngle(-0.5f, 0.9f);
             }
 
             DisplayAimReticle(AimAngle);
         }
+
         else
         {
-            HideAimReticle();
+            float Horizontal = player.GetAxis("Right Horizontal");
+            float Vertical = player.GetAxis("Right Vertical");
+            IsAiming = GameInput.SignificantStickInput(Vertical, Horizontal);
+            if (IsAiming)
+            {
+                Outer_Movement outer_collision = GetComponentInParent<Outer_Movement>();
+                GrapplingHook grapple_collision = hook.GetComponent<GrapplingHook>();
+                float AimAngle = CalculateAimAngle(Vertical, Horizontal);
+                float AimAngle2 = AimAngle * 0.0174533f;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
+                    1000, layer_mask);
+
+                if (hit.transform.gameObject == outer_collision.getCollider())
+                {
+                    can_fire = false;
+                }
+
+                else if (outer_collision.getLocation().Equals("air") && hit.transform.gameObject == outer_collision.get_grapple_collision())
+                {
+                    can_fire = false;
+                }
+
+                else
+                {
+                    can_fire = true;
+                }
+
+                DisplayAimReticle(AimAngle);
+            }
+            else
+            {
+                HideAimReticle();
+            }
         }
     }
     void ProcessShooting()
     {
-        bool Shoot = player.GetButtonDown("Fire Hook");
-        if (Shoot)
+        if (in_start_menu)
         {
-            AttemptFire();
+            Start_Menu start = canvas.GetComponent<Start_Menu>();
+            if (start.start_clicked)
+            {
+                AttemptFire();
+            }
+        }
+
+        else
+        {
+            bool Shoot = player.GetButtonDown("Fire Hook");
+            if (Shoot)
+            {
+                AttemptFire();
+            }
         }
     }
     private float CalculateAimAngle(float Vertical, float Horizontal)
@@ -128,17 +175,28 @@ public class HookLauncher : MonoBehaviour
     void AttemptFire()
     {
         float time = Time.time;
-
-        if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
+        if (in_start_menu && !done)
         {
-            if (prior_hook)
-            {
-                Destroy(prior_hook);
-            }
-            lastShotTime = time;
+            transform.parent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             prior_hook = SpawnHook(transform.position + transform.right * 5f,
-                transform.rotation,
-                transform.right * LaunchVelocity);
+            transform.rotation,
+            transform.right * LaunchVelocity);
+            done = true;
+        }
+
+        else
+        {
+            if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
+            {
+                if (prior_hook)
+                {
+                    Destroy(prior_hook);
+                }
+                lastShotTime = time;
+                prior_hook = SpawnHook(transform.position + transform.right * 5f,
+                    transform.rotation,
+                    transform.right * LaunchVelocity);
+            }
         }
     }
     private GameObject SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
@@ -152,5 +210,10 @@ public class HookLauncher : MonoBehaviour
         lineRenderer = newHook.GetComponent<LineRenderer>();
         return newHook;
 
+    }
+
+    public void startCall()
+    {
+        AttemptFire();
     }
 }
