@@ -5301,12 +5301,12 @@ PrefabInstance:
         type: 3}
       propertyPath: player2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1792777125}
     - target: {fileID: 4785235096209239893, guid: ce630f44b0ab75b44a8baf4150f92217,
         type: 3}
       propertyPath: player1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1859729257}
     - target: {fileID: 4785235096209239893, guid: ce630f44b0ab75b44a8baf4150f92217,
         type: 3}
       propertyPath: p2_heart1
@@ -7477,8 +7477,18 @@ PrefabInstance:
       propertyPath: scene_manager
       value: 
       objectReference: {fileID: 805549752}
+    - target: {fileID: 1178080298, guid: ae56f8d166f524abfae1504641c2ee67, type: 3}
+      propertyPath: scene_manager
+      value: 
+      objectReference: {fileID: 805549752}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae56f8d166f524abfae1504641c2ee67, type: 3}
+--- !u!1 &1792777125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 984439295, guid: ae56f8d166f524abfae1504641c2ee67,
+    type: 3}
+  m_PrefabInstance: {fileID: 1792777124}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1859729256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7542,8 +7552,18 @@ PrefabInstance:
       propertyPath: scene_manager
       value: 
       objectReference: {fileID: 805549752}
+    - target: {fileID: 2059801, guid: 572918f7573154d168d9a69e03092000, type: 3}
+      propertyPath: scene_manager
+      value: 
+      objectReference: {fileID: 805549752}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 572918f7573154d168d9a69e03092000, type: 3}
+--- !u!1 &1859729257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 159709414, guid: 572918f7573154d168d9a69e03092000,
+    type: 3}
+  m_PrefabInstance: {fileID: 1859729256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1922039314
 GameObject:
   m_ObjectHideFlags: 0
