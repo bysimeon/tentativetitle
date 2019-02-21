@@ -22,9 +22,13 @@ public class Start_Menu : MonoBehaviour
 
     public GameObject player;
 
+    private Player special_player;
+
     // Start is called before the first frame update
     void Start()
     {
+        int playerId = player.GetComponent<Outer_Movement>().playerId;
+        special_player = ReInput.players.GetPlayer(playerId);
         select = selection.start;
         start.GetComponent<Image>().color = Color.green;
     }
@@ -34,13 +38,13 @@ public class Start_Menu : MonoBehaviour
     {
         HookLauncher hook = player.GetComponentInChildren<HookLauncher>();
 
-        if ((Input.GetAxis("Switch Platforms") != 0 | Input.GetAxis("Fire Hook") != 0)
+        if (special_player.GetButtonDown("Fire Hook")
             && select == selection.start)
         {
             hook.startCall();
         }
 
-        if ((Input.GetAxis("Switch Platforms") != 0 | Input.GetAxis("Fire Hook") != 0)
+        if ((special_player.GetButtonDown("Fire Hook"))
             && select == selection.quit)
         {
             hook.startCall();
