@@ -64,7 +64,7 @@ public class Shields : MonoBehaviour
         float red = color.r;
         float green = color.g;
         float blue = color.b;
-        Color shieldColor = new Color(red, green, blue);
+        Color shieldColor = new Color(red/255, green/255, blue/255);
 
 
         shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
