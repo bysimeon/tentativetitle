@@ -62,6 +62,18 @@ public class GrapplingHook : MonoBehaviour
                 ShooterMovement.find_grapple_collision(collision.gameObject);
             }
 
+            if(collision.gameObject.GetComponent<Outer_Movement>() && Player != collision.gameObject)
+            {
+
+                var damageManager = GameObject.Find("Damage_Manager");
+                Debug.Log(collision.gameObject.tag);
+                damageManager.GetComponent<Damage_Player>().
+                    DamagePlayer(collision.gameObject,collision,gameObject);
+                Debug.Log(collision.GetContact(0).point);
+                Destroy(gameObject);
+            }
+
+            /*
             if (collision.gameObject.tag == "Player1" && Player != collision.gameObject)
             {
                 Destroy(gameObject);
@@ -75,6 +87,7 @@ public class GrapplingHook : MonoBehaviour
                 var damage = GameObject.Find("Damage_Manager");
                 damage.GetComponent<Damage_Player>().IncrementP2();
             }
+            */
         }
     }
     void PlantHook()
