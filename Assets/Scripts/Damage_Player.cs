@@ -68,43 +68,16 @@ public class Damage_Player : MonoBehaviour
         }
     }
 
-    public void IncrementP1()
+    public void DamagePlayer(GameObject player, Collision2D collision, GameObject hook)
     {
-        player1_count++;
-        StartCoroutine("Flash",GameObject.FindWithTag("Player1"));
 
-        if(player1_count == 1)
+        Shields playerShields = player.GetComponentInChildren<Shields>();
+        playerShields.TakeDamage(30);
+        playerShields.ShowShieldDamage(collision, hook);
+        if(!playerShields.ShieldsUp())
         {
-            Destroy(p1_heart3);
-        }
-        if (player1_count == 2)
-        {
-            Destroy(p1_heart2);
-        }
-        if (player1_count == 3)
-        {
-            Destroy(p1_heart1);
-            win_text.text = "A Winner is Player 2!";
-            StartCoroutine(wait());
-        }
-    }
-
-    public void IncrementP2()
-    {
-        player2_count++;
-        StartCoroutine("Flash", GameObject.FindWithTag("Player2"));
-        if (player2_count == 1)
-        {
-            Destroy(p2_heart3);
-        }
-        if (player2_count == 2)
-        {
-            Destroy(p2_heart2);
-        }
-        if (player2_count == 3)
-        {
-            Destroy(p2_heart1);
-            win_text.text = "A Winner is Player 1!";
+            Destroy(player.gameObject);
+            win_text.text = "A Winner is " + hook.GetComponent<GrapplingHook>().Player.tag;
             StartCoroutine(wait());
         }
     }

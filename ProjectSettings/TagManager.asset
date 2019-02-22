@@ -23,7 +23,7 @@ TagManager:
   - 
   - Players
   - Hooks
-  - 
+  - Shields
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Shields
+    uniqueID: 3524949139
+    locked: 0
   - name: Lines
     uniqueID: 1849101587
     locked: 0
