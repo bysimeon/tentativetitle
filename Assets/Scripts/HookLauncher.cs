@@ -117,11 +117,6 @@ public class HookLauncher : MonoBehaviour
                     can_fire = false;
                 }
 
-                else if (outer_collision.getLocation().Equals("air") && hit.transform.gameObject == outer_collision.get_grapple_collision())
-                {
-                    can_fire = false;
-                }
-
                 else
                 {
                     can_fire = true;
