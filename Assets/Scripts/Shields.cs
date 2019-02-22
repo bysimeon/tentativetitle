@@ -59,11 +59,18 @@ public class Shields : MonoBehaviour
                                     collision.GetContact(0).point,
                                     Quaternion.LookRotation(collision.GetContact(0).normal));
         var shieldParticleSystem = newEffect.
-            GetComponent<ParticleSystem>().main.startColor.color;
-        shieldParticleSystem = color;
+            GetComponent<ParticleSystem>().main;
+
+        float red = color.r;
+        float green = color.g;
+        float blue = color.b;
+        Color shieldColor = new Color(red/255, green/255, blue/255);
+
+
+        shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
 
         Debug.Log(color.r);
-        Debug.Log(shieldParticleSystem.r);
+
     }
     private Color getPlayerColor()
     {
