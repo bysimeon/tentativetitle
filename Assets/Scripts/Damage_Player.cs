@@ -28,9 +28,13 @@ public class Damage_Player : MonoBehaviour
 
     public Text win_text;
 
+    public Scene_Manager scene;
+    private Scene_Manager scene_script;
+
     // Start is called before the first frame update
     void Start()
     {
+        scene_script = scene.GetComponent<Scene_Manager>();
         flashColor = Color.red;
         textColor = GameObject.FindWithTag("Player1Text").
             GetComponent<Text>().color;
@@ -84,6 +88,7 @@ public class Damage_Player : MonoBehaviour
 
     IEnumerator wait()
     {
+        scene_script.can_move = false;
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Stage Select");
     }

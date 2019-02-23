@@ -9,7 +9,7 @@ public class HookLauncher : MonoBehaviour
     private Player player;
 
     public const float LaunchCooldown = .25f;
-    public const float LaunchVelocity = 150f;
+    public float LaunchVelocity = 150f;
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;
@@ -34,6 +34,8 @@ public class HookLauncher : MonoBehaviour
 
     public GameObject scene_manager;
     private Scene_Manager scene;
+
+    public float travel_speed = 150f;
 
     // Start is called before the first frame update
     void Start()
@@ -216,6 +218,7 @@ public class HookLauncher : MonoBehaviour
         GameObject newHook = (GameObject)Instantiate(HookPrefab,
                                             position,
                                             rotation);
+        newHook.GetComponent<GrapplingHook>().hook_speed = travel_speed;
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
         newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
         lineRenderer = newHook.GetComponent<LineRenderer>();
@@ -226,5 +229,10 @@ public class HookLauncher : MonoBehaviour
     public void startCall()
     {
         AttemptFire();
+    }
+
+    private void Create(float speed)
+    {
+        
     }
 }
