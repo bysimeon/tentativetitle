@@ -16,17 +16,24 @@ public class Powerup_spawn : MonoBehaviour
     public float x_max;
     public float x_min;
 
+    private GameObject newItem;
+    private Coroutine routine;
+
     // Start is called before the first frame update
     void Start()
     {
         scene_script = scene.GetComponent<Scene_Manager>();
         speed_boost = Resources.Load("Prefabs/Speed_boost");
-        InvokeRepeating("spawn", 5f, 8f);
+        InvokeRepeating("spawn", 5f, 6.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(newItem != null)
+        {
+            Speed_boost speed_boost = newItem.GetComponent<Speed_boost>();
+        }
     }
 
     void spawn()
@@ -34,7 +41,7 @@ public class Powerup_spawn : MonoBehaviour
         if (scene_script.can_move)
         {
             position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
-            GameObject newHook = (GameObject)Instantiate(speed_boost,
+            newItem = (GameObject)Instantiate(speed_boost,
                                         position,
                                         rotation);
         }
