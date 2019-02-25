@@ -72,13 +72,12 @@ public class Outer_Movement : MonoBehaviour
     // Update is called once per time interval
     void FixedUpdate()
     {
-        //Debug.Log(loc);
         RaycastHit2D DownRaycast = new RaycastHit2D();
         RaycastHit2D UpRaycast = new RaycastHit2D();
         RaycastHit2D RightRaycast = new RaycastHit2D();
         RaycastHit2D LeftRaycast = new RaycastHit2D();
 
-        if (rotated_up | rotated_down)
+        if (rot == rotation.up | rot == rotation.down)
         {
             ray_distance_in_air_1 = ray_distance_in_air_vertical;
             ray_distance_in_air_2 = ray_distance_in_air_horizontal;
@@ -139,6 +138,7 @@ public class Outer_Movement : MonoBehaviour
                         }
                         else if (UpRaycast.collider.gameObject.tag == "Inner Platform")
                         {
+                            Debug.Log('8'); 
                             rot = rotation.down;
                             rb.transform.rotation = Quaternion.Euler(0, 0, 180);
                             ConstrainToHorizontalSurface();
@@ -154,6 +154,7 @@ public class Outer_Movement : MonoBehaviour
                     else if (
                       RightRaycast)
                     {
+                        Debug.Log('1');
                         if (RightRaycast.collider.gameObject.tag == "Outer Platform")
                         {
                             rot = rotation.right;
@@ -162,6 +163,7 @@ public class Outer_Movement : MonoBehaviour
                         }
                         else if (RightRaycast.collider.gameObject.tag == "Inner Platform")
                         {
+                            Debug.Log('2'); 
                             rot = rotation.right;
                             rb.transform.rotation = Quaternion.Euler(0, 0, 90);
                             ConstrainToVerticalSurface();
@@ -496,9 +498,7 @@ public class Outer_Movement : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        loc = location.in_air;
-
-        collider = collision.gameObject;
+        //loc = location.in_air;
     }
 
     public GameObject getCollider()
