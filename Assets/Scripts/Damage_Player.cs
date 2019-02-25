@@ -35,9 +35,9 @@ public class Damage_Player : MonoBehaviour
     void Start()
     {
         scene_script = scene.GetComponent<Scene_Manager>();
-        flashColor = Color.red;
-        textColor = GameObject.FindWithTag("Player1Text").
-            GetComponent<Text>().color;
+        //flashColor = Color.red;
+        //textColor = GameObject.FindWithTag("Player1Text").
+            //GetComponent<Text>().color;
     }
 
     // Update is called once per frame
@@ -53,7 +53,7 @@ public class Damage_Player : MonoBehaviour
             Destroy(player2.gameObject);
         }
     }
-    IEnumerator Flash(GameObject damagedPlayer)
+    /*IEnumerator Flash(GameObject damagedPlayer)
     {
         string playerTag = damagedPlayer.tag;
         GameObject text = GameObject.FindWithTag(playerTag + "Text");
@@ -71,6 +71,7 @@ public class Damage_Player : MonoBehaviour
             yield return new WaitForSeconds(.15f);
         }
     }
+    */
 
     public void DamagePlayer(GameObject player, Collision2D collision, GameObject hook)
     {

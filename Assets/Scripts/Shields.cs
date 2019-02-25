@@ -54,7 +54,6 @@ public class Shields : MonoBehaviour
         Color color = getPlayerColor();
 
 
-        Debug.Log(collision.GetContact(0).point);
         GameObject newEffect = (GameObject)Instantiate(effectPrefab,
                                     collision.GetContact(0).point,
                                     Quaternion.LookRotation(collision.GetContact(0).normal));
@@ -68,8 +67,6 @@ public class Shields : MonoBehaviour
 
 
         shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
-
-        Debug.Log(color.r);
 
     }
     private Color getPlayerColor()

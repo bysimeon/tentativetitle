@@ -68,10 +68,8 @@ public class GrapplingHook : MonoBehaviour
             {
 
                 var damageManager = GameObject.Find("Damage_Manager");
-                Debug.Log(collision.gameObject.tag);
                 damageManager.GetComponent<Damage_Player>().
                     DamagePlayer(collision.gameObject,collision,gameObject);
-                Debug.Log(collision.GetContact(0).point);
                 Destroy(gameObject);
             }
 
