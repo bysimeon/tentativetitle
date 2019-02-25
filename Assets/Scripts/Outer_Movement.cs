@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Rewired;
+using UnityEngine;
 
 //Defining the vertical and horizontal movement of the player along outer platforms (NO GRAPPLING)
 public class Outer_Movement : MonoBehaviour
@@ -11,7 +11,10 @@ public class Outer_Movement : MonoBehaviour
 
     public enum location { outer, inner, in_air };
     public location loc;
+    public enum rotation { up, down, right, left };
+    public rotation rot;
     public Rigidbody2D rb;
+
     public float speed;
     public float ray_distance_vertical;
     public float ray_distance_horizontal;
@@ -28,6 +31,15 @@ public class Outer_Movement : MonoBehaviour
     public Vector3 right_to_top_shift;
     public Vector3 top_to_left_shift;
     public Vector3 left_to_top_shift;
+
+    public Vector3 top_to_right;
+    public Vector3 right_to_top;
+    public Vector3 top_to_left;
+    public Vector3 left_to_top;
+    public Vector3 bottom_to_left;
+    public Vector3 left_to_bottom;
+    public Vector3 bottom_to_right;
+    public Vector3 right_to_bottom;
 
     private bool rotated_up = false;
     private bool rotated_right = false;
@@ -60,6 +72,7 @@ public class Outer_Movement : MonoBehaviour
     // Update is called once per time interval
     void FixedUpdate()
     {
+        //Debug.Log(loc);
         RaycastHit2D DownRaycast = new RaycastHit2D();
         RaycastHit2D UpRaycast = new RaycastHit2D();
         RaycastHit2D RightRaycast = new RaycastHit2D();
@@ -70,7 +83,6 @@ public class Outer_Movement : MonoBehaviour
             ray_distance_in_air_1 = ray_distance_in_air_vertical;
             ray_distance_in_air_2 = ray_distance_in_air_horizontal;
         }
-
         else
         {
             ray_distance_in_air_1 = ray_distance_in_air_horizontal;
@@ -82,25 +94,6 @@ public class Outer_Movement : MonoBehaviour
         RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air_2, layer_mask);
         LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air_2, layer_mask);
 
-        /*
-        if (DownRaycast)
-        {
-            Debug.Log("Down" + DownRaycast.transform.gameObject);
-        }
-        if (UpRaycast)
-        {
-            Debug.Log("Up" + UpRaycast.transform.gameObject);
-        }
-        if (RightRaycast)
-        {
-            Debug.Log("Right" + RightRaycast.transform.gameObject);
-        }
-        if (LeftRaycast)
-        {
-            Debug.Log("Left" + LeftRaycast.transform.gameObject);
-        }
-        */
-
         if (scene_manager != null)
         {
             scene = scene_manager.GetComponent<Scene_Manager>();
@@ -111,84 +104,265 @@ public class Outer_Movement : MonoBehaviour
             if (scene.can_move)
             {
                 //Attaching to platform when grappling
-                if (loc == location.in_air &&
-                    DownRaycast && !rotated_up &&
-                    DownRaycast.collider.gameObject.tag == "Outer Platform")
+                if (loc == location.in_air)
                 {
-                    rotated_up = true;
-                    rotated_right = false;
-                    rotated_left = false;
-                    rotated_down = false;
-                    rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    if (DownRaycast)
+                    {
+                        if (DownRaycast.collider.gameObject.tag == "Outer Platform")
+                        {
+                            rot = rotation.up;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+                            ConstrainToHorizontalSurface();
+                        }
+                        else if (DownRaycast.collider.gameObject.tag == "Inner Platform")
+                        {
+                            rot = rotation.up;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+                            ConstrainToHorizontalSurface();
+                        }
+                        else if (DownRaycast.collider.gameObject.tag == "Inner Platform Corner")
+                        {
+                            Debug.Log("Corner Hit by Down Raycast");
+                            rot = rotation.up;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+                            ConstrainToHorizontalSurface();
+                        }
+                    }
+                    else if (
+                      UpRaycast)
+                    {
+                        if (UpRaycast.collider.gameObject.tag == "Outer Platform")
+                        {
+                            rot = rotation.down;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+                            ConstrainToHorizontalSurface();
+                        }
+                        else if (UpRaycast.collider.gameObject.tag == "Inner Platform")
+                        {
+                            rot = rotation.down;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+                            ConstrainToHorizontalSurface();
+                        }
+                        else if (UpRaycast.collider.gameObject.tag == "Inner Platform Corner")
+                        {
+                            Debug.Log("Corner Hit by Up Raycast");
+                            rot = rotation.down;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+                            ConstrainToHorizontalSurface();
+                        }
+                    }
+                    else if (
+                      RightRaycast)
+                    {
+                        if (RightRaycast.collider.gameObject.tag == "Outer Platform")
+                        {
+                            rot = rotation.right;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+                            ConstrainToVerticalSurface();
+                        }
+                        else if (RightRaycast.collider.gameObject.tag == "Inner Platform")
+                        {
+                            rot = rotation.right;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+                            ConstrainToVerticalSurface();
+                        }
+                        else if (RightRaycast.collider.gameObject.tag == "Inner Platform Corner")
+                        {
+                            Debug.Log("Corner Hit by Right Raycast");
+                            rot = rotation.right;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+                            ConstrainToVerticalSurface();
+                        }
+                    }
+                    else if (
+                      LeftRaycast)
+                    {
+                        if (LeftRaycast.collider.gameObject.tag == "Outer Platform")
+                        {
+                            rot = rotation.left;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+                            ConstrainToVerticalSurface();
+                        }
+                        else if (LeftRaycast.collider.gameObject.tag == "Inner Platform")
+                        {
+                            rot = rotation.left;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+                            ConstrainToVerticalSurface();
+                        }
+                        else if (LeftRaycast.collider.gameObject.tag == "Inner Platform Corner")
+                        {
+                            Debug.Log("Corner Hit by Left Raycast");
+                            rot = rotation.left;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+                            ConstrainToVerticalSurface();
+                        }
+                    }
+                    else
+                    {
+                        rot = rotation.up;
+                        rb.constraints = RigidbodyConstraints2D.None;
+                    }
                 }
 
-                else if (loc == location.in_air &&
-                    UpRaycast && !rotated_down &&
-                    UpRaycast.collider.gameObject.tag == "Outer Platform")
+                if (loc == location.inner)
                 {
-                    rotated_down = true;
-                    rotated_right = false;
-                    rotated_left = false;
-                    rotated_up = false;
-                    rb.transform.rotation = Quaternion.Euler(0, 0, 180);
-                    rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                }
+                    //Moving along top platform
+                    if (rot == rotation.up & Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask))
+                    {
+                        rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                    }
 
-                else if (loc == location.in_air &&
-                    RightRaycast && !rotated_right &&
-                    RightRaycast.collider.gameObject.tag == "Outer Platform")
-                {
-                    rotated_right = true;
-                    rotated_up = false;
-                    rotated_left = false;
-                    rotated_down = false;
-                    rb.transform.rotation = Quaternion.Euler(0, 0, 90);
-                    rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                }
+                    //Moving along right platform
+                    if (rot == rotation.right & Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask))
+                    {
+                        rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
+                    }
 
-                else if (loc == location.in_air &&
-                    LeftRaycast && !rotated_left &&
-                    LeftRaycast.collider.gameObject.tag == "Outer Platform")
-                {
-                    rotated_left = true;
-                    rotated_right = false;
-                    rotated_up = false;
-                    rotated_down = false;
-                    rb.transform.rotation = Quaternion.Euler(0, 0, 270);
-                    rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    //Moving along left platform
+                    if (rot == rotation.left & Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask))
+                    {
+                        rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
+                    }
+
+                    //Moving along bottom platform
+                    if (rot == rotation.down & Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
+                    {
+                        rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                    }
+
+                    //Switching top right corner from top to right
+                    if (rot == rotation.up && !(Physics2D.Raycast(rb.position + new Vector2(2, 0), new Vector2(0, -1), ray_distance_vertical, layer_mask)) &&
+                        Physics2D.Raycast(rb.position + new Vector2(0, -5), new Vector2(-1, 0), ray_distance_horizontal, layer_mask))
+                    {
+                        {
+                            rot = rotation.right;
+                            ConstrainToVerticalSurface();
+                            rb.transform.position = rb.transform.position + top_to_right;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+                            rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
+                        }
+                    }
+
+                    //Switching top right corner from right to top
+                    else if (rot == rotation.right & !(Physics2D.Raycast(rb.position + new Vector2(0, 2), new Vector2(-1, 0), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(-5, 0), new Vector2(0, -1), ray_distance_vertical, layer_mask))
+                    {
+                        {
+                            rot = rotation.up;
+                            ConstrainToHorizontalSurface();
+                            rb.transform.position = rb.transform.position + right_to_top;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+                            rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                        }
+                    }
+
+                    //Switching top left corner from top to left
+                    if (rot == rotation.up &
+                        !(Physics2D.Raycast(rb.position + new Vector2(-2, 0), new Vector2(0, -1), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(0, -5), new Vector2(1, 0), ray_distance_horizontal, layer_mask))
+                    {
+                        {
+                            Debug.Log("Switching top left corner from top to left");
+                            rot = rotation.left;
+                            ConstrainToVerticalSurface();
+                            rb.transform.position = rb.transform.position + top_to_left;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+                            rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
+                        }
+                    }
+
+                    //Switching top left corner from left to top
+                    else if (rot == rotation.left & !(Physics2D.Raycast(rb.position + new Vector2(0, 2), new Vector2(1, 0), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(5, 0), new Vector2(0, -1), ray_distance_vertical, layer_mask))
+                    {
+                        {
+                            Debug.Log("Switching top left corner from left to top");
+                            rot = rotation.up;
+                            ConstrainToHorizontalSurface();
+                            rb.transform.position = rb.transform.position + left_to_top;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+                            rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                        }
+                    }
+
+                    //Switching bottom left corner from bottom to left
+                    if (rot == rotation.down & !(Physics2D.Raycast(rb.position + new Vector2(-2, 0), new Vector2(0, 1), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(0, 5), new Vector2(1, 0), ray_distance_horizontal, layer_mask))
+                    {
+                        {
+                            Debug.Log("Switching bottom left corner from bottom to left");
+                            rot = rotation.left;
+                            ConstrainToVerticalSurface();
+                            rb.transform.position = rb.transform.position + bottom_to_left;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
+                            rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
+                        }
+                    }
+
+                    //Switching bottom left corner from left to bottom
+                    else if (rot == rotation.left & !(Physics2D.Raycast(rb.position + new Vector2(0, -2), new Vector2(1, 0), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(5, 0), new Vector2(0, 1), ray_distance_vertical, layer_mask))
+                    {
+                        {
+                            Debug.Log("Switching bottom left corner from left to bottom");
+                            rot = rotation.down;
+                            ConstrainToHorizontalSurface();
+                            rb.transform.position = rb.transform.position + left_to_bottom;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+                            rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                        }
+                    }
+
+                    //Switching bottom right corner from bottom to right
+                    if (rot == rotation.down & !(Physics2D.Raycast(rb.position + new Vector2(2, 0), new Vector2(0, 1), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(0, 5), new Vector2(-1, 0), ray_distance_horizontal, layer_mask))
+                    {
+                        {
+                            rot = rotation.right;
+                            ConstrainToVerticalSurface();
+                            rb.transform.position = rb.transform.position + bottom_to_right;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
+                            rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
+                        }
+                    }
+
+                    //Switching bottom right corner from right to bottom
+                    else if (rot == rotation.right & !(Physics2D.Raycast(rb.position + new Vector2(0, -2), new Vector2(-1, 0), ray_distance_vertical, layer_mask)) &
+                        Physics2D.Raycast(rb.position + new Vector2(-5, 0), new Vector2(0, 1), ray_distance_vertical, layer_mask))
+                    {
+                        {
+                            rot = rotation.down;
+                            ConstrainToHorizontalSurface();
+                            rb.transform.position = rb.transform.position + right_to_bottom;
+                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
+                            rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
+                        }
+                    }
                 }
 
                 //If on outer platform
                 if (loc == location.outer)
                 {
                     //Moving along lower platform
-                    if (rotated_up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask))
+                    if (rot == rotation.up && Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask))
                     {
                         rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
-                        //Debug.Log(player.GetAxis("Left Horizontal"));
-                        //Debug.Log(rb.velocity);
-                        //Debug.Log("hi");
                     }
 
                     //Moving along right platform
-                    if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask))
+                    if (rot == rotation.right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask))
                     {
                         rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                     }
 
                     //Moving along top platform
-                    if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
+                    if (rot == rotation.down && Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
                     {
                         rb.velocity = speed * new Vector2(player.GetAxis("Left Horizontal"), 0);
                     }
 
                     //Moving along left platform
-                    if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask))
+                    if (rot == rotation.left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask))
                     {
                         rb.velocity = speed * new Vector2(0, player.GetAxis("Left Vertical"));
                     }
@@ -196,10 +370,9 @@ public class Outer_Movement : MonoBehaviour
                     //Switching bottom right corner from bottom to right
                     if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal, layer_mask) &&
                         Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask) &&
-                        rotated_up)
+                        rot == rotation.up)
                     {
-                        rotated_up = false;
-                        rotated_right = true;
+                        rot = rotation.right;
                         ConstrainToVerticalSurface();
                         rb.transform.position = rb.transform.position + bottom_to_right_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 90);
@@ -208,11 +381,10 @@ public class Outer_Movement : MonoBehaviour
 
                     //Switching bottom right corner from right to bottom
                     else if (Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal, layer_mask) &&
-                    rotated_right)
+                        Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal, layer_mask) &&
+                        rot == rotation.right)
                     {
-                        rotated_right = false;
-                        rotated_up = true;
+                        rot = rotation.up;
                         ConstrainToHorizontalSurface();
                         rb.transform.position = rb.transform.position + right_to_bottom_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -220,11 +392,10 @@ public class Outer_Movement : MonoBehaviour
                     }
 
                     //Switching top right corner from right to top
-                    if (rotated_right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal, layer_mask))
+                    if (rot == rotation.right && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_vertical, layer_mask) &&
+                        Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal, layer_mask))
                     {
-                        rotated_right = false;
-                        rotated_down = true;
+                        rot = rotation.down;
                         ConstrainToHorizontalSurface();
                         rb.transform.position = rb.transform.position + right_to_top_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 180);
@@ -232,11 +403,10 @@ public class Outer_Movement : MonoBehaviour
                     }
 
                     //Switching top right corner from top to right
-                    else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
+                    else if (rot == rotation.down && Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_horizontal, layer_mask) &&
+                        Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
                     {
-                        rotated_down = false;
-                        rotated_right = true;
+                        rot = rotation.right;
                         ConstrainToVerticalSurface();
                         rb.transform.position = rb.transform.position + top_to_right_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 90);
@@ -244,11 +414,10 @@ public class Outer_Movement : MonoBehaviour
                     }
 
                     //Switching top left corner from left to top
-                    if (rotated_left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal, layer_mask))
+                    if (rot == rotation.left && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask) &&
+                        Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_horizontal, layer_mask))
                     {
-                        rotated_left = false;
-                        rotated_down = true;
+                        rot = rotation.down;
                         ConstrainToHorizontalSurface();
                         rb.transform.position = rb.transform.position + left_to_top_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 180);
@@ -256,11 +425,10 @@ public class Outer_Movement : MonoBehaviour
                     }
 
                     //Switching top left corner from top to left
-                    else if (rotated_down && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
+                    else if (rot == rotation.down && Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal, layer_mask) &&
+                        Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_vertical, layer_mask))
                     {
-                        rotated_down = false;
-                        rotated_left = true;
+                        rot = rotation.left;
                         ConstrainToVerticalSurface();
                         rb.transform.position = rb.transform.position + top_to_left_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 270);
@@ -269,11 +437,10 @@ public class Outer_Movement : MonoBehaviour
 
                     //Switching bottom left corner from left to bottom
                     if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_vertical, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal, layer_mask) &&
-                    rotated_left)
+                        Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_horizontal, layer_mask) &&
+                        rot == rotation.left)
                     {
-                        rotated_up = true;
-                        rotated_left = false;
+                        rot = rotation.up;
                         ConstrainToHorizontalSurface();
                         rb.transform.position = rb.transform.position + left_to_bottom_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -282,11 +449,10 @@ public class Outer_Movement : MonoBehaviour
 
                     //Switching bottom left corner from bottom to left
                     else if (Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_horizontal, layer_mask) &&
-                    Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask) &&
-                    rotated_up)
+                        Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_vertical, layer_mask) &&
+                        rot == rotation.up)
                     {
-                        rotated_left = true;
-                        rotated_up = false;
+                        rot = rotation.left;
                         ConstrainToVerticalSurface();
                         rb.transform.position = rb.transform.position + bottom_to_left_shift;
                         rb.transform.rotation = Quaternion.Euler(0, 0, 270);
@@ -328,6 +494,13 @@ public class Outer_Movement : MonoBehaviour
         collider = collision.gameObject;
     }
 
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        loc = location.in_air;
+
+        collider = collision.gameObject;
+    }
+
     public GameObject getCollider()
     {
         return collider;
@@ -358,7 +531,7 @@ public class Outer_Movement : MonoBehaviour
 
     public string getLocation()
     {
-        if(loc == location.in_air)
+        if (loc == location.in_air)
         {
             return "air";
         }

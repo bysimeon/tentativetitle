@@ -50,7 +50,8 @@ public class GrapplingHook : MonoBehaviour
             }*/
 
             if ((collision.gameObject.tag == "Outer Platform" ||
-                collision.gameObject.tag == "Inner Platform") &&
+                collision.gameObject.tag == "Inner Platform" || 
+                collision.gameObject.tag == "Inner Platform Corner") &&
                 planted == false)
             {
                 Outer_Movement ShooterMovement = Player.
