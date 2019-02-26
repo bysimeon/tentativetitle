@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1061115179
+    locked: 0
   - name: Shields
     uniqueID: 3524949139
     locked: 0
