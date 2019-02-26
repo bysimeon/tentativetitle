@@ -96,7 +96,7 @@ MonoBehaviour:
   LaunchVelocity: 150
   c1: {r: 0.7686275, g: 0.93725497, b: 0.9686275, a: 1}
   c2: {r: 0.5254902, g: 0.8352942, b: 0.8941177, a: 1}
-  width: 0.1
+  width: 0.75
   lengthOfLineRenderer: 2
   game_player: {fileID: 100000, guid: 0ae86847fcc1d5949b64b85d9ad67fae, type: 3}
   hook: {fileID: 1639291218642692175, guid: f636010f860064044a0ffb1ed08089a8, type: 3}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 7257081580603490916}
   - component: {fileID: 8453827781706428871}
   m_Layer: 8
-  m_Name: robot2 1
+  m_Name: robot2 v2
   m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
