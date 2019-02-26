@@ -36,7 +36,6 @@ public class GrapplingHook : MonoBehaviour
         if (Player != null)
         {
             Outer_Movement outer_collision = Player.GetComponent<Outer_Movement>();
-            Inner_Movement inner_collision = Player.GetComponent<Inner_Movement>();
 
             /*if (collision.gameObject == outer_collision.getCollider() |
                 collision.gameObject == inner_collision.getCollider())
@@ -59,7 +58,6 @@ public class GrapplingHook : MonoBehaviour
                 Inner_Movement ShooterMovement2 = Player.
                     GetComponent<Inner_Movement>();
                 ShooterMovement.DetachFromPlatform();
-                ShooterMovement2.DetachFromPlatform();
                 PlantHook();
                 DragPlayerToHook();
                 ShooterMovement.find_grapple_collision(collision.gameObject);
