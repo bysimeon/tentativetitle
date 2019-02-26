@@ -44,6 +44,7 @@ public class Powerup_spawn : MonoBehaviour
             newItem = (GameObject)Instantiate(speed_boost,
                                         position,
                                         rotation);
+            Destroy(newItem, 12f);
         }
     }
 }

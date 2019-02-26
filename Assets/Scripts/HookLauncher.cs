@@ -79,12 +79,12 @@ public class HookLauncher : MonoBehaviour
             float AimAngle = 0;
             if(start.select == Start_Menu.selection.start)
             {
-                AimAngle = CalculateAimAngle(0.3f, -0.9f);
+                AimAngle = CalculateAimAngle(0f, -0.9f);
             }
 
             if (start.select == Start_Menu.selection.tutorial)
             {
-                AimAngle = CalculateAimAngle(0.5f, 0.9f);
+                AimAngle = CalculateAimAngle(0f, 0.9f);
             }
 
             if (start.select == Start_Menu.selection.credits)

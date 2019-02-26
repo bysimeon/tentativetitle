@@ -82,7 +82,7 @@ public class Damage_Player : MonoBehaviour
         if(!playerShields.ShieldsUp())
         {
             Destroy(player.gameObject);
-            win_text.text = "A Winner is " + hook.GetComponent<GrapplingHook>().Player.tag;
+            win_text.text = "GAME!";
             StartCoroutine(wait());
         }
     }
