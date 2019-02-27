@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
 
-public class HookLauncher : MonoBehaviour {
+public class HookLauncher : MonoBehaviour
+{
     public int playerId;
     private Player player;
 
@@ -39,44 +40,52 @@ public class HookLauncher : MonoBehaviour {
     public bool canShootOwnPlatform;
 
     // Start is called before the first frame update
-    void Start () {
+    void Start()
+    {
         layer_mask = (1 << 8 | 1 << 9);
         layer_mask = ~layer_mask;
-        HookPrefab = Resources.Load ("Prefabs/Hook");
+        HookPrefab = Resources.Load("Prefabs/Hook");
 
-        if (scene_manager != null) {
-            scene = scene_manager.GetComponent<Scene_Manager> ();
+        if (scene_manager != null)
+        {
+            scene = scene_manager.GetComponent<Scene_Manager>();
             canShootOwnPlatform = scene.canShootOwnPlatform;
         }
     }
 
-    private void OnCollisionEnter2D (Collision2D collision) { }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+    }
 
-    void Awake () {
-        playerId = GetComponentInParent<Movement> ().playerId;
-        player = ReInput.players.GetPlayer (playerId);
+    void Awake()
+    {
+        playerId = GetComponentInParent<Movement>().playerId;
+        player = ReInput.players.GetPlayer(playerId);
     }
 
     // Update is called once per frame
-    void Update () {
-        UpdateAim ();
-        ProcessShooting ();
+    void Update()
+    {
+        UpdateAim();
+        ProcessShooting();
 
-        if (prior_hook) {
-            lineRenderer.material = new Material (Shader.Find ("Sprites/Default"));
+        if (prior_hook)
+        {
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
             lineRenderer.sortingLayerName = "Lines";
-            lineRenderer.SetWidth (width, width);
-            lineRenderer.SetColors (c1, c2);
-            lineRenderer.SetPosition (0, gameObject.transform.position);
-            lineRenderer.SetPosition (1, prior_hook.transform.position);
+            lineRenderer.SetWidth(width, width);
+            lineRenderer.SetColors(c1, c2);
+            lineRenderer.SetPosition(0, gameObject.transform.position);
+            lineRenderer.SetPosition(1, prior_hook.transform.position);
         }
     }
-    void UpdateAim () {
-        if (in_start_menu) {
-            Start_Menu start = canvas.GetComponent<Start_Menu> ();
+    void UpdateAim()
+    {
+        if (in_start_menu)
+        {
+            Start_Menu start = canvas.GetComponent<Start_Menu>();
             float AimAngle = 0;
-            
-            if(start.select == Start_Menu.selection.start)
+            if (start.select == Start_Menu.selection.start)
             {
                 AimAngle = CalculateAimAngle(0f, -0.9f);
             }
@@ -84,121 +93,158 @@ public class HookLauncher : MonoBehaviour {
             if (start.select == Start_Menu.selection.tutorial)
             {
                 AimAngle = CalculateAimAngle(0f, 0.9f);
-
-            if (start.select == Start_Menu.selection.credits) {
-                AimAngle = CalculateAimAngle (-0.5f, -0.9f);
             }
 
-            if (start.select == Start_Menu.selection.quit) {
-                AimAngle = CalculateAimAngle (-0.5f, 0.9f);
+            if (start.select == Start_Menu.selection.credits)
+            {
+                AimAngle = CalculateAimAngle(-0.5f, -0.9f);
             }
 
-            DisplayAimReticle (AimAngle);
-        } else {
-            float Horizontal = player.GetAxis ("Right Horizontal");
-            float Vertical = player.GetAxis ("Right Vertical");
-            IsAiming = GameInput.SignificantStickInput (Vertical, Horizontal);
-            if (IsAiming) {
-                Movement outer_collision = GetComponentInParent<Movement> ();
-                GrapplingHook grapple_collision = hook.GetComponent<GrapplingHook> ();
-                float AimAngle = CalculateAimAngle (Vertical, Horizontal);
+            if (start.select == Start_Menu.selection.quit)
+            {
+                AimAngle = CalculateAimAngle(-0.5f, 0.9f);
+            }
+
+            DisplayAimReticle(AimAngle);
+        }
+
+        else
+        {
+            float Horizontal = player.GetAxis("Right Horizontal");
+            float Vertical = player.GetAxis("Right Vertical");
+            IsAiming = GameInput.SignificantStickInput(Vertical, Horizontal);
+            if (IsAiming)
+            {
+                Movement outer_collision = GetComponentInParent<Movement>();
+                GrapplingHook grapple_collision = hook.GetComponent<GrapplingHook>();
+                float AimAngle = CalculateAimAngle(Vertical, Horizontal);
                 float AimAngle2 = AimAngle * 0.0174533f;
-                RaycastHit2D hit = Physics2D.Raycast (transform.position, new Vector2 (Mathf.Cos (AimAngle2), Mathf.Sin (AimAngle2)),
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
                     1000, layer_mask);
 
-                if (canShootOwnPlatform) {
+                if (canShootOwnPlatform)
+                {
                     can_fire = true;
-                    Debug.Log("Can Fire");
-                } else {
-                    if (hit.transform.gameObject == outer_collision.getCollider ()) {
-                        can_fire = false;
-                    } else {
-                        can_fire = true;
-                    }
+                }
+                else if (hit.transform.gameObject == outer_collision.getCollider())
+                {
+                    can_fire = false;
                 }
 
-                DisplayAimReticle (AimAngle);
-            } else {
-                HideAimReticle ();
+                else
+                {
+                    can_fire = true;
+                }
+
+                DisplayAimReticle(AimAngle);
+            }
+            else
+            {
+                HideAimReticle();
             }
         }
     }
-    void ProcessShooting () {
-        if (in_start_menu) {
-            Start_Menu start = canvas.GetComponent<Start_Menu> ();
-            if (start.start_clicked) {
-                AttemptFire ();
+    void ProcessShooting()
+    {
+        if (in_start_menu)
+        {
+            Start_Menu start = canvas.GetComponent<Start_Menu>();
+            if (start.start_clicked)
+            {
+                AttemptFire();
             }
-        } else {
-            bool Shoot = player.GetButtonDown ("Fire Hook");
-            if (Shoot) {
-                AttemptFire ();
+        }
+
+        else
+        {
+            bool Shoot = player.GetButtonDown("Fire Hook");
+            if (Shoot)
+            {
+                AttemptFire();
             }
         }
     }
-    private float CalculateAimAngle (float Vertical, float Horizontal) {
-        return Mathf.Atan2 (Vertical, Horizontal) * Mathf.Rad2Deg;
+    private float CalculateAimAngle(float Vertical, float Horizontal)
+    {
+        return Mathf.Atan2(Vertical, Horizontal) * Mathf.Rad2Deg;
     }
-    private void HideAimReticle () {
-        Color color = gameObject.GetComponent<SpriteRenderer> ().color;
+    private void HideAimReticle()
+    {
+        Color color = gameObject.GetComponent<SpriteRenderer>().color;
         color.a = 0;
-        gameObject.GetComponent<SpriteRenderer> ().color = color;
+        gameObject.GetComponent<SpriteRenderer>().color = color;
     }
-    private void DisplayAimReticle (float angle) {
+    private void DisplayAimReticle(float angle)
+    {
         float time = Time.time;
-        if (time < (lastShotTime + LaunchCooldown) | !can_fire) {
-            gameObject.GetComponent<SpriteRenderer> ().color = Color.red;
-            transform.rotation = Quaternion.Euler (0, 0, angle);
-        } else {
-            gameObject.GetComponent<SpriteRenderer> ().color = Color.green;
-            transform.rotation = Quaternion.Euler (0, 0, angle);
+        if (time < (lastShotTime + LaunchCooldown) | !can_fire)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 
-    void AttemptFire () {
-        if (scene_manager != null) {
-            scene = scene_manager.GetComponent<Scene_Manager> ();
+    void AttemptFire()
+    {
+        if (scene_manager != null)
+        {
+            scene = scene_manager.GetComponent<Scene_Manager>();
         }
 
-        if (scene == null || scene.can_move) {
+        if (scene == null || scene.can_move)
+        {
             float time = Time.time;
-            if (in_start_menu && !done) {
-                transform.parent.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.FreezeAll;
-                prior_hook = SpawnHook (transform.position + transform.right * 5f,
-                    transform.rotation,
-                    transform.right * LaunchVelocity);
+            if (in_start_menu && !done)
+            {
+                transform.parent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                prior_hook = SpawnHook(transform.position + transform.right * 5f,
+                transform.rotation,
+                transform.right * LaunchVelocity);
                 done = true;
-            } else {
-                if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire) {
-                    if (prior_hook) {
-                        Destroy (prior_hook);
+            }
+
+            else
+            {
+                if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
+                {
+                    if (prior_hook)
+                    {
+                        Destroy(prior_hook);
                     }
                     lastShotTime = time;
-                    prior_hook = SpawnHook (transform.position + transform.right * 5f,
+                    prior_hook = SpawnHook(transform.position + transform.right * 5f,
                         transform.rotation,
                         transform.right * LaunchVelocity);
                 }
             }
         }
     }
-    private GameObject SpawnHook (Vector2 position, Quaternion rotation, Vector2 velocity) {
+    private GameObject SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
+    {
         Transform playerTransform = transform.parent;
-        GameObject newHook = (GameObject) Instantiate (HookPrefab,
-            position,
-            rotation);
-        newHook.GetComponent<GrapplingHook> ().hook_speed = travel_speed;
-        newHook.GetComponent<Rigidbody2D> ().velocity = velocity;
-        newHook.GetComponent<GrapplingHook> ().Player = transform.parent.gameObject;
-        lineRenderer = newHook.GetComponent<LineRenderer> ();
+        GameObject newHook = (GameObject)Instantiate(HookPrefab,
+                                            position,
+                                            rotation);
+        newHook.GetComponent<GrapplingHook>().hook_speed = travel_speed;
+        newHook.GetComponent<Rigidbody2D>().velocity = velocity;
+        newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
+        lineRenderer = newHook.GetComponent<LineRenderer>();
         return newHook;
 
     }
 
-    public void startCall () {
-        AttemptFire ();
+    public void startCall()
+    {
+        AttemptFire();
     }
 
-    private void Create (float speed) {
+    private void Create(float speed)
+    {
 
     }
 }
