@@ -35,7 +35,7 @@ public class GrapplingHook : MonoBehaviour
     {
         if (Player != null)
         {
-            Outer_Movement outer_collision = Player.GetComponent<Outer_Movement>();
+            Movement outer_collision = Player.GetComponent<Movement>();
 
             /*if (collision.gameObject == outer_collision.getCollider() |
                 collision.gameObject == inner_collision.getCollider())
@@ -53,17 +53,15 @@ public class GrapplingHook : MonoBehaviour
                 collision.gameObject.tag == "Inner Platform Corner") &&
                 planted == false)
             {
-                Outer_Movement ShooterMovement = Player.
-                    GetComponent<Outer_Movement>();
-                Inner_Movement ShooterMovement2 = Player.
-                    GetComponent<Inner_Movement>();
+                Movement ShooterMovement = Player.
+                    GetComponent<Movement>();
                 ShooterMovement.DetachFromPlatform();
                 PlantHook();
                 DragPlayerToHook();
                 ShooterMovement.find_grapple_collision(collision.gameObject);
             }
 
-            if(collision.gameObject.GetComponent<Outer_Movement>() && Player != collision.gameObject)
+            if(collision.gameObject.GetComponent<Movement>() && Player != collision.gameObject)
             {
 
                 var damageManager = GameObject.Find("Damage_Manager");

@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
+  LaunchVelocity: 150
   c1: {r: 0.48627454, g: 0.9803922, b: 0.5294118, a: 1}
   c2: {r: 0.3137255, g: 0.90196085, b: 0.21568628, a: 0.75686276}
   width: 0.1
@@ -102,6 +103,8 @@ MonoBehaviour:
   in_start_menu: 0
   canvas: {fileID: 0}
   scene_manager: {fileID: 0}
+  travel_speed: 150
+  canShootOwnPlatform: 0
 --- !u!1 &1288512961
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,10 +117,9 @@ GameObject:
   - component: {fileID: 1288512971}
   - component: {fileID: 1288512970}
   - component: {fileID: 1288512969}
-  - component: {fileID: 1288512968}
-  - component: {fileID: 1288512967}
   - component: {fileID: 1288512963}
   - component: {fileID: 1288512962}
+  - component: {fileID: 1288512967}
   m_Layer: 8
   m_Name: robot4
   m_TagString: Player4
@@ -235,61 +237,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.77, y: 8}
   m_EdgeRadius: 0
---- !u!114 &1288512968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288512961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b34a79a810e5ef48a56a5c26a17162a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerId: 3
-  loc: 0
-  rb: {fileID: 1288512970}
-  speed: 50
-  ray_distance_vertical: 6
-  ray_distance_horizontal: 5
-  ray_distance_in_air_vertical: 9.5
-  ray_distance_in_air_horizontal: 8.5
-  bottom_to_right_shift: {x: -0.5, y: 2, z: 0}
-  right_to_bottom_shift: {x: -2, y: 0.5, z: 0}
-  bottom_to_left_shift: {x: 0.5, y: 2, z: 0}
-  left_to_bottom_shift: {x: 2, y: 0.5, z: 0}
-  top_to_right_shift: {x: -0.5, y: -1, z: 0}
-  right_to_top_shift: {x: -1, y: -0.5, z: 0}
-  top_to_left_shift: {x: 0.5, y: -1, z: 0}
-  left_to_top_shift: {x: 1, y: -0.5, z: 0}
-  scene_manager: {fileID: 0}
---- !u!114 &1288512967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288512961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e326625af5ac84e950e90bcfe54789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerId: 3
-  rb: {fileID: 1288512970}
-  speed: 40
-  ray_distance_vertical: 4
-  ray_distance_horizontal: 3
-  top_to_right: {x: 5, y: -6, z: 0}
-  right_to_top: {x: -6, y: 4.75, z: 0}
-  top_to_left: {x: -5, y: -6, z: 0}
-  left_to_top: {x: 6, y: 4.75, z: 0}
-  bottom_to_left: {x: -5, y: 6, z: 0}
-  left_to_bottom: {x: 6, y: -5, z: 0}
-  bottom_to_right: {x: 5, y: 6, z: 0}
-  right_to_bottom: {x: -6, y: -5, z: 0}
-  ray_distance_in_air: 0
 --- !u!95 &1288512963
 Animator:
   serializedVersion: 3
@@ -322,3 +269,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 3
+--- !u!114 &1288512967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288512961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e07c14b484642bebcf6f1805d60c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerId: 3
+  loc: 0
+  rot: 0
+  rb: {fileID: 1288512970}
+  speed: 50
+  ray_distance_vertical: 6
+  ray_distance_horizontal: 5
+  ray_distance_in_air_vertical: 9.5
+  ray_distance_in_air_horizontal: 8.5
+  scene_manager: {fileID: 0}

@@ -27,7 +27,7 @@ public class Start_Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int playerId = player.GetComponent<Outer_Movement>().playerId;
+        int playerId = player.GetComponent<Movement>().playerId;
         special_player = ReInput.players.GetPlayer(playerId);
         select = selection.start;
         start.GetComponent<Image>().color = Color.green;
