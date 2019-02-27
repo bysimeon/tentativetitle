@@ -11,6 +11,6 @@ public class PlayerColors
     private static Color[] playerColors = { player1, player2, player3, player4 };
     public static Color getPlayerColor(GameObject player)
     {
-        return playerColors[player.GetComponent<Outer_Movement>().playerId];
+        return playerColors[player.GetComponent<Movement>().playerId];
     }
 }

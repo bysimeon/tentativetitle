@@ -6669,6 +6669,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4660275252935313398, guid: 70252914658cb384c9fc1e1ea9ae62a9,
+        type: 3}
+      propertyPath: scene_manager
+      value: 
+      objectReference: {fileID: 805549752}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70252914658cb384c9fc1e1ea9ae62a9, type: 3}
 --- !u!1001 &6456707463215402601
