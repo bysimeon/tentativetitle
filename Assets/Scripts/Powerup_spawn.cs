@@ -19,12 +19,17 @@ public class Powerup_spawn : MonoBehaviour
     private GameObject newItem;
     private Coroutine routine;
 
+    private Object mine;
+
     // Start is called before the first frame update
     void Start()
     {
         scene_script = scene.GetComponent<Scene_Manager>();
         speed_boost = Resources.Load("Prefabs/Speed_boost");
         InvokeRepeating("spawn", 5f, 6.5f);
+
+        mine = Resources.Load("Prefabs/mine_not_planted");
+        InvokeRepeating("spawn_mine", 7f, 10f);
     }
 
     // Update is called once per frame
@@ -42,6 +47,18 @@ public class Powerup_spawn : MonoBehaviour
         {
             position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
             newItem = (GameObject)Instantiate(speed_boost,
+                                        position,
+                                        rotation);
+            Destroy(newItem, 12f);
+        }
+    }
+
+    void spawn_mine()
+    {
+        if (scene_script.can_move)
+        {
+            position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
+            newItem = (GameObject)Instantiate(mine,
                                         position,
                                         rotation);
             Destroy(newItem, 12f);

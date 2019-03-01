@@ -51,22 +51,35 @@ public class Shields : MonoBehaviour
     }
     public void ShowShieldDamage(Collision2D collision, GameObject hook)
     {
-        Color color = getPlayerColor();
+        if (collision == null)
+        {
+            Color color = getPlayerColor();
+            float red = color.r;
+            float green = color.g;
+            float blue = color.b;
+            Color shieldColor = new Color(red / 255, green / 255, blue / 255);
+            Debug.Log("BOOM!");
+        }
+
+        else
+        {
+            Color color = getPlayerColor();
 
 
-        GameObject newEffect = (GameObject)Instantiate(effectPrefab,
-                                    collision.GetContact(0).point,
-                                    Quaternion.LookRotation(collision.GetContact(0).normal));
-        var shieldParticleSystem = newEffect.
-            GetComponent<ParticleSystem>().main;
+            GameObject newEffect = (GameObject)Instantiate(effectPrefab,
+                                        collision.GetContact(0).point,
+                                        Quaternion.LookRotation(collision.GetContact(0).normal));
+            var shieldParticleSystem = newEffect.
+                GetComponent<ParticleSystem>().main;
 
-        float red = color.r;
-        float green = color.g;
-        float blue = color.b;
-        Color shieldColor = new Color(red/255, green/255, blue/255);
+            float red = color.r;
+            float green = color.g;
+            float blue = color.b;
+            Color shieldColor = new Color(red / 255, green / 255, blue / 255);
 
 
-        shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
+            shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
+        }
 
     }
     private Color getPlayerColor()

@@ -147,7 +147,7 @@ public enum location { outer, inner, in_air };
                 if (loc != location.in_air) {
                     if (stickToPlatform) {
                         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                        Debug.Log ("Freezing Everything");
+                        //Debug.Log ("Freezing Everything");
                     }
                 }
             }
@@ -183,7 +183,7 @@ public enum location { outer, inner, in_air };
         loc = location.in_air;
     }
 
-    void OnTriggerEnter2D (Collision2D collision) {
+    void OnTriggerEnter2D (Collider2D collision) {
         if (collision.gameObject.tag == "Inner Platform Corner") {
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
         }
