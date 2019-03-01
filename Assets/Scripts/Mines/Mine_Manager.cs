@@ -20,10 +20,12 @@ public class Mine_Manager : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         mine_planted = Resources.Load("Prefabs/mine_planted");
         //For debugging purposes
+        /*
         GameObject temp = (GameObject)Instantiate(mine_planted,
                 new Vector3(300, 0, 0),
                 rotation);
         temp.GetComponent<Mine_planted>().playerId = 5;
+        */
         //
     }
 
@@ -36,7 +38,7 @@ public class Mine_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(has_mine && player.GetButtonDown("Switch Platforms"))
+        if(has_mine && player.GetButtonDown("Fire 3"))
         {
             has_mine = false;
             GetComponent<SpriteRenderer>().enabled = false;
