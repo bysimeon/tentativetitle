@@ -158,7 +158,7 @@ public class HookLauncher : MonoBehaviour
         else
         {
 
-            bool Swing = player.GetButtonDown("Switch Platforms");
+            bool Swing = player.GetButtonDown("Fire 2");
             bool Shoot = player.GetButtonDown("Fire Hook");
             if (Shoot)
             {
