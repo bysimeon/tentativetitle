@@ -157,10 +157,19 @@ public class HookLauncher : MonoBehaviour
 
         else
         {
+
+            bool Swing = player.GetButtonDown("Fire 2");
             bool Shoot = player.GetButtonDown("Fire Hook");
             if (Shoot)
             {
                 AttemptFire();
+                Debug.Log("test2");
+            }
+            else if (Swing)
+            {
+                Debug.Log("test");
+                AttemptSwingFire();
+
             }
         }
     }
@@ -210,20 +219,40 @@ public class HookLauncher : MonoBehaviour
 
             else
             {
-                if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
-                {
-                    if (prior_hook)
-                    {
-                        Destroy(prior_hook);
-                    }
-                    lastShotTime = time;
-                    prior_hook = SpawnHook(transform.position + transform.right * 5f,
-                        transform.rotation,
-                        transform.right * LaunchVelocity);
-                }
+                Fire();
             }
         }
     }
+    void AttemptSwingFire()
+    {
+        Fire();
+        if(prior_hook)
+        {
+            prior_hook.GetComponent<GrapplingHook>().swingHook = true;
+            prior_hook.GetComponent<Rigidbody2D>().velocity *= 1.5f;
+        }
+
+
+    }
+    void Fire()
+    {
+        float time = Time.time;
+        if (time > (lastShotTime + LaunchCooldown) && IsAiming && can_fire)
+        {
+            if (prior_hook)
+            {
+                Destroy(prior_hook);
+            }
+            lastShotTime = time;
+
+            prior_hook = SpawnHook(transform.position + transform.right * 5f,
+                transform.rotation,
+                transform.right * LaunchVelocity);
+        }
+    }
+
+
+
     private GameObject SpawnHook(Vector2 position, Quaternion rotation, Vector2 velocity)
     {
         Transform playerTransform = transform.parent;
@@ -232,7 +261,7 @@ public class HookLauncher : MonoBehaviour
                                             rotation);
         newHook.GetComponent<GrapplingHook>().hook_speed = travel_speed;
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
-        newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
+        newHook.GetComponent<GrapplingHook>().Shooter = transform.parent.gameObject;
         lineRenderer = newHook.GetComponent<LineRenderer>();
         return newHook;
 
