@@ -232,7 +232,7 @@ public class HookLauncher : MonoBehaviour
                                             rotation);
         newHook.GetComponent<GrapplingHook>().hook_speed = travel_speed;
         newHook.GetComponent<Rigidbody2D>().velocity = velocity;
-        newHook.GetComponent<GrapplingHook>().Player = transform.parent.gameObject;
+        newHook.GetComponent<GrapplingHook>().Shooter = transform.parent.gameObject;
         lineRenderer = newHook.GetComponent<LineRenderer>();
         return newHook;
 
