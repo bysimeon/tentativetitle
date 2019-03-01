@@ -14,6 +14,8 @@ public class GrapplingHook : MonoBehaviour
     private GameObject platform_collider;
     private Object explodePrefab;
 
+    public bool swingHook;
+
     public GameObject start_collider;
 
     public Button start;
@@ -47,21 +49,39 @@ public class GrapplingHook : MonoBehaviour
                     GetComponent<Movement>();
                 ShooterMovement.DetachFromPlatform();
                 PlantHook();
-                DragShooterToHook();
+                if(swingHook)
+                {
+                    Shooter.GetComponent<Movement>().swinging = true;
+                    Vector3 hookPosition = gameObject.transform.position;
+                    Shooter.GetComponent<Movement>().rotationPoint = hookPosition;
+
+                    Vector3 shooterPosition = Shooter.gameObject.transform.position;
+                    float ropeLength = Vector3.Distance(shooterPosition, hookPosition);
+
+                    Shooter.GetComponent<Movement>().rotationRadius = ropeLength;
+
+                }
+                else
+                {
+                    DragShooterToHook();
+                }
                 ShooterMovement.find_grapple_collision(collision.gameObject);
             }
 
             if(collision.gameObject.GetComponent<Movement>() && Shooter != collision.gameObject)
             {
+                if (swingHook)
+                {
+                    Explode();
+                }
+                else
+                {
+                    var damageManager = GameObject.Find("Damage_Manager");
+                    damageManager.GetComponent<Damage_Player>().
+                        DamagePlayer(collision.gameObject, collision, gameObject);
+                    Destroy(gameObject);
+                }
 
-                var damageManager = GameObject.Find("Damage_Manager");
-                damageManager.GetComponent<Damage_Player>().
-                    DamagePlayer(collision.gameObject,collision,gameObject);
-
-
-
-
-                Destroy(gameObject);
 
             }
 
@@ -117,6 +137,7 @@ public class GrapplingHook : MonoBehaviour
 
             if (planted && Shooter.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
+                Debug.Log("Making it die");
                 Destroy(gameObject);
             }
 

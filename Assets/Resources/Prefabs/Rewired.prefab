@@ -262,7 +262,7 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 0
     - _id: 4
-      _name: Switch Platforms
+      _name: Fire Swing
       _type: 1
       _descriptiveName: 
       _positiveDescriptiveName: 
@@ -408,7 +408,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 4
+        _actionId: 8
         _elementType: 0
         _elementIdentifierId: 4
         _axisRange: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 0
+        _actionId: 8
         _elementType: 0
         _elementIdentifierId: 5
         _axisRange: 0
@@ -705,7 +705,7 @@ MonoBehaviour:
     customControllerMaps: []
     customControllers: []
     playerIdCounter: 5
-    actionIdCounter: 8
+    actionIdCounter: 9
     actionCategoryIdCounter: 1
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 1
