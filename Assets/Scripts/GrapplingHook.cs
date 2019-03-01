@@ -8,10 +8,13 @@ public class GrapplingHook : MonoBehaviour
     Quaternion rotation;
     Vector3 position;
     Transform plantedtransform;
-    public GameObject Player;
+    public GameObject Shooter;
     public float ray_distance;
     public bool same_surface = false;
     private GameObject platform_collider;
+    private Object explodePrefab;
+
+    public bool swingHook;
 
     public GameObject start_collider;
 
@@ -21,6 +24,7 @@ public class GrapplingHook : MonoBehaviour
 
     private void Start()
     {
+        explodePrefab = Resources.Load("Prefabs/explodeHookEffect");
     }
 
     void LateUpdate()
@@ -33,60 +37,76 @@ public class GrapplingHook : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Player != null)
+        if (Shooter != null)
         {
-            Movement outer_collision = Player.GetComponent<Movement>();
-
-            /*if (collision.gameObject == outer_collision.getCollider() |
-                collision.gameObject == inner_collision.getCollider())
-            {
-                same_surface = true;
-            }
-
-            else
-            {
-                same_surface = false;
-            }*/
-
+            Movement outer_collision = Shooter.GetComponent<Movement>();
             if ((collision.gameObject.tag == "Outer Platform" ||
                 collision.gameObject.tag == "Inner Platform" || 
                 collision.gameObject.tag == "Inner Platform Corner") &&
                 planted == false)
             {
-                Movement ShooterMovement = Player.
+                Movement ShooterMovement = Shooter.
                     GetComponent<Movement>();
                 ShooterMovement.DetachFromPlatform();
                 PlantHook();
-                DragPlayerToHook();
+                if(swingHook)
+                {
+                    Shooter.GetComponent<Movement>().swinging = true;
+                    Vector3 hookPosition = gameObject.transform.position;
+                    Shooter.GetComponent<Movement>().rotationPoint = hookPosition;
+
+                    Vector3 shooterPosition = Shooter.gameObject.transform.position;
+                    float ropeLength = Vector3.Distance(shooterPosition, hookPosition);
+
+                    Shooter.GetComponent<Movement>().rotationRadius = ropeLength;
+
+                }
+                else
+                {
+                    DragShooterToHook();
+                }
                 ShooterMovement.find_grapple_collision(collision.gameObject);
             }
 
-            if(collision.gameObject.GetComponent<Movement>() && Player != collision.gameObject)
+            if(collision.gameObject.GetComponent<Movement>() && Shooter != collision.gameObject)
             {
+                if (swingHook)
+                {
+                    Explode();
+                }
+                else
+                {
+                    var damageManager = GameObject.Find("Damage_Manager");
+                    damageManager.GetComponent<Damage_Player>().
+                        DamagePlayer(collision.gameObject, collision, gameObject);
+                    Destroy(gameObject);
+                }
 
-                var damageManager = GameObject.Find("Damage_Manager");
-                damageManager.GetComponent<Damage_Player>().
-                    DamagePlayer(collision.gameObject,collision,gameObject);
-                Destroy(gameObject);
+
             }
 
-            /*
-            if (collision.gameObject.tag == "Player1" && Player != collision.gameObject)
+            if(collision.gameObject.GetComponent<GrapplingHook>())
             {
-                Destroy(gameObject);
-                var damage = GameObject.Find("Damage_Manager");
-                damage.GetComponent<Damage_Player>().IncrementP1();
+                Explode();
             }
-
-            if (collision.gameObject.tag == "Player2" && Player != collision.gameObject)
-            {
-                Destroy(gameObject);
-                var damage = GameObject.Find("Damage_Manager");
-                damage.GetComponent<Damage_Player>().IncrementP2();
-            }
-            */
         }
     }
+    void Explode()
+    {
+        GameObject explosion = (GameObject)Instantiate(explodePrefab,
+                                                      transform.position,
+                                                      transform.rotation);
+        var explosionParticles = explosion.GetComponent<ParticleSystem>().main;
+        var playerColor = PlayerColors.getPlayerColor(Shooter);
+        explosionParticles.startColor = new Color(playerColor.r/255,
+                                                 playerColor.g/255,
+                                                 playerColor.b/255);
+        explosionParticles.startSpeed = gameObject.GetComponent<Rigidbody2D>().
+                                        velocity.magnitude;
+        Destroy(gameObject);
+    }
+
+
     void PlantHook()
     {
         gameObject.GetComponent<Rigidbody2D>().constraints =
@@ -96,26 +116,28 @@ public class GrapplingHook : MonoBehaviour
         position = transform.position;
     }
     // TODO: Clean this up
-    void DragPlayerToHook()
+    void DragShooterToHook()
     {
         Vector3 HookPosition = transform.position;
-        Vector3 PlayerPosition = Player.transform.position;
+        Vector3 PlayerPosition = Shooter.transform.position;
         Vector3 PlayerVelocity = Vector3.Normalize(HookPosition - PlayerPosition) *
                                         hook_speed;
-        Player.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
+        Shooter.GetComponent<Rigidbody2D>().velocity = PlayerVelocity;
 
     }
+
     void Update()
     {
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Vector3.zero;
 
-        if (Player != null)
+        if (Shooter != null)
         {
-            PlayerPosition = Player.transform.position;
+            PlayerPosition = Shooter.transform.position;
 
-            if (planted && Player.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+            if (planted && Shooter.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
+                Debug.Log("Making it die");
                 Destroy(gameObject);
             }
 
