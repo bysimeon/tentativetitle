@@ -122,19 +122,7 @@ public class HookLauncher : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(AimAngle2), Mathf.Sin(AimAngle2)),
                     1000, layer_mask);
 
-                if (canShootOwnPlatform)
-                {
-                    can_fire = true;
-                }
-                else if (hit.transform.gameObject == outer_collision.getCollider())
-                {
-                    can_fire = false;
-                }
-
-                else
-                {
-                    can_fire = true;
-                }
+                can_fire = true;
 
                 DisplayAimReticle(AimAngle);
             }
