@@ -126,7 +126,7 @@ public class GrapplingHook : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 HookPosition = transform.position;
         Vector3 PlayerPosition = Vector3.zero;
