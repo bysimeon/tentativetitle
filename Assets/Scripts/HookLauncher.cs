@@ -64,7 +64,7 @@ public class HookLauncher : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateAim();
         ProcessShooting();
