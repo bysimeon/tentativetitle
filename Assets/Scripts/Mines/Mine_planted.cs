@@ -6,6 +6,8 @@ public class Mine_planted : MonoBehaviour
 {
     public int playerId;
 
+    public AudioClip explode;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class Mine_planted : MonoBehaviour
             int collision_playerId = collision.gameObject.GetComponent<Movement>().playerId;
             if (playerId != collision_playerId)
             {
+                GetComponent<AudioSource>().PlayOneShot(explode);
                 Shields shield = collision.gameObject.GetComponentInChildren<Shields>();
                 shield.TakeDamage(50);
                 shield.ShowShieldDamage(null, null);

@@ -202,7 +202,7 @@ public class HookLauncher : MonoBehaviour
             float time = Time.time;
             if (in_start_menu && !done)
             {
-                source.PlayOneShot(shooting, 2f);
+                source.PlayOneShot(shooting, 5f);
                 transform.parent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,

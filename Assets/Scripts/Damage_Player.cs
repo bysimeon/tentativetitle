@@ -32,6 +32,7 @@ public class Damage_Player : MonoBehaviour
     private Scene_Manager scene_script;
 
     public AudioClip hit;
+    public AudioClip win;
 
     // Start is called before the first frame update
     void Start()
@@ -92,8 +93,9 @@ public class Damage_Player : MonoBehaviour
     IEnumerator wait()
     {
         GameObject.FindGameObjectWithTag("Music").GetComponent<Music_Manager>().StopMusic();
+        GetComponent<AudioSource>().PlayOneShot(win, 6f);
         scene_script.can_move = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("Stage Select");
     }
 }

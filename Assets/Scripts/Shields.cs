@@ -7,6 +7,9 @@ public class Shields : MonoBehaviour
     private static Object effectPrefab;
     public float strength;
     public float working;
+
+    public Color start_color;
+
     // Start is called before the first frame update
     void Start()
     {

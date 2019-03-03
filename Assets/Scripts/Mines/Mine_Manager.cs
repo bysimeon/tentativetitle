@@ -48,7 +48,7 @@ public class Mine_Manager : MonoBehaviour
                             transform.parent.position,
                             rotation);
             new_mine.GetComponent<SpriteRenderer>().color =
-                transform.parent.GetComponentInChildren<Shields>().GetComponent<SpriteRenderer>().color;
+                transform.parent.GetComponentInChildren<Shields>().start_color;
             new_mine.GetComponent<Mine_planted>().playerId = playerId;
             Destroy(new_mine, 15f);
         }

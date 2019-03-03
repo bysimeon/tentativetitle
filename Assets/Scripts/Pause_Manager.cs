@@ -48,6 +48,8 @@ public class Pause_Manager : MonoBehaviour
 
         else if ((player1_new.GetButtonDown("Back") || player2_new.GetButtonDown("Back")) && paused && scene_script.can_move)
         {
+            GameObject.FindGameObjectWithTag("Music").GetComponent<Music_Manager>().StopMusic();
+            GameObject.FindGameObjectWithTag("Music").GetComponent<Music_Manager>().PlayMusic();
             SceneManager.LoadScene("Stage Select");
             Time.timeScale = 1f;
             paused = false;
