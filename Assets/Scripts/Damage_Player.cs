@@ -31,6 +31,8 @@ public class Damage_Player : MonoBehaviour
     public Scene_Manager scene;
     private Scene_Manager scene_script;
 
+    public AudioClip hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +77,7 @@ public class Damage_Player : MonoBehaviour
 
     public void DamagePlayer(GameObject player, Collision2D collision, GameObject hook)
     {
-
+        GetComponent<AudioSource>().PlayOneShot(hit);
         Shields playerShields = player.GetComponentInChildren<Shields>();
         playerShields.TakeDamage(30);
         playerShields.ShowShieldDamage(collision, hook);
@@ -89,6 +91,7 @@ public class Damage_Player : MonoBehaviour
 
     IEnumerator wait()
     {
+        GameObject.FindGameObjectWithTag("Music").GetComponent<Music_Manager>().StopMusic();
         scene_script.can_move = false;
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Stage Select");

@@ -15,6 +15,8 @@ public class Powerup_timer : MonoBehaviour
 
     public float fast_speed;
 
+    public AudioClip pick_up;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,7 @@ public class Powerup_timer : MonoBehaviour
 
     public void call_speed_up()
     {
+        GetComponent<AudioSource>().PlayOneShot(pick_up);
         if(routine2 != null)
         {
             StopCoroutine(routine2);

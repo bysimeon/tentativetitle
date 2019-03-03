@@ -21,6 +21,8 @@ public class Pause_Manager : MonoBehaviour
     public Scene_Manager scene;
     private Scene_Manager scene_script;
 
+    public AudioClip pause;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class Pause_Manager : MonoBehaviour
     {
         if((player1_new.GetButtonDown("Start") || player2_new.GetButtonDown("Start")) && !paused && scene_script.can_move)
         {
+            GetComponent<AudioSource>().PlayOneShot(pause);
             Time.timeScale = 0f;
             paused = true;
             fight_text.enabled = false;

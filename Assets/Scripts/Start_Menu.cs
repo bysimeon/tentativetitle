@@ -24,9 +24,16 @@ public class Start_Menu : MonoBehaviour
 
     private Player special_player;
 
+    public AudioClip switching;
+    private AudioSource source;
+
+    public Music_Manager music;
+    private Music_Manager music_script;
+
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         int playerId = player.GetComponent<Movement>().playerId;
         special_player = ReInput.players.GetPlayer(playerId);
         select = selection.start;
@@ -36,6 +43,8 @@ public class Start_Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject.FindGameObjectWithTag("Music").GetComponent<Music_Manager>().PlayMusic();
+
         HookLauncher hook = player.GetComponentInChildren<HookLauncher>();
 
         if (special_player.GetButtonDown("Fire Hook")
@@ -56,6 +65,7 @@ public class Start_Menu : MonoBehaviour
 
             start.GetComponent<Image>().color = Color.white;
             tutorial.GetComponent<Image>().color = Color.green;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Horizontal") < -.8f && select == selection.tutorial)
@@ -64,6 +74,7 @@ public class Start_Menu : MonoBehaviour
 
             start.GetComponent<Image>().color = Color.green;
             tutorial.GetComponent<Image>().color = Color.white;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Vertical") < -.8f && select == selection.start)
@@ -72,6 +83,7 @@ public class Start_Menu : MonoBehaviour
 
             start.GetComponent<Image>().color = Color.white;
             credits.GetComponent<Image>().color = Color.green;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Vertical") > .8f && select == selection.credits)
@@ -80,6 +92,7 @@ public class Start_Menu : MonoBehaviour
 
             start.GetComponent<Image>().color = Color.green;
             credits.GetComponent<Image>().color = Color.white;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Vertical") < -.8f && select == selection.tutorial)
@@ -88,6 +101,7 @@ public class Start_Menu : MonoBehaviour
 
             tutorial.GetComponent<Image>().color = Color.white;
             quit.GetComponent<Image>().color = Color.green;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Vertical") > .8f && select == selection.quit)
@@ -96,6 +110,7 @@ public class Start_Menu : MonoBehaviour
 
             tutorial.GetComponent<Image>().color = Color.green;
             quit.GetComponent<Image>().color = Color.white;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Horizontal") < -.8f && select == selection.quit)
@@ -104,6 +119,7 @@ public class Start_Menu : MonoBehaviour
 
             quit.GetComponent<Image>().color = Color.white;
             credits.GetComponent<Image>().color = Color.green;
+            source.PlayOneShot(switching);
         }
 
         else if (Input.GetAxis("Left Horizontal") > .8f && select == selection.credits)
@@ -112,6 +128,7 @@ public class Start_Menu : MonoBehaviour
 
             quit.GetComponent<Image>().color = Color.green;
             credits.GetComponent<Image>().color = Color.white;
+            source.PlayOneShot(switching);
         }
     }
 

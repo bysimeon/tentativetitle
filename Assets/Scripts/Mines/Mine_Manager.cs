@@ -14,6 +14,8 @@ public class Mine_Manager : MonoBehaviour
 
     private Quaternion rotation = Quaternion.Euler(0, 0, 0);
 
+    public AudioClip pick_up;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class Mine_Manager : MonoBehaviour
 
     public void getMine()
     {
+        GetComponent<AudioSource>().PlayOneShot(pick_up);
         GetComponent<SpriteRenderer>().enabled = true;
         has_mine = true;
     }
