@@ -27,7 +27,6 @@ public class Mine_planted : MonoBehaviour
             int collision_playerId = collision.gameObject.GetComponent<Movement>().playerId;
             if (playerId != collision_playerId)
             {
-                GetComponent<AudioSource>().PlayOneShot(explode);
                 Shields shield = collision.gameObject.GetComponentInChildren<Shields>();
                 shield.TakeDamage(50);
                 shield.ShowShieldDamage(null, null);
