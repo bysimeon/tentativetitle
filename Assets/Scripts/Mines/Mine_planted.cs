@@ -6,6 +6,8 @@ public class Mine_planted : MonoBehaviour
 {
     public int playerId;
 
+    public AudioClip explode;
+
     // Start is called before the first frame update
     void Start()
     {

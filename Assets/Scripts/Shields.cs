@@ -7,6 +7,11 @@ public class Shields : MonoBehaviour
     private static Object effectPrefab;
     public float strength;
     public float working;
+
+    public Color start_color;
+
+    public AudioClip explode;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +63,7 @@ public class Shields : MonoBehaviour
             float green = color.g;
             float blue = color.b;
             Color shieldColor = new Color(red / 255, green / 255, blue / 255);
-            Debug.Log("BOOM!");
+            GetComponent<AudioSource>().PlayOneShot(explode);
         }
 
         else

@@ -39,9 +39,13 @@ public class HookLauncher : MonoBehaviour
 
     public bool canShootOwnPlatform;
 
+    private AudioSource source;
+    public AudioClip shooting;
+
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         layer_mask = (1 << 8 | 1 << 9);
         layer_mask = ~layer_mask;
         HookPrefab = Resources.Load("Prefabs/Hook");
@@ -198,6 +202,7 @@ public class HookLauncher : MonoBehaviour
             float time = Time.time;
             if (in_start_menu && !done)
             {
+                source.PlayOneShot(shooting, 5f);
                 transform.parent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
@@ -213,11 +218,14 @@ public class HookLauncher : MonoBehaviour
     }
     void AttemptSwingFire()
     {
-        Fire();
-        if(prior_hook)
+        if (scene.can_move)
         {
-            prior_hook.GetComponent<GrapplingHook>().swingHook = true;
-            prior_hook.GetComponent<Rigidbody2D>().velocity *= 1.5f;
+            Fire();
+            if (prior_hook)
+            {
+                prior_hook.GetComponent<GrapplingHook>().swingHook = true;
+                prior_hook.GetComponent<Rigidbody2D>().velocity *= 1.5f;
+            }
         }
 
 
@@ -233,9 +241,12 @@ public class HookLauncher : MonoBehaviour
             }
             lastShotTime = time;
 
+            source.PlayOneShot(shooting);
+
             prior_hook = SpawnHook(transform.position + transform.right * 5f,
                 transform.rotation,
                 transform.right * LaunchVelocity);
+
         }
     }
 
