@@ -28,6 +28,8 @@ public class Damage_Player : MonoBehaviour {
     public AudioClip hit;
     public AudioClip win;
 
+    public int alivePlayers;
+
     // Start is called before the first frame update
     void Start () {
         scene_script = scene.GetComponent<Scene_Manager> ();
@@ -79,12 +81,15 @@ public class Damage_Player : MonoBehaviour {
         playerShields.ShowShieldDamage (collision, hook);
         if (!playerShields.ShieldsUp ()) {
             Destroy (player.gameObject);
-            win_text.text = "GAME!";
-            StartCoroutine (wait ());
+            alivePlayers -= 1;
+            if (alivePlayers == 1) {
+                StartCoroutine (wait ());
+            }
         }
     }
 
     IEnumerator wait () {
+        win_text.text = "GAME!";
         GameObject.FindGameObjectWithTag ("Music").GetComponent<Music_Manager> ().StopMusic ();
         GetComponent<AudioSource> ().PlayOneShot (win, 6f);
         scene_script.can_move = false;
