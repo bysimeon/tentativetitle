@@ -9,34 +9,34 @@ public class Movement : MonoBehaviour {
     private Player player;
 
     public enum location { outer, inner, in_air };
-    public location loc;
-    public enum rotation { up, down, right, left };
-    public rotation rot;
-    public Rigidbody2D rb;
+ public location loc;
+ public enum rotation { up, down, right, left };
+ public rotation rot;
+ public Rigidbody2D rb;
 
-    public float speed;
-    public float ray_distance_vertical;
-    public float ray_distance_horizontal;
-    public float ray_distance_in_air_vertical;
-    public float ray_distance_in_air_horizontal;
-    private float ray_distance_in_air_1;
-    private float ray_distance_in_air_2;
+ public float speed;
+ public float ray_distance_vertical;
+ public float ray_distance_horizontal;
+ public float ray_distance_in_air_vertical;
+ public float ray_distance_in_air_horizontal;
+ private float ray_distance_in_air_1;
+ private float ray_distance_in_air_2;
 
-    private GameObject collider = null;
-    private GameObject grapple_collision = null;
-    private int layer_mask;
+ private GameObject collider = null;
+ private GameObject grapple_collision = null;
+ private int layer_mask;
 
-    public GameObject scene_manager;
-    private Scene_Manager scene;
+ public GameObject scene_manager;
+ private Scene_Manager scene;
 
-    private bool stickToPlatform;
-    public bool swinging;
+ private bool stickToPlatform;
+ public bool swinging;
 
-    public Vector3 rotationPoint;
-    public float rotationRadius;
+ public Vector3 rotationPoint;
+ public float rotationRadius;
 
-    void Awake () {
-        player = ReInput.players.GetPlayer (playerId);
+ void Awake () {
+ player = ReInput.players.GetPlayer (playerId);
     }
 
     // Start is called before the first frame update
@@ -51,178 +51,134 @@ public class Movement : MonoBehaviour {
 
     // Update is called once per time interval
     void FixedUpdate () {
-        HandlePlatforming();
-        if(swinging && loc == location.in_air)
-        {
-            Swing();
+        HandlePlatforming ();
+        if (swinging && loc == location.in_air) {
+            Swing ();
         }
-        if(! (loc == location.in_air) || gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < 1)
-        {
+        if (!(loc == location.in_air) || gameObject.GetComponent<Rigidbody2D> ().velocity.magnitude < 1) {
             swinging = false;
         }
     }
 
-    private void Swing()
-    {
+    private void Swing () {
         Vector3 playerPosition = gameObject.transform.position;
         Vector3 radialVector = playerPosition - rotationPoint;
-        Vector3 playerVelocity = gameObject.GetComponent<Rigidbody2D>().velocity;
+        Vector3 playerVelocity = gameObject.GetComponent<Rigidbody2D> ().velocity;
 
-        float currentDistance = Vector3.Distance(rotationPoint, playerPosition);
-        if(rotationRadius == 0)
-        {
+        float currentDistance = Vector3.Distance (rotationPoint, playerPosition);
+        if (rotationRadius == 0) {
             rotationRadius = currentDistance;
         }
-        if(currentDistance > rotationRadius)
-        {
-            Vector3 radialVelocity = Vector3.Project(playerVelocity, radialVector);
+        if (currentDistance > rotationRadius) {
+            Vector3 radialVelocity = Vector3.Project (playerVelocity, radialVector);
             Vector3 tangentialVelocity = playerVelocity - radialVelocity;
-            gameObject.GetComponent<Rigidbody2D>().velocity = playerVelocity -
-                                                              radialVelocity;
+            gameObject.GetComponent<Rigidbody2D> ().velocity = playerVelocity -
+                radialVelocity;
             Vector3 radialDirection = radialVector.normalized;
-            float tangentialSquared = Mathf.Pow(tangentialVelocity.magnitude, 2);
+            float tangentialSquared = Mathf.Pow (tangentialVelocity.magnitude, 2);
             float centripetalMagnitude = tangentialSquared / rotationRadius;
             Vector3 centripetalAcceleration = centripetalMagnitude * radialDirection;
-            Debug.Log(centripetalAcceleration);
-            gameObject.GetComponent<Rigidbody2D>().velocity += (Vector2)centripetalAcceleration * Time.deltaTime;
+            Debug.Log (centripetalAcceleration);
+            gameObject.GetComponent<Rigidbody2D> ().velocity += (Vector2) centripetalAcceleration * Time.deltaTime;
         }
-        Debug.Log("Swinging");
+        Debug.Log ("Swinging");
     }
 
-    private void HandlePlatforming()
-    {
-        RaycastHit2D DownRaycast = new RaycastHit2D();
-        RaycastHit2D UpRaycast = new RaycastHit2D();
-        RaycastHit2D RightRaycast = new RaycastHit2D();
-        RaycastHit2D LeftRaycast = new RaycastHit2D();
+    private void HandlePlatforming () {
+        RaycastHit2D DownRaycast = new RaycastHit2D ();
+        RaycastHit2D UpRaycast = new RaycastHit2D ();
+        RaycastHit2D RightRaycast = new RaycastHit2D ();
+        RaycastHit2D LeftRaycast = new RaycastHit2D ();
 
-        if (rot == rotation.up | rot == rotation.down)
-        {
+        if (rot == rotation.up | rot == rotation.down) {
             ray_distance_in_air_1 = ray_distance_in_air_vertical;
             ray_distance_in_air_2 = ray_distance_in_air_horizontal;
-        }
-        else
-        {
+        } else {
             ray_distance_in_air_1 = ray_distance_in_air_horizontal;
             ray_distance_in_air_2 = ray_distance_in_air_vertical;
         }
 
-        DownRaycast = Physics2D.Raycast(rb.position, new Vector2(0, -1), ray_distance_in_air_1, layer_mask);
-        UpRaycast = Physics2D.Raycast(rb.position, new Vector2(0, 1), ray_distance_in_air_1, layer_mask);
-        RightRaycast = Physics2D.Raycast(rb.position, new Vector2(1, 0), ray_distance_in_air_2, layer_mask);
-        LeftRaycast = Physics2D.Raycast(rb.position, new Vector2(-1, 0), ray_distance_in_air_2, layer_mask);
+        DownRaycast = Physics2D.Raycast (rb.position, new Vector2 (0, -1), ray_distance_in_air_1, layer_mask);
+        UpRaycast = Physics2D.Raycast (rb.position, new Vector2 (0, 1), ray_distance_in_air_1, layer_mask);
+        RightRaycast = Physics2D.Raycast (rb.position, new Vector2 (1, 0), ray_distance_in_air_2, layer_mask);
+        LeftRaycast = Physics2D.Raycast (rb.position, new Vector2 (-1, 0), ray_distance_in_air_2, layer_mask);
 
-        if (scene_manager != null)
-        {
-            scene = scene_manager.GetComponent<Scene_Manager>();
+        if (scene_manager != null) {
+            scene = scene_manager.GetComponent<Scene_Manager> ();
             stickToPlatform = scene.stickToPlatform;
         }
 
-        if (scene != null)
-        {
-            if (scene.can_move)
-            {
+        if (scene != null) {
+            if (scene.can_move) {
                 //Attaching to platform when grappling
-                if (loc == location.in_air)
-                {
-                    if (DownRaycast)
-                    {
-                        if (DownRaycast.collider.gameObject.tag == "Outer Platform")
-                        {
+                if (loc == location.in_air) {
+                    if (DownRaycast) {
+                        if (DownRaycast.collider.gameObject.tag == "Outer Platform") {
                             rot = rotation.up;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                            ConstrainToHorizontalSurface();
-                        }
-                        else if (DownRaycast.collider.gameObject.tag == "Inner Platform")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 0);
+                            ConstrainToHorizontalSurface ();
+                        } else if (DownRaycast.collider.gameObject.tag == "Inner Platform") {
                             rot = rotation.up;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                            ConstrainToHorizontalSurface();
-                        }
-                        else if (DownRaycast.collider.gameObject.tag == "Inner Platform Corner")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 0);
+                            ConstrainToHorizontalSurface ();
+                        } else if (DownRaycast.collider.gameObject.tag == "Inner Platform Corner") {
                             rot = rotation.up;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-                            ConstrainToHorizontalSurface();
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 0);
+                            ConstrainToHorizontalSurface ();
                         }
-                    }
-                    else if (
-                      UpRaycast)
-                    {
-                        if (UpRaycast.collider.gameObject.tag == "Outer Platform")
-                        {
+                    } else if (
+                        UpRaycast) {
+                        if (UpRaycast.collider.gameObject.tag == "Outer Platform") {
                             rot = rotation.down;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
-                            ConstrainToHorizontalSurface();
-                        }
-                        else if (UpRaycast.collider.gameObject.tag == "Inner Platform")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 180);
+                            ConstrainToHorizontalSurface ();
+                        } else if (UpRaycast.collider.gameObject.tag == "Inner Platform") {
 
                             rot = rotation.down;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
-                            ConstrainToHorizontalSurface();
-                        }
-                        else if (UpRaycast.collider.gameObject.tag == "Inner Platform Corner")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 180);
+                            ConstrainToHorizontalSurface ();
+                        } else if (UpRaycast.collider.gameObject.tag == "Inner Platform Corner") {
                             rot = rotation.down;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 180);
-                            ConstrainToHorizontalSurface();
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 180);
+                            ConstrainToHorizontalSurface ();
                         }
-                    }
-                    else if (
-                      RightRaycast)
-                    {
-                        if (RightRaycast.collider.gameObject.tag == "Outer Platform")
-                        {
+                    } else if (
+                        RightRaycast) {
+                        if (RightRaycast.collider.gameObject.tag == "Outer Platform") {
                             rot = rotation.right;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
-                            ConstrainToVerticalSurface();
-                        }
-                        else if (RightRaycast.collider.gameObject.tag == "Inner Platform")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 90);
+                            ConstrainToVerticalSurface ();
+                        } else if (RightRaycast.collider.gameObject.tag == "Inner Platform") {
                             rot = rotation.right;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
-                            ConstrainToVerticalSurface();
-                        }
-                        else if (RightRaycast.collider.gameObject.tag == "Inner Platform Corner")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 90);
+                            ConstrainToVerticalSurface ();
+                        } else if (RightRaycast.collider.gameObject.tag == "Inner Platform Corner") {
                             rot = rotation.right;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 90);
-                            ConstrainToVerticalSurface();
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 90);
+                            ConstrainToVerticalSurface ();
                         }
-                    }
-                    else if (
-                      LeftRaycast)
-                    {
-                        if (LeftRaycast.collider.gameObject.tag == "Outer Platform")
-                        {
+                    } else if (
+                        LeftRaycast) {
+                        if (LeftRaycast.collider.gameObject.tag == "Outer Platform") {
                             rot = rotation.left;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
-                            ConstrainToVerticalSurface();
-                        }
-                        else if (LeftRaycast.collider.gameObject.tag == "Inner Platform")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 270);
+                            ConstrainToVerticalSurface ();
+                        } else if (LeftRaycast.collider.gameObject.tag == "Inner Platform") {
                             rot = rotation.left;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
-                            ConstrainToVerticalSurface();
-                        }
-                        else if (LeftRaycast.collider.gameObject.tag == "Inner Platform Corner")
-                        {
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 270);
+                            ConstrainToVerticalSurface ();
+                        } else if (LeftRaycast.collider.gameObject.tag == "Inner Platform Corner") {
                             rot = rotation.left;
-                            rb.transform.rotation = Quaternion.Euler(0, 0, 270);
-                            ConstrainToVerticalSurface();
+                            rb.transform.rotation = Quaternion.Euler (0, 0, 270);
+                            ConstrainToVerticalSurface ();
                         }
-                    }
-                    else
-                    {
+                    } else {
                         rot = rotation.up;
                         rb.constraints = RigidbodyConstraints2D.None;
                     }
                 }
-                if (loc != location.in_air)
-                {
-                    if (stickToPlatform)
-                    {
+                if (loc != location.in_air) {
+                    if (stickToPlatform) {
                         rb.constraints = RigidbodyConstraints2D.FreezeAll;
                     }
                 }
@@ -260,7 +216,8 @@ public class Movement : MonoBehaviour {
     }
 
     void OnTriggerEnter2D (Collider2D collision) {
-        if (collision.gameObject.tag == "Inner Platform Corner") {
+        if (collision.gameObject.tag == "Inner Platform Corner" && loc == location.in_air) {
+            loc = location.inner;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
@@ -270,7 +227,6 @@ public class Movement : MonoBehaviour {
     }
 
     public void sameSurface () {
-        //rb.velocity = Vector2.zero;
         if (rot == rotation.up && Physics2D.Raycast (rb.position, new Vector2 (0, -1), ray_distance_vertical, layer_mask)) {
             rb.velocity = speed * new Vector2 (player.GetAxis ("Left Horizontal"), 0);
         }
