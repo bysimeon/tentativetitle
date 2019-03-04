@@ -161,6 +161,7 @@ public class HookLauncher : MonoBehaviour
             {
                 AttemptFire();
                 Debug.Log("test2");
+                GetComponentInParent<Movement>().swinging = false;
             }
             else if (Swing)
             {
@@ -229,7 +230,7 @@ public class HookLauncher : MonoBehaviour
             if (prior_hook)
             {
                 prior_hook.GetComponent<GrapplingHook>().swingHook = true;
-                prior_hook.GetComponent<Rigidbody2D>().velocity *= 1.5f;
+                prior_hook.GetComponent<Rigidbody2D>().velocity *= 2.0f;
             }
         }
 
