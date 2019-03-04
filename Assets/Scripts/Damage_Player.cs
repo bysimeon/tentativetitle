@@ -77,7 +77,7 @@ public class Damage_Player : MonoBehaviour {
     public void DamagePlayer (GameObject player, Collision2D collision, GameObject hook) {
         GetComponent<AudioSource> ().PlayOneShot (hit);
         Shields playerShields = player.GetComponentInChildren<Shields> ();
-        playerShields.TakeDamage (25);
+        playerShields.TakeDamage (27);
         playerShields.ShowShieldDamage (collision, hook);
         if (!playerShields.ShieldsUp ()) {
             Destroy (player.gameObject);
