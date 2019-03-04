@@ -434,7 +434,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1061115179
-  m_SortingLayer: -4
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e28db972ef669e0438fda2b31b1c93ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -35850,6 +35850,32 @@ PrefabInstance:
       propertyPath: scene_manager
       value: 
       objectReference: {fileID: 805549752}
+    - target: {fileID: 3279869424145906471, guid: 36ba7f7b1f4745d48946430a3302954d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279869424145906471, guid: 36ba7f7b1f4745d48946430a3302954d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279869424145906471, guid: 36ba7f7b1f4745d48946430a3302954d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.91372555
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279869424145906471, guid: 36ba7f7b1f4745d48946430a3302954d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279869424145906471, guid: 36ba7f7b1f4745d48946430a3302954d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 673bab88adbe03d45ad15e2f88613059,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36ba7f7b1f4745d48946430a3302954d, type: 3}
 --- !u!1001 &6892609224507012033

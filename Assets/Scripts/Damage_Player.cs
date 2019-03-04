@@ -1,30 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Damage_Player : MonoBehaviour
-{
+public class Damage_Player : MonoBehaviour {
     private int player1_count = 0;
     private int player2_count = 0;
+    private int player3_count = 0;
+    private int player4_count = 0;
 
     public GameObject player1;
     public GameObject player2;
+    public GameObject player3;
+    public GameObject player4;
 
     public Canvas canvas;
-    public GameObject p1_heart1;
-    public GameObject p1_heart2;
-    public GameObject p1_heart3;
-
-    public GameObject p2_heart1;
-    public GameObject p2_heart2;
-    public GameObject p2_heart3;
-
 
     private Color flashColor;
     private Color textColor;
-
 
     public Text win_text;
 
@@ -35,25 +29,27 @@ public class Damage_Player : MonoBehaviour
     public AudioClip win;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        scene_script = scene.GetComponent<Scene_Manager>();
+    void Start () {
+        scene_script = scene.GetComponent<Scene_Manager> ();
         //flashColor = Color.red;
         //textColor = GameObject.FindWithTag("Player1Text").
-            //GetComponent<Text>().color;
+        //GetComponent<Text>().color;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (player1_count >= 3)
-        {
-            Destroy(player1.gameObject);
+    void Update () {
+        if (player1_count >= 3) {
+            Destroy (player1.gameObject);
         }
 
-        if (player2_count >= 3)
-        {
-            Destroy(player2.gameObject);
+        if (player2_count >= 3) {
+            Destroy (player2.gameObject);
+        }
+        if (player3_count >= 3) {
+            Destroy (player3.gameObject);
+        }
+        if (player4_count >= 3) {
+            Destroy (player4.gameObject);
         }
     }
     /*IEnumerator Flash(GameObject damagedPlayer)
@@ -76,26 +72,23 @@ public class Damage_Player : MonoBehaviour
     }
     */
 
-    public void DamagePlayer(GameObject player, Collision2D collision, GameObject hook)
-    {
-        GetComponent<AudioSource>().PlayOneShot(hit);
-        Shields playerShields = player.GetComponentInChildren<Shields>();
-        playerShields.TakeDamage(30);
-        playerShields.ShowShieldDamage(collision, hook);
-        if(!playerShields.ShieldsUp())
-        {
-            Destroy(player.gameObject);
+    public void DamagePlayer (GameObject player, Collision2D collision, GameObject hook) {
+        GetComponent<AudioSource> ().PlayOneShot (hit);
+        Shields playerShields = player.GetComponentInChildren<Shields> ();
+        playerShields.TakeDamage (25);
+        playerShields.ShowShieldDamage (collision, hook);
+        if (!playerShields.ShieldsUp ()) {
+            Destroy (player.gameObject);
             win_text.text = "GAME!";
-            StartCoroutine(wait());
+            StartCoroutine (wait ());
         }
     }
 
-    IEnumerator wait()
-    {
-        GameObject.FindGameObjectWithTag("Music").GetComponent<Music_Manager>().StopMusic();
-        GetComponent<AudioSource>().PlayOneShot(win, 6f);
+    IEnumerator wait () {
+        GameObject.FindGameObjectWithTag ("Music").GetComponent<Music_Manager> ().StopMusic ();
+        GetComponent<AudioSource> ().PlayOneShot (win, 6f);
         scene_script.can_move = false;
-        yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene("Stage Select");
+        yield return new WaitForSeconds (4f);
+        SceneManager.LoadScene ("Stage Select");
     }
 }
