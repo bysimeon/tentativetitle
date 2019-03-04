@@ -349,10 +349,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: robot3 v3
       objectReference: {fileID: 0}
-    - target: {fileID: 675094039, guid: bbbb6d85145c14c7781856a6260ffacd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 675094050, guid: bbbb6d85145c14c7781856a6260ffacd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 366.1
@@ -3108,7 +3104,7 @@ PrefabInstance:
     - target: {fileID: 6527749652881778141, guid: efd4f01483a1d26448fb1e9b0aaaf0d1,
         type: 3}
       propertyPath: alivePlayers
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd4f01483a1d26448fb1e9b0aaaf0d1, type: 3}
