@@ -13,7 +13,7 @@ public class Pause_Manager : MonoBehaviour
     private Player player1_new;
     private Player player2_new;
 
-    private bool paused = false;
+    public bool paused = false;
 
     public Text pause_text;
     public Text fight_text;

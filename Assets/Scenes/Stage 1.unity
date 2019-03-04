@@ -31031,6 +31031,11 @@ PrefabInstance:
       propertyPath: scene_manager
       value: 
       objectReference: {fileID: 805549752}
+    - target: {fileID: 1637362447511297425, guid: 5f06377234e023e4fa64ca55356f2162,
+        type: 3}
+      propertyPath: pause_manager
+      value: 
+      objectReference: {fileID: 6014967107987997072}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f06377234e023e4fa64ca55356f2162, type: 3}
 --- !u!1001 &6014967107987997071
@@ -31132,6 +31137,18 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: b4fd1c326c7151b4e9d12d7e9225e508, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3398c356007d2148ade4d74b6110982, type: 3}
+--- !u!114 &6014967107987997072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6014967108386811044, guid: e3398c356007d2148ade4d74b6110982,
+    type: 3}
+  m_PrefabInstance: {fileID: 6014967107987997071}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108992013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecad0346008df6d4980b8f3977bb5b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6456707463215402601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34115,6 +34132,11 @@ PrefabInstance:
       propertyPath: scene_manager
       value: 
       objectReference: {fileID: 805549752}
+    - target: {fileID: 2804716367063098601, guid: 36ba7f7b1f4745d48946430a3302954d,
+        type: 3}
+      propertyPath: pause_manager
+      value: 
+      objectReference: {fileID: 6014967107987997072}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36ba7f7b1f4745d48946430a3302954d, type: 3}
 --- !u!1001 &6892609224507012033

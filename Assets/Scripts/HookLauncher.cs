@@ -42,6 +42,9 @@ public class HookLauncher : MonoBehaviour
     private AudioSource source;
     public AudioClip shooting;
 
+    public Pause_Manager pause_manager;
+    private Pause_Manager pause_script;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,19 +71,21 @@ public class HookLauncher : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        UpdateAim();
-        ProcessShooting();
+        if (pause_manager == null || !(pause_manager.GetComponent<Pause_Manager>().paused)){
+            UpdateAim();
+            ProcessShooting();
 
-        if (prior_hook)
-        {
-            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-            lineRenderer.sortingLayerName = "Lines";
-            lineRenderer.SetWidth(width, width);
-            lineRenderer.SetColors(c1, c2);
-            lineRenderer.SetPosition(0, gameObject.transform.position);
-            lineRenderer.SetPosition(1, prior_hook.transform.position);
+            if (prior_hook)
+            {
+                lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+                lineRenderer.sortingLayerName = "Lines";
+                lineRenderer.SetWidth(width, width);
+                lineRenderer.SetColors(c1, c2);
+                lineRenderer.SetPosition(0, gameObject.transform.position);
+                lineRenderer.SetPosition(1, prior_hook.transform.position);
+            }
         }
     }
     void UpdateAim()
