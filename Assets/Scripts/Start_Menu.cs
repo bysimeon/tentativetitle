@@ -30,6 +30,8 @@ public class Start_Menu : MonoBehaviour
     public Music_Manager music;
     private Music_Manager music_script;
 
+    public bool in_start_menu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,18 @@ public class Start_Menu : MonoBehaviour
 
         if ((special_player.GetButtonDown("Fire Hook") || special_player.GetButtonDown("Fire 3"))
             && select == selection.quit)
+        {
+            hook.startCall();
+        }
+
+        if ((special_player.GetButtonDown("Fire Hook") || special_player.GetButtonDown("Fire 3"))
+        && select == selection.tutorial && !in_start_menu)
+        {
+            hook.startCall();
+        }
+
+        if ((special_player.GetButtonDown("Fire Hook") || special_player.GetButtonDown("Fire 3"))
+        && select == selection.credits && !in_start_menu)
         {
             hook.startCall();
         }

@@ -27,7 +27,7 @@ public class Scene_Manager : MonoBehaviour {
         fight.enabled = false;
         Scene currentScene = SceneManager.GetActiveScene ();
         string scene_name = currentScene.name;
-        if (scene_name == "Stage 1") {
+        if (scene_name == "Stage 1" || scene_name == "Stage 2" || scene_name == "Stage 3") {
             StartCoroutine (countdown ());
         }
     }
