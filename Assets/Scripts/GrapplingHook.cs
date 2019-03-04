@@ -27,6 +27,11 @@ public class GrapplingHook : MonoBehaviour
         explodePrefab = Resources.Load("Prefabs/explodeHookEffect");
     }
 
+    private void Awake()
+    {
+        explodePrefab = Resources.Load("Prefabs/explodeHookEffect");
+    }
+
     void LateUpdate()
     {
         if(planted)
