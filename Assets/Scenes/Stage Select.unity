@@ -240,6 +240,7 @@ MonoBehaviour:
   switching: {fileID: 8300000, guid: bf40f10394cb01949a8a740f4ff728c7, type: 3}
   music: {fileID: 0}
   in_start_menu: 0
+  in_player_menu: 0
 --- !u!82 &36008473
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1180,7 +1181,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Return
+  m_Text: Back
 --- !u!222 &790197287
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1989,7 +1990,7 @@ GameObject:
   - component: {fileID: 1679435836}
   - component: {fileID: 1679435835}
   m_Layer: 5
-  m_Name: Return
+  m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

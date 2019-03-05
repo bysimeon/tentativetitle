@@ -160,12 +160,10 @@ public class HookLauncher : MonoBehaviour
             if (Shoot)
             {
                 AttemptFire();
-                Debug.Log("test2");
                 GetComponentInParent<Movement>().swinging = false;
             }
             else if (Swing)
             {
-                Debug.Log("test");
                 AttemptSwingFire();
 
             }

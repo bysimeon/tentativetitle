@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 179787349}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32701,6 +32701,11 @@ PrefabInstance:
       propertyPath: post
       value: 
       objectReference: {fileID: 8300000, guid: e4a1e68c80eb6a549acad5fc2135cdb8, type: 3}
+    - target: {fileID: 4978874082489327385, guid: 2856f1ad954965b449571b06eb8693f9,
+        type: 3}
+      propertyPath: player3
+      value: 
+      objectReference: {fileID: 308698186}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2856f1ad954965b449571b06eb8693f9, type: 3}
 --- !u!114 &4978874082489327385 stripped

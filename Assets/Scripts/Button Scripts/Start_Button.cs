@@ -21,6 +21,6 @@ public class Start_Button : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene("Stage Select");
+        SceneManager.LoadScene("Player Select");
     }
 }
