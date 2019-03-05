@@ -30,7 +30,7 @@ public class Shields : MonoBehaviour {
     IEnumerator RegenerateShields () {
         while (true) {
             if (strength < 95) {
-                strength += 5f;
+                strength += 2.5f;
             } else {
                 strength = 100;
             }
