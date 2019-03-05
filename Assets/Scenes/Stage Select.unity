@@ -239,6 +239,7 @@ MonoBehaviour:
   player: {fileID: 1215592951}
   switching: {fileID: 8300000, guid: bf40f10394cb01949a8a740f4ff728c7, type: 3}
   music: {fileID: 0}
+  in_start_menu: 0
 --- !u!82 &36008473
 AudioSource:
   m_ObjectHideFlags: 0
@@ -894,6 +895,41 @@ PrefabInstance:
       propertyPath: shooting
       value: 
       objectReference: {fileID: 8300000, guid: 7ef8c4a0e13f180499a14145354cce3e, type: 3}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: width
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: c1.g
+      value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: c1.b
+      value: 0.34901962
+      objectReference: {fileID: 0}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: c1.r
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: c2.g
+      value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: c2.r
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 864095086882329699, guid: 68a205b715f44134581a54e8c4c493b8,
+        type: 3}
+      propertyPath: c2.b
+      value: 0.34901962
+      objectReference: {fileID: 0}
     - target: {fileID: 4416067943981202562, guid: 68a205b715f44134581a54e8c4c493b8,
         type: 3}
       propertyPath: m_Sprite
