@@ -23,6 +23,12 @@ public class Mine_not_planted : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "Inner Platform")
+        {
+            Debug.Log("hi");
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.layer == 8)
         {
             player_hit = collision.gameObject;

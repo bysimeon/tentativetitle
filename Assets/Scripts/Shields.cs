@@ -19,7 +19,6 @@ public class Shields : MonoBehaviour {
         StartCoroutine (RegenerateShields ());
         effectPrefab = Resources.Load ("Prefabs/shieldHitEffect");
         shieldSprites = Resources.LoadAll<Sprite> ("shield");
-        Debug.Log(shieldSprites);
     }
 
     // Update is called once per frame

@@ -19,8 +19,24 @@ public class Scene_Manager : MonoBehaviour {
     public bool stickToPlatform = true;
     public bool canShootOwnPlatform = true;
 
+    public GameObject player3;
+
     // Start is called before the first frame update
     void Start () {
+        Num_Player_Manager num_players =
+            GameObject.FindGameObjectWithTag("Num_Player").GetComponent<Num_Player_Manager>();
+        Damage_Player damage = FindObjectOfType<Damage_Player>();
+        if (num_players.player_2)
+        {
+            Destroy(player3);
+            damage.alivePlayers = 2;
+        }
+
+        else
+        {
+            damage.alivePlayers = 3;
+        }
+
         count3.enabled = false;
         count2.enabled = false;
         count1.enabled = false;
@@ -30,6 +46,8 @@ public class Scene_Manager : MonoBehaviour {
         if (scene_name == "Stage 1" || scene_name == "Stage 2" || scene_name == "Stage 3") {
             StartCoroutine (countdown ());
         }
+
+
     }
 
     // Update is called once per frame
