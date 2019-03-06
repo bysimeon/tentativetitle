@@ -25,7 +25,7 @@ public class Mine_not_planted : MonoBehaviour
     {
         if(collision.gameObject.tag == "Inner Platform")
         {
-            Debug.Log("hi");
+            //Debug.Log("hi");
             Destroy(gameObject);
         }
 

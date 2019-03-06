@@ -142,7 +142,7 @@ public class GrapplingHook : MonoBehaviour
 
             if (planted && Shooter.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
-                Debug.Log("Making it die");
+                //Debug.Log("Making it die");
                 Destroy(gameObject);
             }
 

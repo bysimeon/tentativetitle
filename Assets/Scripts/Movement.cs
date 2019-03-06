@@ -78,10 +78,9 @@ public class Movement : MonoBehaviour {
             float tangentialSquared = Mathf.Pow (tangentialVelocity.magnitude, 2);
             float centripetalMagnitude = tangentialSquared / rotationRadius;
             Vector3 centripetalAcceleration = centripetalMagnitude * radialDirection;
-            Debug.Log (centripetalAcceleration);
             gameObject.GetComponent<Rigidbody2D> ().velocity += (Vector2) centripetalAcceleration * Time.deltaTime;
         }
-        Debug.Log ("Swinging");
+        //Debug.Log ("Swinging");
     }
 
     private void HandlePlatforming () {
