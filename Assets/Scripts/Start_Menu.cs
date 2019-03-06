@@ -32,6 +32,7 @@ public class Start_Menu : MonoBehaviour
 
     public bool in_start_menu;
     public bool in_player_menu;
+    public bool in_instructions;
 
     // Start is called before the first frame update
     void Start()
@@ -63,18 +64,18 @@ public class Start_Menu : MonoBehaviour
         }
 
         if ((special_player.GetButtonDown("Fire Hook") || special_player.GetButtonDown("Fire 3"))
-        && select == selection.tutorial && !in_start_menu)
+        && select == selection.tutorial)
         {
             hook.startCall();
         }
 
         if ((special_player.GetButtonDown("Fire Hook") || special_player.GetButtonDown("Fire 3"))
-        && select == selection.credits && !in_start_menu)
+        && select == selection.credits)
         {
             hook.startCall();
         }
 
-        if (special_player.GetAxis("Left Horizontal") > .8f && select == selection.start)
+        if (!in_instructions && special_player.GetAxis("Left Horizontal") > .8f && select == selection.start)
         {
             select = selection.tutorial;
 
@@ -83,7 +84,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (special_player.GetAxis("Left Horizontal") < -.8f && select == selection.tutorial)
+        else if (!in_instructions && special_player.GetAxis("Left Horizontal") < -.8f && select == selection.tutorial)
         {
             select = selection.start;
 
@@ -92,7 +93,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (special_player.GetAxis("Left Vertical") < -.8f && select == selection.start)
+        else if (!in_instructions && special_player.GetAxis("Left Vertical") < -.8f && select == selection.start)
         {
             select = selection.credits;
 
@@ -101,7 +102,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (special_player.GetAxis("Left Vertical") > .8f && select == selection.credits)
+        else if (!in_instructions && special_player.GetAxis("Left Vertical") > .8f && select == selection.credits)
         {
             select = selection.start;
 
@@ -110,7 +111,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (!in_player_menu && special_player.GetAxis("Left Vertical") < -.8f && select == selection.tutorial)
+        else if (!in_instructions && !in_player_menu && special_player.GetAxis("Left Vertical") < -.8f && select == selection.tutorial)
         {
             select = selection.quit;
 
@@ -119,7 +120,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (!in_player_menu && special_player.GetAxis("Left Vertical") > .8f && select == selection.quit)
+        else if (!in_instructions &&  !in_player_menu && special_player.GetAxis("Left Vertical") > .8f && select == selection.quit)
         {
             select = selection.tutorial;
 
@@ -128,7 +129,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (!in_player_menu && special_player.GetAxis("Left Horizontal") < -.8f && select == selection.quit)
+        else if (!in_instructions && !in_player_menu && special_player.GetAxis("Left Horizontal") < -.8f && select == selection.quit)
         {
             select = selection.credits;
 
@@ -137,7 +138,7 @@ public class Start_Menu : MonoBehaviour
             source.PlayOneShot(switching);
         }
 
-        else if (!in_player_menu && special_player.GetAxis("Left Horizontal") > .8f && select == selection.credits)
+        else if (!in_instructions && !in_player_menu && special_player.GetAxis("Left Horizontal") > .8f && select == selection.credits)
         {
             select = selection.quit;
 

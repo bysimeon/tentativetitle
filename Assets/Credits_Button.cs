@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Tutorial_Button : MonoBehaviour
+public class Credits_Button : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -19,6 +19,6 @@ public class Tutorial_Button : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene("Controls");
+        SceneManager.LoadScene("Credits");
     }
 }
