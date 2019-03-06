@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shields : MonoBehaviour {
     private static Object effectPrefab;
+
     public float strength;
     public float working;
 
@@ -56,22 +57,22 @@ public class Shields : MonoBehaviour {
             sprite.sprite = shieldSprites[0];
         }
     }
-    public void ShowShieldDamage (Collision2D collision, GameObject hook) {
+    public void ShowShieldDamage (Collision2D collision, GameObject damager) {
         if (collision == null) {
-            Color color = getPlayerColor ();
+            Color color = getPlayerColor();
             float red = color.r;
             float green = color.g;
             float blue = color.b;
             Color shieldColor = new Color (red / 255, green / 255, blue / 255);
             GetComponent<AudioSource> ().PlayOneShot (explode);
-        } else {
-            Color color = getPlayerColor ();
+        } else if(damager.GetComponent<GrapplingHook>()) {
+            Color color = getPlayerColor();
 
             GameObject newEffect = (GameObject) Instantiate (effectPrefab,
                 collision.GetContact (0).point,
                 Quaternion.LookRotation (collision.GetContact (0).normal));
             var shieldParticleSystem = newEffect.
-            GetComponent<ParticleSystem> ().main;
+            GetComponent<ParticleSystem>().main;
 
             float red = color.r;
             float green = color.g;
@@ -82,7 +83,7 @@ public class Shields : MonoBehaviour {
         }
 
     }
-    private Color getPlayerColor () {
+    public Color getPlayerColor () {
         return PlayerColors.getPlayerColor (gameObject.transform.parent.gameObject);
     }
 
