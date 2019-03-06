@@ -15,6 +15,9 @@ public class Damage_Player : MonoBehaviour {
     public GameObject player3;
     public GameObject player4;
 
+
+    private Object NukePrefab;
+
     public Canvas canvas;
 
     private Color flashColor;
@@ -54,38 +57,27 @@ public class Damage_Player : MonoBehaviour {
             Destroy (player4.gameObject);
         }
     }
-    /*IEnumerator Flash(GameObject damagedPlayer)
-    {
-        string playerTag = damagedPlayer.tag;
-        GameObject text = GameObject.FindWithTag(playerTag + "Text");
-        for (float f = 0f; f < 1.15f; f += 0.15f)
-        {
-            // check to see if the Player's destroyed
-            if(damagedPlayer)
-            {
-                Color currentColor = text.GetComponent<Text>().color;
-                text.GetComponent<Text>().color = currentColor.Equals(textColor) ?
-                    flashColor :
-                    textColor;
-            }
 
-            yield return new WaitForSeconds(.15f);
-        }
-    }
-    */
-
-    public void DamagePlayer (GameObject player, Collision2D collision, GameObject hook) {
+    public void DamagePlayer (GameObject player, Collision2D collision, GameObject damager) {
         GetComponent<AudioSource> ().PlayOneShot (hit);
         Shields playerShields = player.GetComponentInChildren<Shields> ();
-        playerShields.TakeDamage (27);
-        playerShields.ShowShieldDamage (collision, hook);
+
+        playerShields.TakeDamage(27);
+        playerShields.ShowShieldDamage (collision, damager);
         if (!playerShields.ShieldsUp ()) {
+
+            KillPlayer(player);
             Destroy (player.gameObject);
             alivePlayers -= 1;
             if (alivePlayers == 1) {
                 StartCoroutine (wait ());
             }
         }
+    }
+
+    private void KillPlayer(GameObject player)
+    {
+
     }
 
     IEnumerator wait () {
