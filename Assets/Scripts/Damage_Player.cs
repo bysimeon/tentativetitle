@@ -15,7 +15,6 @@ public class Damage_Player : MonoBehaviour {
     public GameObject player3;
     public GameObject player4;
 
-
     private float camShakeMagnitude;
     public float initialChamShakeMagnitude = 30.0f;
     private Object NukePrefab;
@@ -39,8 +38,19 @@ public class Damage_Player : MonoBehaviour {
     private bool cameraShaking;
     public int alivePlayers;
 
+    public bool p1_alive = true;
+    public bool p2_alive = true;
+    public bool p3_alive = true;
+
+    public Text p1_win;
+    public Text p2_win;
+    public Text p3_win;
+
     // Start is called before the first frame update
     void Start () {
+        p1_win.enabled = false;
+        p2_win.enabled = false;
+        p3_win.enabled = false;
         scene_script = scene.GetComponent<Scene_Manager> ();
         NukePrefab = Resources.Load("Prefabs/NukeExplosion");
         //flashColor = Color.red;
@@ -131,6 +141,20 @@ public class Damage_Player : MonoBehaviour {
         shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
         StartCoroutine(NukeFlash());
 
+        if(player == player1)
+        {
+            p1_alive = false;
+        }
+
+        else if (player == player2)
+        {
+            p2_alive = false;
+        }
+
+        else if (player == player3)
+        {
+            p3_alive = false;
+        }
         Destroy(player.gameObject);
     }
     IEnumerator NukeFlash()
@@ -159,7 +183,21 @@ public class Damage_Player : MonoBehaviour {
     }
 
     IEnumerator wait () {
-        win_text.text = "GAME!";
+        if (p1_alive)
+        {
+            p1_win.enabled = true;
+        }
+
+        if (p2_alive)
+        {
+            p2_win.enabled = true;
+        }
+
+        if (p3_alive)
+        {
+            p3_win.enabled = true;
+        }
+
         GameObject.FindGameObjectWithTag ("Music").GetComponent<Music_Manager> ().StopMusic ();
         GetComponent<AudioSource> ().PlayOneShot (win, 6f);
         scene_script.can_move = false;

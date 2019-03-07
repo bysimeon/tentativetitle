@@ -30,6 +30,7 @@ public class Scene_Manager : MonoBehaviour {
         {
             Destroy(player3);
             damage.alivePlayers = 2;
+            damage.p3_alive = false;
         }
 
         else
