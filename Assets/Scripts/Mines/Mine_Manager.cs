@@ -40,7 +40,7 @@ public class Mine_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(has_mine && player.GetButtonDown("Fire 3"))
+        if(has_mine && player.GetButtonDown("Plant Bomb"))
         {
             has_mine = false;
             GetComponent<SpriteRenderer>().enabled = false;

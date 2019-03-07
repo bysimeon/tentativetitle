@@ -338,6 +338,85 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
+--- !u!1 &144870764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 144870765}
+  - component: {fileID: 144870767}
+  - component: {fileID: 144870766}
+  m_Layer: 5
+  m_Name: Orange Wins
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &144870765
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144870764}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2083796007}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000030517578, y: -180}
+  m_SizeDelta: {x: 700, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &144870766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144870764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.023529414, g: 0.54901963, b: 0.14117648, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1c759a90fb1b89343ab3dfc9fa9cb1da, type: 3}
+    m_FontSize: 60
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Orange Wins!
+--- !u!222 &144870767
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144870764}
+  m_CullTransparentMesh: 0
 --- !u!1001 &168402473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1031,7 +1110,7 @@ PrefabInstance:
     - target: {fileID: 4081258363524254562, guid: ce8ca3e15d79cc546ac5a07bc7abfd47,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce8ca3e15d79cc546ac5a07bc7abfd47, type: 3}
@@ -1357,6 +1436,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actions.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actionCategoryMap.list.Array.data[0].actionIds.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actions.Array.data[10]._id
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actions.Array.data[10]._name
+      value: Plant Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actions.Array.data[10]._type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actions.Array.data[10]._descriptiveName
+      value: Action0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actions.Array.data[10]._userAssignable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actionCategoryMap.list.Array.data[0].actionIds.Array.data[10]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.actionIdCounter
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544284096450278878, guid: 10f16fa5bfa724040b7ee6195f54ade8,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[10]._actionId
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10f16fa5bfa724040b7ee6195f54ade8, type: 3}
@@ -2487,6 +2616,26 @@ PrefabInstance:
       propertyPath: alivePlayers
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6527749652881778141, guid: efd4f01483a1d26448fb1e9b0aaaf0d1,
+        type: 3}
+      propertyPath: player3
+      value: 
+      objectReference: {fileID: 168402474}
+    - target: {fileID: 6527749652881778141, guid: efd4f01483a1d26448fb1e9b0aaaf0d1,
+        type: 3}
+      propertyPath: p1_win
+      value: 
+      objectReference: {fileID: 144870766}
+    - target: {fileID: 6527749652881778141, guid: efd4f01483a1d26448fb1e9b0aaaf0d1,
+        type: 3}
+      propertyPath: p2_win
+      value: 
+      objectReference: {fileID: 1900551291}
+    - target: {fileID: 6527749652881778141, guid: efd4f01483a1d26448fb1e9b0aaaf0d1,
+        type: 3}
+      propertyPath: p3_win
+      value: 
+      objectReference: {fileID: 1918823954}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd4f01483a1d26448fb1e9b0aaaf0d1, type: 3}
 --- !u!1 &1561490876 stripped
@@ -2609,6 +2758,85 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5986295366327724030}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1900551289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900551290}
+  - component: {fileID: 1900551292}
+  - component: {fileID: 1900551291}
+  m_Layer: 5
+  m_Name: Blue Wins
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1900551290
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900551289}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2083796007}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 105.000015, y: -180}
+  m_SizeDelta: {x: 700, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1900551291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900551289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.023529414, g: 0.54901963, b: 0.14117648, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1c759a90fb1b89343ab3dfc9fa9cb1da, type: 3}
+    m_FontSize: 60
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Blue Wins!
+--- !u!222 &1900551292
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900551289}
+  m_CullTransparentMesh: 0
 --- !u!1 &1904428670
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,6 +3874,85 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1918823952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918823953}
+  - component: {fileID: 1918823955}
+  - component: {fileID: 1918823954}
+  m_Layer: 5
+  m_Name: Purple Wins!
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1918823953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918823952}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2083796007}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 42.999985, y: -180}
+  m_SizeDelta: {x: 700, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1918823954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918823952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.023529414, g: 0.54901963, b: 0.14117648, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1c759a90fb1b89343ab3dfc9fa9cb1da, type: 3}
+    m_FontSize: 60
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Purple Wins!
+--- !u!222 &1918823955
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918823952}
+  m_CullTransparentMesh: 0
 --- !u!114 &1926862303 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1926862303, guid: ce8ca3e15d79cc546ac5a07bc7abfd47,
