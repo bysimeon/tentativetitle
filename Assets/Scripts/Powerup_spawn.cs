@@ -26,7 +26,7 @@ public class Powerup_spawn : MonoBehaviour
     {
         scene_script = scene.GetComponent<Scene_Manager>();
         speed_boost = Resources.Load("Prefabs/Speed_boost");
-        InvokeRepeating("spawn", 5f, 6.5f);
+        InvokeRepeating("spawn", 5f, 7f);
 
         mine = Resources.Load("Prefabs/mine_not_planted");
         InvokeRepeating("spawn_mine", 7f, 10f);
