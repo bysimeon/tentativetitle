@@ -104,9 +104,9 @@ public class GrapplingHook : MonoBehaviour
                                                       transform.rotation);
         var explosionParticles = explosion.GetComponent<ParticleSystem>().main;
         var playerColor = PlayerColors.getPlayerColor(Shooter);
-        explosionParticles.startColor = new Color(playerColor.r/255,
-                                                 playerColor.g/255,
-                                                 playerColor.b/255);
+        explosionParticles.startColor = new Color(150f/255,
+                                                 150f/255,
+                                                 150f/255);
         explosionParticles.startSpeed = gameObject.GetComponent<Rigidbody2D>().
                                         velocity.magnitude;
         Destroy(gameObject);

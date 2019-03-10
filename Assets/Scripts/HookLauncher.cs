@@ -13,7 +13,7 @@ public class HookLauncher : MonoBehaviour
     private static Object HookPrefab;
     float lastShotTime = -1;
     private bool IsAiming = false;
-    private GameObject prior_hook;
+    public GameObject prior_hook;
 
     private LineRenderer lineRenderer;
     public Color c1 = Color.yellow;
@@ -207,6 +207,9 @@ public class HookLauncher : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
+
+
+
 
     void AttemptFire()
     {
