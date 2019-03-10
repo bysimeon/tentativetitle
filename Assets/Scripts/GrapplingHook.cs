@@ -77,7 +77,8 @@ public class GrapplingHook : MonoBehaviour
             {
                 if (swingHook)
                 {
-                    Explode();
+                    //Explode();
+                    Destroy(gameObject);
                 }
                 else
                 {

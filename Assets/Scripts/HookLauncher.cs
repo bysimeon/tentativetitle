@@ -31,6 +31,7 @@ public class HookLauncher : MonoBehaviour
     public Canvas canvas;
     bool done = false;
     bool done2 = false;
+    bool swinging = false;
 
     public GameObject scene_manager;
     private Scene_Manager scene;
@@ -79,12 +80,25 @@ public class HookLauncher : MonoBehaviour
 
             if (prior_hook)
             {
-                lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-                lineRenderer.sortingLayerName = "Lines";
-                lineRenderer.SetWidth(width, width);
-                lineRenderer.SetColors(c1, c2);
-                lineRenderer.SetPosition(0, gameObject.transform.position);
-                lineRenderer.SetPosition(1, prior_hook.transform.position);
+                if (swinging == true)
+                {
+                    lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+                    lineRenderer.sortingLayerName = "Lines";
+                    lineRenderer.SetWidth(width, width);
+                    lineRenderer.SetColors(Color.gray, Color.gray);
+                    lineRenderer.SetPosition(0, gameObject.transform.position);
+                    lineRenderer.SetPosition(1, prior_hook.transform.position);
+                }
+                else
+                {
+                    lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+                    lineRenderer.sortingLayerName = "Lines";
+                    lineRenderer.SetWidth(width, width);
+                    lineRenderer.SetColors(c1, c2);
+                    lineRenderer.SetPosition(0, gameObject.transform.position);
+                    lineRenderer.SetPosition(1, prior_hook.transform.position);
+                }
+
             }
         }
     }
@@ -220,6 +234,7 @@ public class HookLauncher : MonoBehaviour
             else
             {
                 Fire();
+                swinging = false;
             }
         }
     }
@@ -232,6 +247,7 @@ public class HookLauncher : MonoBehaviour
             {
                 prior_hook.GetComponent<GrapplingHook>().swingHook = true;
                 prior_hook.GetComponent<Rigidbody2D>().velocity *= 2.0f;
+                swinging = true;
             }
         }
 
