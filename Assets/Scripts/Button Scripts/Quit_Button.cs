@@ -18,11 +18,6 @@ public class Quit_Button : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-    #else
-        Application.quit();
-
-    #endif
+        Application.Quit();
     }
 }

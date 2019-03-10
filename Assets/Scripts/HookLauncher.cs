@@ -30,7 +30,6 @@ public class HookLauncher : MonoBehaviour
     public bool in_start_menu = false;
     public Canvas canvas;
     bool done = false;
-    bool done2 = false;
     bool swinging = false;
 
     public GameObject scene_manager;
