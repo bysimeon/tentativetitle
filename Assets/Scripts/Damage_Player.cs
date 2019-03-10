@@ -65,25 +65,7 @@ public class Damage_Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (player1_count >= 3) {
-            Destroy (player1.gameObject);
-        }
-
-        if (player2_count >= 3) {
-            Destroy (player2.gameObject);
-        }
-        if (player3_count >= 3) {
-            Destroy (player3.gameObject);
-        }
-        if (player4_count >= 3) {
-            Destroy (player4.gameObject);
-        }
-
-        Debug.Log(cameraShaking);
         HandleCameraShakes();
-
-
-
     }
 
     void HandleCameraShakes()
