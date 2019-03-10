@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Damage_Player : MonoBehaviour {
-    private int player1_count = 0;
-    private int player2_count = 0;
-    private int player3_count = 0;
-    private int player4_count = 0;
 
     public GameObject player1;
     public GameObject player2;
@@ -53,9 +49,6 @@ public class Damage_Player : MonoBehaviour {
         p3_win.enabled = false;
         scene_script = scene.GetComponent<Scene_Manager> ();
         NukePrefab = Resources.Load("Prefabs/NukeExplosion");
-        //flashColor = Color.red;
-        //textColor = GameObject.FindWithTag("Player1Text").
-        //GetComponent<Text>().color;
         cameraShaking = false;
         Camera = GameObject.Find("Main Camera");
         CameraX = Camera.transform.position.x;
@@ -75,9 +68,6 @@ public class Damage_Player : MonoBehaviour {
             float yOffset = camShakeMagnitude * Mathf.PerlinNoise(Time.time * 10, Time.time * 10) - camShakeMagnitude/2;
             float xOffset = camShakeMagnitude * Mathf.PerlinNoise(Time.time * 10 + 155555, Time.time * 10 +5555) - camShakeMagnitude / 2;
             Camera.transform.position = new Vector3(CameraX + xOffset, CameraY + yOffset, -10f);
-            Debug.Log("Yo");
-            Debug.Log(yOffset);
-            Debug.Log(xOffset);
         }
         else
         {
@@ -122,7 +112,7 @@ public class Damage_Player : MonoBehaviour {
 
         shieldParticleSystem.startColor = new ParticleSystem.MinMaxGradient(shieldColor);
         StartCoroutine(NukeFlash());
-
+        
         if(player == player1)
         {
             p1_alive = false;
@@ -137,6 +127,11 @@ public class Damage_Player : MonoBehaviour {
         {
             p3_alive = false;
         }
+        var hook = player.GetComponentInChildren<HookLauncher>().prior_hook;
+        if (hook)
+        {
+            Destroy(hook);
+        }
         Destroy(player.gameObject);
     }
     IEnumerator NukeFlash()
@@ -144,6 +139,7 @@ public class Damage_Player : MonoBehaviour {
         cameraShaking = true;
         for(float i = 0; i <= 1.0f; i= i +0.2f)
         {
+            Color player1 = new Color(253, 147, 89);
             GameObject canvas = GameObject.Find("Canvas");
             canvas.GetComponent<AudioSource>().Play();
             canvas.GetComponent<Image>().color = new Color(1, 1, 1, i);
