@@ -22,16 +22,18 @@ public class Powerup_spawn : MonoBehaviour
     private Object mine;
 
     public bool stage_3;
+    private int layer;
 
     // Start is called before the first frame update
     void Start()
     {
+        layer = 1 << 11;
         scene_script = scene.GetComponent<Scene_Manager>();
         speed_boost = Resources.Load("Prefabs/Speed_boost");
-        InvokeRepeating("spawn", 5f, .5f);
+        InvokeRepeating("spawn", 5f, 7f);
 
         mine = Resources.Load("Prefabs/mine_not_planted");
-        InvokeRepeating("spawn_mine", 7f, .5f);
+        InvokeRepeating("spawn_mine", 7f, 10f);
     }
 
     // Update is called once per frame
@@ -49,11 +51,10 @@ public class Powerup_spawn : MonoBehaviour
         {
             position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
 
-            if (Physics2D.CircleCast(position, 5f, Vector2.zero)){
-                while (Physics2D.CircleCast(position, 5f, Vector2.zero).collider.gameObject.tag == "Inner Platform")
-                {
-                    position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
-                }
+            while (Physics2D.CircleCast(position, 7f, Vector2.zero, Mathf.Infinity, layer) &&
+                    Physics2D.CircleCast(position, 7f, Vector2.zero, Mathf.Infinity, layer).collider.gameObject.tag == "Inner Platform")
+            {
+                position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
             }
 
             newItem = (GameObject)Instantiate(speed_boost,
@@ -69,11 +70,10 @@ public class Powerup_spawn : MonoBehaviour
         {
             position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
 
-            if (Physics2D.CircleCast(position, 5f, Vector2.zero)){
-                while (Physics2D.CircleCast(position, 5f, Vector2.zero).collider.gameObject.tag == "Inner Platform")
-                {
-                    position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
-                }
+            while (Physics2D.CircleCast(position, 7f, Vector2.zero, Mathf.Infinity, layer) &&
+                    Physics2D.CircleCast(position, 7f, Vector2.zero, Mathf.Infinity, layer).collider.gameObject.tag == "Inner Platform")
+            {
+                position = new Vector2(Random.Range(x_min, x_max), Random.Range(y_min, y_max));
             }
 
             newItem = (GameObject)Instantiate(mine,

@@ -2851,7 +2851,7 @@ GameObject:
   - component: {fileID: 1904428674}
   - component: {fileID: 1904428673}
   - component: {fileID: 1904428672}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tilemap
   m_TagString: Inner Platform
   m_Icon: {fileID: 0}
